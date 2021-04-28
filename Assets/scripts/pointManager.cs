@@ -9,7 +9,8 @@ public class pointManager : Photon.MonoBehaviour
     public PhotonView photonView;
     void Update()
     {
-        photonView.RPC("markPoints", PhotonTargets.All);
+        if(Data.Instance.Rol ==0){
+        photonView.RPC("markPoints", PhotonTargets.All);}
         //actualiza el texto UI de las ordenes en tiempo y vencidas
     }
     [PunRPC]

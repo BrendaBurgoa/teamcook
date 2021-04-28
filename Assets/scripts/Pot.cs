@@ -72,12 +72,12 @@ public class Pot : MonoBehaviour
         // }
     }
 
-    // public void CookSoup()
-    // {
-    //         beginTimer = true;
-    //         photonView.RPC("PutSound", PhotonTargets.All, true);
-    //         photonView.RPC("showTimers", PhotonTargets.All);
-    // }
+    public void CookSoup()
+    {
+            beginTimer = true;
+            photonView.RPC("PutSound", PhotonTargets.All, true);
+            photonView.RPC("showTimers", PhotonTargets.All);
+    }
 
 [PunRPC] 
 private void PutSound(bool playstop){
@@ -192,19 +192,26 @@ private void PutSound(bool playstop){
         float randomValue = Random.Range(0.5f, 1f);
         if (which == "OSoup")
         {
-            PhotonNetwork.Instantiate(onion_soup.name, new Vector3(transform.position.x, transform.position.y, transform.position.z-randomValue ), transform.rotation,0);
-
+            var newPot = PhotonNetwork.Instantiate(onion_soup.name, new Vector3(transform.position.x, transform.position.y, transform.position.z-randomValue ), transform.rotation,0);
+            photonView.RPC("UniquePot", PhotonTargets.All, newPot.GetComponent<PhotonView>().viewID);
         }
         else if (which == "TSoup")
         {
-            PhotonNetwork.Instantiate(tomato_soup.name, new Vector3(transform.position.x, transform.position.y, transform.position.z-randomValue ), transform.rotation,0);
-
+            var newPot = PhotonNetwork.Instantiate(tomato_soup.name, new Vector3(transform.position.x, transform.position.y, transform.position.z-randomValue ), transform.rotation,0);
+            photonView.RPC("UniquePot", PhotonTargets.All, newPot.GetComponent<PhotonView>().viewID);
         }else if (which == "burnt"){
             PhotonNetwork.Instantiate(burntPot.name, new Vector3(transform.position.x , transform.position.y, transform.position.z-randomValue), transform.rotation,0);
         }
         
         PhotonNetwork.Destroy(gameObject);
     }
+
+    [PunRPC]
+    private void UniquePot(int id){
+        var createdPot = PhotonView.Find(id);
+        createdPot.name = createdPot.name + PhotonView.Find(id); 
+    }
+
     [PunRPC]
     private void initializeVars ()
     {

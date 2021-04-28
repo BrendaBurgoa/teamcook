@@ -24,6 +24,68 @@ void Start(){
     chopping = GetComponent<AudioSource>();
 
 }
+void Update(){
+    if(startChop ==true && Data.Instance.Rol == 0){
+        //solo el manager activa el audio de todos, y lleva cuenta de que se está cortando 
+            if (gameObject.transform.childCount >= 1){
+                elapsed += Time.deltaTime;
+                photonView.RPC("PlayChop", PhotonTargets.All, true);
+           //     photonView.RPC("ObjectEnablingWhenPlaced", PhotonTargets.All, false);
+                if (elapsed > necessaryTime)
+                {
+                photonView.RPC("ChopForAll", PhotonTargets.All);
+              //  photonView.RPC("ObjectEnablingWhenPlaced", PhotonTargets.All, true);
+                }
+            }
+    }
+    if(transform.childCount <=0){
+        //si no tiene nada adentro se pueden poner cosas
+        gameObject.GetComponent<PlaceObj>().enabled =true;
+    }
+        if(nowChop==true){
+            if(Data.Instance.Rol == 0){
+                //cuando el manager registra que paso el tiempo para el cambio se instancia lo cortado y destruye el original, se calla el audio y se reactiva el timer
+                    ChopChange(ingredientToChop.name, ingredientToChop.tag);  
+                    this.photonView.TransferOwnership(0);
+                    photonView.RPC("ReActivate", PhotonTargets.All);
+                    PhotonNetwork.Destroy(ingredientToChop);
+                    photonView.RPC("PlayChop", PhotonTargets.All, false);
+                }
+            }
+}
+[PunRPC]
+private void ObjectEnablingWhenPlaced(bool enablingState){
+                gameObject.GetComponent<PlaceObj>().enabled =enablingState;
+}
+    void OnCollisionEnter(Collision other)
+    {
+     if (other.gameObject.tag == "lettuce" || other.gameObject.tag == "tomato" || other.gameObject.tag == "onion")
+        {       
+            //cuando entra en colision empieza la animacion 
+            ingredientToChop = other.gameObject;
+        }
+    }
+    void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.tag == "lettuce" || other.gameObject.tag == "bread" || other.gameObject.tag == "tomato" || other.gameObject.tag == "onion")
+        {
+            //si no lo dejas para cortar se para la animacion
+            startChop=false;
+        }
+    }
+    void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.tag == "lettuce" || other.gameObject.tag == "bread" || other.gameObject.tag == "tomato" || other.gameObject.tag == "onion")
+        {
+            startChop=true;
+            //mientras este en colision con algo se corta, se anima y se inamilita que se pueda volver a agarrar
+             if (gameObject.transform.childCount >= 1){
+                photonView.RPC("animateChop", PhotonTargets.All);
+             }
+            
+        }
+    }
+
 [PunRPC]
 private void ChopForAll(){
     nowChop = true;
@@ -43,65 +105,6 @@ private void PlayChop(bool playstop){
         isPlaying=false;
     }
 }
-void Update(){
-    if(startChop ==true && Data.Instance.Rol == 0){
-            if (gameObject.transform.childCount >= 1){
-                elapsed += Time.deltaTime;
-                photonView.RPC("PlayChop", PhotonTargets.All, true);
-                if (elapsed > necessaryTime)
-                {
-                photonView.RPC("ChopForAll", PhotonTargets.All);
-                }
-            }
-    }
-    if(transform.childCount <=0){
-        gameObject.GetComponent<PlaceObj>().enabled =true;
-    }
-        if(nowChop==true){
-            if(Data.Instance.Rol == 0){
-                    ChopChange(ingredientToChop.name, ingredientToChop.tag);  
-                    photonView.RPC("ReActivate", PhotonTargets.All);
-                    PhotonNetwork.Destroy(ingredientToChop);
-                    photonView.RPC("PlayChop", PhotonTargets.All, false);
-                }
-            }
-}
-    void OnCollisionEnter(Collision other)
-    {
-     if (other.gameObject.tag == "lettuce" || other.gameObject.tag == "tomato" || other.gameObject.tag == "onion")
-        {        Debug.Log("colisionó con ingrediente y llama animacion");
-            ingredientToChop = other.gameObject;
-        }
-    }
-    void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.tag == "lettuce" || other.gameObject.tag == "bread" || other.gameObject.tag == "tomato" || other.gameObject.tag == "onion")
-        {
-            startChop=false;
-        }
-    }
-    void OnCollisionStay(Collision other)
-    {
-        if (other.gameObject.tag == "lettuce" || other.gameObject.tag == "bread" || other.gameObject.tag == "tomato" || other.gameObject.tag == "onion")
-        {
-            startChop=true;
-            
-             if (gameObject.transform.childCount >= 1){
-            photonView.RPC("animateChop", PhotonTargets.All);
-                other.gameObject.GetComponent<pick_drop>().enabled =false;
-                gameObject.GetComponent<PlaceObj>().enabled =false;
-
-//                 elapsed += Time.fixedDeltaTime;
-//                 if (elapsed > necessaryTime)
-//                 {
-//                    chopping.Play();
-//                     nowChop = true;
-//                     elapsed = 0;
-//                 }
-             }
-            
-        }
-    }
 
     [PunRPC]
     private void animateChop()
@@ -114,10 +117,6 @@ void Update(){
     private void ReActivate()
     {
             gameObject.GetComponent<PlaceObj>().enabled =true;
-            // nowChop=false;
-            // ingredientToChop = null;
-            // elapsed = 0;
-            // startChop = false;
         
     }
 
@@ -127,25 +126,21 @@ void Update(){
         float randomValue = Random.Range(val1, val2);
         if (tag == "lettuce")
         { 
-//            var ingredient = PhotonNetwork.Instantiate(chopped_lettuce.name, new Vector3(transform.position.x+randomValue , transform.position.y, randomValue), Quaternion.identity,0); 
             var ingredient = PhotonNetwork.Instantiate(chopped_lettuce.name, new Vector3(randomValue , transform.position.y, transform.position.z), Quaternion.identity,0); 
             photonView.RPC("DeleteChange", PhotonTargets.All, name, tag, ingredient.GetComponent<PhotonView>().viewID);
         }
         else if (tag == "tomato")
         {
-//            var ingredient = PhotonNetwork.Instantiate(chopped_tomato.name, new Vector3(transform.position.x+randomValue , transform.position.y, randomValue), Quaternion.identity,0); 
             var ingredient = PhotonNetwork.Instantiate(chopped_tomato.name, new Vector3(randomValue, transform.position.y, transform.position.z), Quaternion.identity,0); 
             photonView.RPC("DeleteChange", PhotonTargets.All, name, tag, ingredient.GetComponent<PhotonView>().viewID);
         }
         else if (tag == "onion")
         {
-//            var ingredient = PhotonNetwork.Instantiate(chopped_onion.name, new Vector3(transform.position.x+randomValue , transform.position.y, randomValue), Quaternion.identity,0);  
             var ingredient = PhotonNetwork.Instantiate(chopped_onion.name, new Vector3(randomValue, transform.position.y, transform.position.z), Quaternion.identity,0);  
             photonView.RPC("DeleteChange", PhotonTargets.All, name, tag, ingredient.GetComponent<PhotonView>().viewID);
         }
         else if (tag == "bread")
         {
-//            var ingredient = PhotonNetwork.Instantiate(chopped_bread.name, new Vector3(transform.position.x+randomValue , transform.position.y, randomValue), Quaternion.identity,0);  
             var ingredient = PhotonNetwork.Instantiate(chopped_bread.name, new Vector3(randomValue, transform.position.y, transform.position.z), Quaternion.identity,0);  
             photonView.RPC("DeleteChange", PhotonTargets.All, name, tag, ingredient.GetComponent<PhotonView>().viewID);
         }

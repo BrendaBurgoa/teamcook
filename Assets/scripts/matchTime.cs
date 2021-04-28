@@ -85,12 +85,12 @@ public class matchTime : MonoBehaviour
             playTime += Time.deltaTime;
 			// timer.fillAmount -= 1.0f/Data.Instance.Time * Time.deltaTime;
             if(Data.Instance.Rol ==0){
-            photonView.RPC("FillTimer", PhotonTargets.All, playTime);        
+                photonView.RPC("FillTimer", PhotonTargets.All, playTime);        
 
-            }
-            if (playTime > Data.Instance.Time)
-            {
-                photonView.RPC("GoToEnd", PhotonTargets.All);        
+                if (playTime > Data.Instance.Time)
+                {
+                    photonView.RPC("GoToEnd", PhotonTargets.All);        
+                }
             }
     }
 
@@ -99,7 +99,14 @@ public class matchTime : MonoBehaviour
 
     [PunRPC]
     private void FillTimer(float lefttime){
+        if((Mathf.Floor((Data.Instance.Time-lefttime)%60))>=10)
+        {            
             timeleft.text = Mathf.Floor((Data.Instance.Time-lefttime)/60 )+":"+Mathf.Floor((Data.Instance.Time-lefttime)%60);
+        }
+        else{
+            //para que aparezca tipo 9:07 en vez de 9:7 
+            timeleft.text = Mathf.Floor((Data.Instance.Time-lefttime)/60 )+": 0"+Mathf.Floor((Data.Instance.Time-lefttime)%60);
+        }  
     }
     
     [PunRPC]

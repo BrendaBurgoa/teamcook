@@ -16,9 +16,10 @@ public class ShowPoints : Photon.MonoBehaviour
     void Start()
     {
         //en la pantalla final toma el porcentaje de ordenes completadas y las que no se llegaron a hacer y reemplaza el texto por el porcentaje
-        results = ((Data.Instance.TimelyOrders)*100)/(Data.Instance.LateOrders + Data.Instance.TimelyOrders);
-        points.text=results+"%";
         //de acuerdo al porcentaje resalta la imagen correcta
+        if(Data.Instance.Rol == 0){
+            photonView.RPC("WritePoints", PhotonTargets.All, Data.Instance.TimelyOrders, Data.Instance.LateOrders);
+        }
         if(results < 33.3f)
             red.GetComponent<Image>().color = Color.white;
         else if (results > 33.3f && results < 66.6f)
@@ -35,6 +36,11 @@ public class ShowPoints : Photon.MonoBehaviour
     }
     public void ReStart(){        
         photonView.RPC("goBack", PhotonTargets.All);
+    }
+    [PunRPC]
+    private void WritePoints(int onTime, int late){
+        results = ((onTime)*100)/(late + onTime);
+        points.text=results+"%";
     }
     [PunRPC]
     private void goBack(){

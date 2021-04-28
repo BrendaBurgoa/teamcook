@@ -26,8 +26,8 @@ public class menuController : MonoBehaviour
     //     Create.SetActive(true);
     // }
     private void Start(){
-            Create.SetActive(true);
-            Join.SetActive(false);
+            Create.SetActive(false);
+            Join.SetActive(true);
         // if(username == ""){
         //  //   Create.SetActive(true);
         //     Join.SetActive(true);

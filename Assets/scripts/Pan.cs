@@ -100,7 +100,7 @@ private void PutSound(bool playstop){
     {
         if(other.gameObject.tag == "stove"){
             onstove=false;
-            timerCanvas.SetActive(false);
+        //    timerCanvas.SetActive(false);
         }
         if(other.gameObject.tag== "character"){
             collided=false;
@@ -123,16 +123,18 @@ private void PutSound(bool playstop){
                 Destroy(GameObject.Find(name));
             }
     }
-[PunRPC]
-private void ShowPatty(){
-                showPatty.SetActive(true);
-}
+    [PunRPC]
+    private void ShowPatty(){
+                    showPatty.SetActive(true);
+    }
     private void instantiateFood(string which)
     {
         float randomValue = Random.Range(0.5f, 1f);
         if(which == "patty")
         {
-            PhotonNetwork.Instantiate(cooked_patty.name, transform.position, transform.rotation,0);
+            var newPan = PhotonNetwork.Instantiate(cooked_patty.name, transform.position, transform.rotation,0);
+            photonView.RPC("UniquePot", PhotonTargets.All, newPan.GetComponent<PhotonView>().viewID);
+
         }
         else if (which == "burnt"){
             PhotonNetwork.Instantiate(burntPot.name, transform.position, Quaternion.identity,0);
@@ -140,7 +142,11 @@ private void ShowPatty(){
         }
     }
 
-
+    [PunRPC]
+    private void UniquePan(int id){
+        var createdPot = PhotonView.Find(id);
+        createdPot.name = createdPot.name + PhotonView.Find(id); 
+    }
 
     [PunRPC]
     private void initializeVars ()

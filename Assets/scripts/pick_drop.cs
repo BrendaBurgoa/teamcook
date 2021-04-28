@@ -24,8 +24,8 @@ public class pick_drop : Photon.PunBehaviour
         {
           if(transform.parent == null)
           {  
-                this.photonView.TransferOwnership(PhotonNetwork.player);
-                PhotonNetwork.Destroy(gameObject);
+              //si el objeto no tiene padre para alguien, esa pesona pide ownership y le dice a todos que lo borren
+                photonView.RPC("DeleteThis", PhotonTargets.All);
             }
         }
             if(transform.parent == null)
@@ -50,6 +50,11 @@ public class pick_drop : Photon.PunBehaviour
             }
 
     }
+    }
+    [PunRPC]
+    private void DeleteThis (){
+//        this.photonView.TransferOwnership(PhotonNetwork.player);
+        Destroy(gameObject);
     }
     void OnCollisionEnter(Collision other)
     {

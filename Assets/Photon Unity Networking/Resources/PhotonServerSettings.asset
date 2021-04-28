@@ -93,4 +93,8 @@ MonoBehaviour:
   - ShowPatty
   - TimerMatch
   - PutSound
+  - ObjectEnablingWhenPlaced
+  - DeleteThis
+  - UniquePan
+  - UniquePot
   DisableAutoOpenWizard: 1

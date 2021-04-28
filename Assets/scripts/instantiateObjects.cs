@@ -15,11 +15,11 @@ public class instantiateObjects : Photon.MonoBehaviour
         if (Input.GetKeyDown("space") && buttonFlag == true && chara.transform.GetChild(0).transform.childCount <= 0)
             {
                 if(transform.parent.position.x < 0){
-                    val1=0.5f;
-                    val2=1f;
+                    val1=2f;
+                    val2=3f;
                 }else{
-                    val1= -0.5f;
-                    val2 = -1f;
+                    val1= -2f;
+                    val2 = -3f;
                 }
                 float randomValue = Random.Range(val1, val2);
                 var ingredient = PhotonNetwork.Instantiate(myPrefab.name, new Vector3(transform.position.x+randomValue , 0.5f, transform.position.z), Quaternion.identity, 0); 
@@ -50,16 +50,15 @@ public class instantiateObjects : Photon.MonoBehaviour
        ingredient.name = ingredient.name + PhotonView.Find(id); 
       if(chara != null){
         if(chara.transform.GetChild(0).transform.childCount <= 0){
-            Debug.Log("se agarraría");
-             var dest = chara.transform.GetChild(0);
-             ingredient.transform.SetParent(dest.transform, true);
-             ingredient.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.player);
+            var dest = chara.transform.GetChild(0);
+            ingredient.transform.SetParent(dest.transform, true);
+            ingredient.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.player);
             ingredient.GetComponent<pick_drop>().character = chara;
             ingredient.GetComponent<pick_drop>().isGrabbed=true;
             ingredient.transform.localPosition=new Vector3(0, 0, 0);
         }else{
             Debug.Log("se eliminaría");
-            //    Destroy(ingredient);
+            Destroy(ingredient);
         }
        }
        

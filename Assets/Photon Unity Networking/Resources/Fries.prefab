@@ -287,3 +287,4 @@ MonoBehaviour:
   ren: {fileID: 0}
   mat: []
   shownMat: []
+  matcolor: {r: 0, g: 0, b: 0, a: 0}
