@@ -20,14 +20,14 @@ public class pick_drop : Photon.PunBehaviour
     if(charaPhotonView != null)
     {
 
-        if(gameObject.tag == "onion" || gameObject.tag == "tomato" || gameObject.tag == "patty" || gameObject.tag == "chopped_bread" )
-        {
-          if(transform.parent == null)
-          {  
-              //si el objeto no tiene padre para alguien, esa pesona pide ownership y le dice a todos que lo borren
-                photonView.RPC("DeleteThis", PhotonTargets.All);
-            }
-        }
+        // if(gameObject.tag == "onion" || gameObject.tag == "tomato" || gameObject.tag == "patty" || gameObject.tag == "chopped_bread" )
+        // {
+        //   if(transform.parent == null)
+        //   {  
+        //       //si el objeto no tiene padre para alguien, esa pesona pide ownership y le dice a todos que lo borren
+        //         photonView.RPC("DeleteThis", PhotonTargets.All);
+        //     }
+        // }
             if(transform.parent == null)
             {
                 if(isLeft==true){
@@ -35,7 +35,7 @@ public class pick_drop : Photon.PunBehaviour
                     photonView.RPC("pickDrop", PhotonTargets.All, "leave");
                     this.photonView.TransferOwnership(0);
                 }
-                if (Input.GetKeyDown("space") && isGrabbed == false && collisionFlag == true && character.GetComponent<PhotonView>().owner == PhotonNetwork.player){
+                if (Input.GetKeyDown("space") && isGrabbed == false && collisionFlag == true && character.GetComponent<PhotonView>().isMine){
                     //si apreto barra y no esta agarrado pero si estoy cerca me hago dueño y el agarre se activa
                      this.photonView.TransferOwnership(PhotonNetwork.player);
                     isGrabbed = true;
@@ -62,7 +62,7 @@ public class pick_drop : Photon.PunBehaviour
                 //si la colision es con un personaje character ahora es ese personaje
                 character  =other.gameObject;
 //                if(character.GetComponent<character>().isGrabbing == false){
-                if(character.transform.GetChild(0).transform.childCount <= 0){
+                if(character.transform.GetChild(0).transform.childCount == 0){
                     //si personaje no está agarrando nada se toma su photonview, se reconoce el contacto y quien es 
                     charaPhotonView=character.GetComponent<PhotonView>();
                     collisionFlag = true;

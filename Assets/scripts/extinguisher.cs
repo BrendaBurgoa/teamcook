@@ -9,7 +9,7 @@ public class extinguisher : MonoBehaviour
     private GameObject character;
     void Update(){
         Data.Instance.fireExists = true; 
-        if(collided==true && Input.GetKeyDown("space") && character.GetComponent<PhotonView>().owner == PhotonNetwork.player){
+        if(collided==true && Input.GetKeyDown("space") && character.GetComponent<PhotonView>().isMine){
             photonView.RPC("extinguishFire", PhotonTargets.All);
         }
     }

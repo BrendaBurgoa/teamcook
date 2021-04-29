@@ -62,7 +62,7 @@ public class plate : Photon.MonoBehaviour
     }
     void Update (){
         //si un personaje esta cerca y hace espacio se suma la imagen correspondiente, si tiene una olla se crea la olla y se devuelve
-        if(Input.GetKeyDown("space") && collided == true && character.GetComponent<PhotonView>().owner == PhotonNetwork.player){
+        if(Input.GetKeyDown("space") && collided == true && character.GetComponent<PhotonView>().isMine){
           if(ingredientOnCollision.tag == "potOnionSoup" || ingredientOnCollision.tag == "potTomatoSoup"){
               if (ingredientOnCollision.tag == "potTomatoSoup")
                 {

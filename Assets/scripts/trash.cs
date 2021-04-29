@@ -11,7 +11,7 @@ public class trash : Photon.MonoBehaviour
     private GameObject character;
     void Update(){
         //si un personaje se acerca, se chequea que quien apreta espacio sea este
-        if (collided && Input.GetKeyDown("space") && character.GetComponent<PhotonView>().owner == PhotonNetwork.player){
+        if (collided && Input.GetKeyDown("space") && character.GetComponent<PhotonView>().isMine){
             //si el pesonaje tiene un obj agarrado, chequea que no sea un objeto no desechable
             if( character.transform.GetChild(0).transform.GetChild(0) != null){
                 var objTrash = character.transform.GetChild(0).transform.GetChild(0).gameObject.tag;

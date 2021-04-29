@@ -10,10 +10,12 @@ public class instantiateObjects : Photon.MonoBehaviour
     public float val1;
     public float val2;
     private GameObject chara;
+
     void Update()
     {
-        if (Input.GetKeyDown("space") && buttonFlag == true && chara.transform.GetChild(0).transform.childCount <= 0)
+        if (Input.GetKeyDown("space") && buttonFlag == true && chara.transform.GetChild(0).transform.childCount == 0 && chara.GetComponent<PhotonView>().isMine)
             {
+                // Debug.Log(chara.GetComponent<PhotonView>().owner);
                 if(transform.parent.position.x < 0){
                     val1=2f;
                     val2=3f;
@@ -29,18 +31,20 @@ public class instantiateObjects : Photon.MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "character" && collision.gameObject.transform.GetChild(0).transform.childCount <= 0){
-            photonView.RPC("whoGets", PhotonTargets.All, collision.gameObject.name);
+        if(collision.gameObject.tag == "character" && collision.gameObject.transform.GetChild(0).transform.childCount == 0){
+            photonView.RPC("WhoGets", PhotonTargets.All, collision.gameObject.name);
             buttonFlag=true;    
         }
     }
 
     void OnCollisionExit(Collision collision){
-        buttonFlag=false;
-        chara=null;
+        if(collision.gameObject.tag == "character"){
+            buttonFlag=false;
+            chara=null;
+        }
     }
     [PunRPC]
-    private void whoGets(string name){
+    private void WhoGets(string name){
         chara = GameObject.Find(name);
     }
     [PunRPC]

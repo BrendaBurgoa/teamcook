@@ -19,7 +19,7 @@ public class PlaceObj : Photon.MonoBehaviour
             if(transform.childCount >= 2){
                 Destroy(transform.GetChild(0));
             }
-            if (Input.GetKeyDown("space") && contact == true && gameObject.transform.childCount <= 0 && character.transform.GetChild(0).transform.childCount >=1 && character.GetComponent<PhotonView>().owner == PhotonNetwork.player)
+            if (Input.GetKeyDown("space") && contact == true && gameObject.transform.childCount <= 0 && character.transform.GetChild(0).transform.childCount >=1 && character.GetComponent<PhotonView>().isMine)
                 {
 //si apreto la barra, un personaje con manos llenas está en contacto y no tengo algo, y el objeto no está excluido, tomo lo que me dan 
                     for(var i =0; i<includedTags.Length; i++){
@@ -32,7 +32,7 @@ public class PlaceObj : Photon.MonoBehaviour
                         photonView.RPC("pickDrop", PhotonTargets.All, false, character.name, character.transform.GetChild(0).transform.GetChild(0).name);
                     }
                 }
-            else if (Input.GetKeyDown("space") && contact == true && gameObject.transform.childCount >= 1 && character.transform.GetChild(0).transform.childCount <=1 && character.GetComponent<PhotonView>().owner == PhotonNetwork.player)
+            else if (Input.GetKeyDown("space") && contact == true && gameObject.transform.childCount >= 1 && character.transform.GetChild(0).transform.childCount <=1 && character.GetComponent<PhotonView>().isMine)
                 {
                     photonView.RPC("pickDrop", PhotonTargets.All, true, character.name, gameObject.transform.GetChild(0).name);
                     //si apreto la barra, un personaje con manos vacias esta en contacto y tengo algo, se lo doy 
