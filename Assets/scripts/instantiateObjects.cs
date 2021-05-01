@@ -53,7 +53,7 @@ public class instantiateObjects : Photon.MonoBehaviour
        var ingredient = PhotonView.Find(id);
        ingredient.name = ingredient.name + PhotonView.Find(id); 
       if(chara != null){
-        if(chara.transform.GetChild(0).transform.childCount <= 0){
+        if(chara.transform.GetChild(0).transform.childCount == 0){
             var dest = chara.transform.GetChild(0);
             ingredient.transform.SetParent(dest.transform, true);
             ingredient.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.player);

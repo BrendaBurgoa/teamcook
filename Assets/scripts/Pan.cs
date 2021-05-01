@@ -12,7 +12,7 @@ public class Pan : MonoBehaviour
     private bool isBurnt = false;
     private bool halfBurnt = false;
     private bool cookingPatty = false;
-    private bool cooked = false;
+    private bool isCooking = false;
     private bool collided = false;
     public bool onstove = false;
     public Image timer;
@@ -22,6 +22,7 @@ public class Pan : MonoBehaviour
     public GameObject timerCanvas;
     public GameObject buttonCook;
     public AudioSource burner;
+    public GameObject character;
     private bool isPlaying = false;
       void Start(){
             timerCanvas.SetActive(false);
@@ -30,7 +31,7 @@ public class Pan : MonoBehaviour
    }
     void Update(){
         if (beginTimer == true && onstove==true){
-                buttonCook.SetActive(false);
+     //       buttonCook.SetActive(false);
             timerCanvas.SetActive(true);
             cookingTime += Time.deltaTime;
             if (cookingTime > 10)
@@ -47,10 +48,11 @@ public class Pan : MonoBehaviour
     public void CookBtn()
     {
         if (onstove==true && cookingPatty == true){
+            if(collided && character.GetComponent<PhotonView>().isMine){
                 beginTimer = true;
                 photonView.RPC("PutSound", PhotonTargets.All, true);
-            photonView.RPC("showTimers", PhotonTargets.All);
-
+                photonView.RPC("showTimers", PhotonTargets.All);
+            }
          }
     }
 [PunRPC]
@@ -82,12 +84,12 @@ private void PutSound(bool playstop){
             onstove=true;
             gameObject.transform.rotation = Quaternion.Euler(0.0f, -90.0f, 0.0f); 
         }
-        if(other.gameObject.tag== "character"){
-            collided=true;
+        if(other.gameObject.tag=="character"){
+                collided=true;
+                character = other.gameObject;
         }
-        if(other.gameObject.tag == "patty"){
-            photonView.RPC("ShowPatty", PhotonTargets.All);
-            cookIngredient(other.gameObject.tag, other.gameObject.name);
+        if(other.gameObject.tag == "patty" && isCooking == false){
+            photonView.RPC("ShowPatty", PhotonTargets.All, other.gameObject.name);
         }
     }
      void OnCollisionStay(Collision other)
@@ -104,6 +106,7 @@ private void PutSound(bool playstop){
         }
         if(other.gameObject.tag== "character"){
             collided=false;
+            character = null;
         }
     }
     [PunRPC]
@@ -113,19 +116,18 @@ private void PutSound(bool playstop){
             
     }
 
-    private void cookIngredient(string tag, string name)
+    private void CookIngredient()
     {    
-            if (tag == "patty")
-            {
-            timerCanvas.SetActive(true);
-            buttonCook.SetActive(true);
+                timerCanvas.SetActive(true);
+                buttonCook.SetActive(true);
                 cookingPatty = true;
-                Destroy(GameObject.Find(name));
-            }
     }
     [PunRPC]
-    private void ShowPatty(){
+    private void ShowPatty(string name){
+                    Destroy(GameObject.Find(name));
+                    isCooking = true;
                     showPatty.SetActive(true);
+                    CookIngredient();
     }
     private void instantiateFood(string which)
     {
@@ -133,7 +135,7 @@ private void PutSound(bool playstop){
         if(which == "patty")
         {
             var newPan = PhotonNetwork.Instantiate(cooked_patty.name, transform.position, transform.rotation,0);
-            photonView.RPC("UniquePot", PhotonTargets.All, newPan.GetComponent<PhotonView>().viewID);
+            photonView.RPC("UniquePan", PhotonTargets.All, newPan.GetComponent<PhotonView>().viewID);
 
         }
         else if (which == "burnt"){
@@ -154,7 +156,7 @@ private void PutSound(bool playstop){
         cookingTime=0;
         beginTimer = false;
         timer.fillAmount= 1;
-        cooked = false;
+        isCooking = false;
         cookingPatty = false;
     }
     

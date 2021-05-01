@@ -97,4 +97,6 @@ MonoBehaviour:
   - DeleteThis
   - UniquePan
   - UniquePot
+  - WritePoints
+  - WhoGets
   DisableAutoOpenWizard: 1

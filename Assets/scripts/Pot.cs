@@ -74,9 +74,11 @@ public class Pot : MonoBehaviour
 
     public void CookSoup()
     {
+        if(collided && character.GetComponent<PhotonView>().isMine){
             beginTimer = true;
             photonView.RPC("PutSound", PhotonTargets.All, true);
             photonView.RPC("showTimers", PhotonTargets.All);
+            }
     }
 
 [PunRPC] 
@@ -119,10 +121,10 @@ private void PutSound(bool playstop){
             if(onions == 0 && tomatoes == 0){
                 cookIngredient(other.gameObject.tag, other.gameObject.name);
             }
-            else if(other.gameObject.tag == "chopped_onion" && tomatoes <= 0){             
+            else if(other.gameObject.tag == "chopped_onion" && tomatoes == 0){             
                 cookIngredient(other.gameObject.tag, other.gameObject.name);
             }
-            else if(other.gameObject.tag == "chopped_tomato" && onions <= 0){             
+            else if(other.gameObject.tag == "chopped_tomato" && onions == 0){             
                 cookIngredient(other.gameObject.tag, other.gameObject.name);
             }
 

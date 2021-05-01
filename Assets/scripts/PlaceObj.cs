@@ -19,7 +19,7 @@ public class PlaceObj : Photon.MonoBehaviour
             if(transform.childCount >= 2){
                 Destroy(transform.GetChild(0));
             }
-            if (Input.GetKeyDown("space") && contact == true && gameObject.transform.childCount <= 0 && character.transform.GetChild(0).transform.childCount >=1 && character.GetComponent<PhotonView>().isMine)
+            if (Input.GetKeyDown("space") && contact == true && gameObject.transform.childCount == 0 && character.transform.GetChild(0).transform.childCount >=1 && character.GetComponent<PhotonView>().isMine)
                 {
 //si apreto la barra, un personaje con manos llenas está en contacto y no tengo algo, y el objeto no está excluido, tomo lo que me dan 
                     for(var i =0; i<includedTags.Length; i++){
@@ -70,7 +70,7 @@ public class PlaceObj : Photon.MonoBehaviour
                 objectPicked.transform.localPosition= new Vector3(0f,0f,0f);
                 objectPicked.GetComponent<pick_drop>().isLeft = false;
             } else{
-                 if(chara.transform.GetChild(0).transform.childCount <= 0)
+                 if(chara.transform.GetChild(0).transform.childCount == 0)
                  {
                     //se transfiere ownership al personaje y se pasa objeto como hijo
                     objPhtn.TransferOwnership(chara.GetComponent<PhotonView>().viewID);

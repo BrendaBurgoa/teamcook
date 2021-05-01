@@ -17,22 +17,15 @@ public class ShowPoints : Photon.MonoBehaviour
     {
         //en la pantalla final toma el porcentaje de ordenes completadas y las que no se llegaron a hacer y reemplaza el texto por el porcentaje
         //de acuerdo al porcentaje resalta la imagen correcta
-        if(Data.Instance.Rol == 0){
-            photonView.RPC("WritePoints", PhotonTargets.All, Data.Instance.TimelyOrders, Data.Instance.LateOrders);
+        if(Data.Instance.Rol == 0){        //si el jugador es manager se le muestra el boton de reinicio
+            reStartBtn.SetActive(true);
         }
-        if(results < 33.3f)
-            red.GetComponent<Image>().color = Color.white;
-        else if (results > 33.3f && results < 66.6f)
-            yellow.GetComponent<Image>().color = Color.white;
-        else if (results > 66.6f)
-            green.GetComponent<Image>().color = Color.white;
     }
 
     void Update(){
-        if (Data.Instance.Rol ==0)
-        //quizas podria estar en el awake o start
-        //si el jugador es manager se le muestra el boton de reinicio
-        reStartBtn.SetActive(true);
+        if (Data.Instance.Rol ==0){
+            photonView.RPC("WritePoints", PhotonTargets.All, Data.Instance.TimelyOrders, Data.Instance.LateOrders);
+}
     }
     public void ReStart(){        
         photonView.RPC("goBack", PhotonTargets.All);
@@ -41,6 +34,12 @@ public class ShowPoints : Photon.MonoBehaviour
     private void WritePoints(int onTime, int late){
         results = ((onTime)*100)/(late + onTime);
         points.text=results+"%";
+        if(results < 33.3f)
+            red.GetComponent<Image>().color = Color.white;
+        else if (results > 33.3f && results < 66.6f)
+            yellow.GetComponent<Image>().color = Color.white;
+        else if (results > 66.6f)
+            green.GetComponent<Image>().color = Color.white;
     }
     [PunRPC]
     private void goBack(){

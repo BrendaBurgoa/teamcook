@@ -54,7 +54,7 @@ public class plate : Photon.MonoBehaviour
     void OnMouseDown()
     {
         //si un personaje esta cerca y clickea el plato se crea lo correspondiente y se inicializan variables
-        if (collided==true && character.transform.GetChild(0).transform.childCount <=0){
+        if (collided==true && character.transform.GetChild(0).transform.childCount <=0 && character.GetComponent<PhotonView>().isMine){
             makeDish();
               photonView.RPC("initializeVars", PhotonTargets.All);
               photonView.RPC("deleteChildren", PhotonTargets.All);
