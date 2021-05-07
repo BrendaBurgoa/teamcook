@@ -9,7 +9,6 @@ public class pick_drop : Photon.PunBehaviour
     public bool  isGrabbed = false;
     private bool collisionFlag = false;
     private bool leaveOnCounter = false;
-  //  public bool takingback = false;
     private string collisionName;
     public bool isLeft = false;
     public string leftWhere;
@@ -53,7 +52,6 @@ public class pick_drop : Photon.PunBehaviour
     }
     [PunRPC]
     private void DeleteThis (){
-//        this.photonView.TransferOwnership(PhotonNetwork.player);
         Destroy(gameObject);
     }
     void OnCollisionEnter(Collision other)
@@ -61,12 +59,10 @@ public class pick_drop : Photon.PunBehaviour
             if(other.gameObject.tag == "character" ){
                 //si la colision es con un personaje character ahora es ese personaje
                 character  =other.gameObject;
-//                if(character.GetComponent<character>().isGrabbing == false){
                 if(character.transform.GetChild(0).transform.childCount == 0){
                     //si personaje no está agarrando nada se toma su photonview, se reconoce el contacto y quien es 
                     charaPhotonView=character.GetComponent<PhotonView>();
                     collisionFlag = true;
-        //            gameObject.transform.position=new Vector3(transform.position.x, transform.position.y+0.01f , transform.position.z);
                     who=other.gameObject.name;
                 }
             }

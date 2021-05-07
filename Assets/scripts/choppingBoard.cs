@@ -28,48 +28,28 @@ void Update(){
     if(startChop ==true && Data.Instance.Rol == 0){
         //solo el manager activa el audio de todos, y lleva cuenta de que se está cortando 
             if (gameObject.transform.childCount >= 1){
-                    elapsed += Time.deltaTime;
-                    photonView.RPC("PlayChop", PhotonTargets.All, true);
-                    Debug.Log(elapsed +"."+ necessaryTime);
-            //     photonView.RPC("ObjectEnablingWhenPlaced", PhotonTargets.All, false);
-                
+                elapsed += Time.deltaTime;
+                photonView.RPC("PlayChop", PhotonTargets.All, true);
+                Debug.Log(elapsed +"."+ necessaryTime);
             }
     }
-    if (elapsed >= necessaryTime && Data.Instance.Rol == 0)
-                {
-                    Debug.Log("termina tiempo");
-                   photonView.RPC("ChopForAll", PhotonTargets.All);
-                    //  photonView.RPC("ObjectEnablingWhenPlaced", PhotonTargets.All, true);
-                              //cuando el manager registra que paso el tiempo para el cambio se instancia lo cortado y destruye el original, se calla el audio y se reactiva el timer
-                    ChopChange();  
-                     //this.photonView.TransferOwnership(0);
-                //     photonView.RPC("ReActivate", PhotonTargets.All);
-                    ingredientToChop.GetComponent<PhotonView>().TransferOwnership(0);
-                     PhotonNetwork.Destroy(GetComponent<Transform>().GetChild(0).gameObject);
-                     photonView.RPC("PlayChop", PhotonTargets.All, false);
+        if (elapsed >= necessaryTime && Data.Instance.Rol == 0)
+        {
+            //pasado el tiempo se instancia la version cortada, y se borra el ingrediente sin cortar
+            Debug.Log("termina tiempo");
+            photonView.RPC("ChopForAll", PhotonTargets.All);
+            ChopChange();  
+            ingredientToChop.GetComponent<PhotonView>().TransferOwnership(0);
+            PhotonNetwork.Destroy(GetComponent<Transform>().GetChild(0).gameObject);
+            photonView.RPC("PlayChop", PhotonTargets.All, false);
 
-    }
+        }
     if(transform.childCount ==0){
         //si no tiene nada adentro se pueden poner cosas
         gameObject.GetComponent<PlaceObj>().enabled =true;
     }
-    /*
-        if(nowChop==true){
-            if(Data.Instance.Rol == 0){
-                //cuando el manager registra que paso el tiempo para el cambio se instancia lo cortado y destruye el original, se calla el audio y se reactiva el timer
-                    ChopChange();  
-                    this.photonView.TransferOwnership(0);
-                    photonView.RPC("ReActivate", PhotonTargets.All);
-                   // PhotonNetwork.Destroy(ingredientToChop);
-                    photonView.RPC("PlayChop", PhotonTargets.All, false);
-                }
-            }
-            */
 }
-[PunRPC]
-private void ObjectEnablingWhenPlaced(bool enablingState){
-                gameObject.GetComponent<PlaceObj>().enabled =enablingState;
-}
+
     void OnCollisionEnter(Collision other)
     {
      if (other.gameObject.tag == "lettuce" || other.gameObject.tag == "tomato" || other.gameObject.tag == "onion")
@@ -103,6 +83,7 @@ private void ObjectEnablingWhenPlaced(bool enablingState){
 
 [PunRPC]
 private void ChopForAll(){
+    //indicar que terminó el tiempo y ahora se tiene q instanciar la version cortada y reiniciar el tiempo
     startChop = false;
     nowChop = true;
     elapsed = 0;
@@ -110,6 +91,7 @@ private void ChopForAll(){
 }
 [PunRPC]
 private void PlayChop(bool playstop){
+    //animar o parar la animación del cuchillo
     if(playstop && isPlaying==false)
     {
         chopping.Play();
@@ -138,6 +120,7 @@ private void PlayChop(bool playstop){
 
     private void ChopChange()
     {
+        //se ve el tag del objeto en la tabla y dependiendo se instancia la version cortada correspondiente en un lugar random cerca de la tabla de cortar
         Debug.Log("entra a chopchange");
         var tag = ingredientToChop.tag;
         float randomValue = Random.Range(val1, val2);
@@ -172,7 +155,7 @@ private void PlayChop(bool playstop){
     [PunRPC]
     private void DeleteChange(int id)
     {
-     //   Destroy (GetComponent<Transform>().GetChild (0).gameObject);
+        //se le asigna un nombre unico al ingrediente cortado
         Debug.Log(GetComponent<Transform> ().GetChild (0).gameObject.name);
         var ingredient = PhotonView.Find(id);
         ingredient.name = ingredient.name + id; 

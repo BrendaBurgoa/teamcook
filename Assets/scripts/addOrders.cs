@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class addOrders : Photon.MonoBehaviour
 {
+    //lamadas por botones UI del manager, segun el numero instancia la tarjeta en la lista de ordenes
     public GameObject orderSimpleSalad;
     public GameObject orderFullSalad;
     public GameObject orderSimpleBurger;

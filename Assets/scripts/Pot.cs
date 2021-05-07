@@ -9,16 +9,13 @@ public class Pot : MonoBehaviour
     private int onions;
     public GameObject tomato_soup;
     public GameObject onion_soup;
-    public GameObject burntPot;
     public GameObject newPot;
     public GameObject onionUI;
     public GameObject tomatoUI;
     public GameObject filledTomato;
     public GameObject filledOnion;
-    public GameObject showBurnt;
     public bool beginTimer = false;
     private bool collided = false;
-    private bool ready = false;
     public bool onstove = false;
     public Image timer;
     public Text quantity;
@@ -64,12 +61,6 @@ public class Pot : MonoBehaviour
         }else if(tomatoes >= 1 ){
             filledTomato.SetActive(true);
         }
-        // if(ready){
-        //     if(tomatoes >= 3 || onions >= 3 ){
-        //         CookedVersion();
-        //         Destroy(gameObject);
-        //     }
-        // }
     }
 
     public void CookSoup()
@@ -136,15 +127,14 @@ private void PutSound(bool playstop){
             }
         if(other.gameObject.tag == "stove"){
             onstove=true;
-            gameObject.transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
         }
     }
     
      void OnCollisionStay(Collision other)
     {
         if(other.gameObject.tag == "stove"){
-           onstove = true;
-
+            onstove = true;
+            gameObject.transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
         }
     }
     void OnCollisionExit(Collision other){
@@ -164,6 +154,7 @@ private void PutSound(bool playstop){
     }
     [PunRPC]
     private void SetIngredient(int ingredientCount, string name, int which){
+            Destroy(GameObject.Find(name));
             switch (which){
             case 1: onions= ingredientCount;
                     quantity.text = "X"+onions;
@@ -173,11 +164,10 @@ private void PutSound(bool playstop){
                 break;
             }
             timerCanvas.SetActive(true);
-            Destroy(GameObject.Find(name));
     }
     private void cookIngredient(string tag, string name)
     {    
-        //aumenta el contador y llama ala funcion que muestra cuandos hay en UI
+        //aumenta el contador y llama a la funcion que muestra cuantos hay en UI
             if (tag == "chopped_onion")
             {
                 onions = onions + 1;
@@ -201,10 +191,7 @@ private void PutSound(bool playstop){
         {
             var newPot = PhotonNetwork.Instantiate(tomato_soup.name, new Vector3(transform.position.x, transform.position.y, transform.position.z-randomValue ), transform.rotation,0);
             photonView.RPC("UniquePot", PhotonTargets.All, newPot.GetComponent<PhotonView>().viewID);
-        }else if (which == "burnt"){
-            PhotonNetwork.Instantiate(burntPot.name, new Vector3(transform.position.x , transform.position.y, transform.position.z-randomValue), transform.rotation,0);
         }
-        
         PhotonNetwork.Destroy(gameObject);
     }
 

@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class Goback : MonoBehaviour
 {
-    // Start is called before the first frame update
+// lamado cuando se pasa a la escena de transicion RESTART
     void Start()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Game");            
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -24,6 +24,7 @@ public class orders : MonoBehaviour
     }
 
     void Update(){
+        //la cantidad de ordenes se define segun la cantidad de objetos con esa tag que haya
         simpleBurger = GameObject.FindGameObjectsWithTag("SBurgerOrder").Length;
         fullBurger= GameObject.FindGameObjectsWithTag("FBurgerOrder").Length;
         simpleBurgerFries= GameObject.FindGameObjectsWithTag("SBurgerFriesOrder").Length;
@@ -37,6 +38,7 @@ public class orders : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        //se deja entregar si no existe fuego y existe una orden para ese plato
         if(Data.Instance.fireExists == false && other.gameObject.tag == "character"){
             if(other.gameObject.GetComponent<PhotonView>().owner == PhotonNetwork.player && other.gameObject.transform.GetChild(0).transform.GetChild(0).gameObject != null){
                 var plate = other.gameObject.transform.GetChild(0).transform.GetChild(0).gameObject;
@@ -45,110 +47,64 @@ public class orders : MonoBehaviour
         }
     }
     
-private void RecognizeOrder(string collisionTag, GameObject plate){
+    private void RecognizeOrder(string collisionTag, GameObject plate){
+        //se corrobora que exista el pedido y se elimina una de las ordenes para entregar
             if(collisionTag == "simpleBurger" && simpleBurger>0)
             {
                     photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
                     photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerOrder");
-                    // simpleBurger=simpleBurger-1;
             }
             else if(collisionTag == "fullBurger" && fullBurger>0)
             {
                     photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
                     photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerOrder");
-                    // fullBurger = fullBurger-1;
             }
             else if(collisionTag == "fullBurgerFries" && fullBurgerFries>0)
             {
                 photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
                     photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerFriesOrder"); 
-                    // fullBurgerFries=fullBurgerFries-1;
             }
             else if(collisionTag == "simpleBurgerFries" && simpleBurgerFries>0)
             {
                     photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
                     photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerFriesOrder");
-                    // simpleBurgerFries=simpleBurgerFries-1;
             }
 
             else if(collisionTag == "simpleSalad" && simpleSalad>0)
             { 
                         photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
                         photonView.RPC("DeleteLatest", PhotonTargets.All, "SSaladOrder");
-                        // simpleSalad=simpleSalad-1;
             }
             else if(collisionTag == "fullSalad" && fullSalad>0)
             {
                     photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
                     photonView.RPC("DeleteLatest", PhotonTargets.All, "FSaladOrder");
-                    // fullSalad=fullSalad-1;
             }
             else if(collisionTag == "onionSoup" && onionSoup>0)
             {
                     photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
                     photonView.RPC("DeleteLatest", PhotonTargets.All, "OSoupOrder");
-                    // onionSoup=onionSoup-1;
             }
             else if(collisionTag == "tomatoSoup" && tomatoSoup>0)
             {         
                     photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);   
                     photonView.RPC("DeleteLatest", PhotonTargets.All, "TSoupOrder");
-                    // tomatoSoup=tomatoSoup-1;
             }
-}
+    }
 
     [PunRPC]
     private void ChangePoints(int newPoints, string receivedplate){
+    //cuando se entrega se modifica el numero de entregas, se reproduce un audio y se destuye el plato entregado
         clap.Play();
         Data.Instance.TimelyOrders=newPoints;
         Destroy(GameObject.Find(receivedplate));
     }
-    [PunRPC]
-    public void PickOrder(int order){
-        // if(order == 1)
-        // {
-        //     simpleBurger = simpleBurger + 1;
-        // }
-        // else if(order == 2)
-        // {
-        //     fullBurger = fullBurger + 1;
-        // }
-        // else if(order == 3)
-        // {
-        //     tomatoSoup = tomatoSoup + 1;
-        // }
-        // else if(order == 4)
-        // {
-        //     onionSoup = onionSoup + 1;
-        // }
-        // else if(order == 5)
-        // {
-        //     simpleSalad = simpleSalad + 1;
-        // }
-        // else if(order == 6)
-        // {
-        //     fullSalad = fullSalad + 1;
-        // }
-        // else if(order == 7)
-        // {
-        //     fullBurgerFries = fullBurgerFries + 1;
-        // }
-        // else if(order == 8)
-        // {
-        //     simpleBurgerFries = simpleBurgerFries + 1;
-        // }
-        Debug.Log("simpleBurger"+simpleBurger+"fullBurger"+fullBurger+"tomatoSoup"+tomatoSoup+"onionSoup"+onionSoup+"simpleSalad" +simpleSalad + "fullSalad"+ fullSalad);
-    
-    }
+
     [PunRPC]    
     private void DeleteLatest(string tag){
         var listButton = GameObject.FindGameObjectsWithTag(tag);
         Destroy(listButton[0].gameObject);
     }
     
-    public void MakeOrder(int order)
-    {
-       photonView.RPC("PickOrder", PhotonTargets.All, order);
-    }
 
 }

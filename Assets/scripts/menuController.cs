@@ -18,21 +18,12 @@ public class menuController : MonoBehaviour
     private void Awake(){
         PhotonNetwork.ConnectUsingSettings(VersionName);
     }
-    
-    // public void SetManagerUsername(string name){
-    //     PhotonNetwork.playerName = name;
-    //     username=name;
-    //     Join.SetActive(false);
-    //     Create.SetActive(true);
-    // }
+
     private void Start(){
-            Create.SetActive(false);
-            Join.SetActive(true);
-        // if(username == ""){
-        //  //   Create.SetActive(true);
-        //     Join.SetActive(true);
-        // }
+            Create.SetActive(true);
+            Join.SetActive(false);
     }
+    
     public void CreateGame(){
         PhotonNetwork.CreateRoom(CreateGameinput.text, new RoomOptions(){maxPlayers = 7}, null);
         PhotonNetwork.playerName="manager";

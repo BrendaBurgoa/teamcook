@@ -6,22 +6,10 @@ public class fires : Photon.MonoBehaviour
 {
     public GameObject myPrefab;
     public PhotonView photonView;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+//instancia de los fuegos, llamado por UI por el manager
     public void MakeFires()
     {                
-
        photonView.RPC("instantiateFires", PhotonTargets.All);
-       // this.GetComponent<PhotonView>().RPC("instantiateFires", RpcTarget.All);
     }
     
     [PunRPC]

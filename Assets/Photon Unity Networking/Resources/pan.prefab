@@ -216,11 +216,10 @@ GameObject:
   - component: {fileID: 1514938512457466207}
   - component: {fileID: 1514938512457466202}
   - component: {fileID: 1514938512457466203}
-  - component: {fileID: 7963168090941678419}
   - component: {fileID: 1789292075831752522}
   - component: {fileID: 114138401645655040}
   - component: {fileID: 114947210969860530}
-  - component: {fileID: 3674772447977971451}
+  - component: {fileID: 82234813789327364}
   m_Layer: 0
   m_Name: pan
   m_TagString: pan
@@ -424,25 +423,6 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!95 &7963168090941678419
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514938512457466180}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1789292075831752522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,8 +437,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooked_patty: {fileID: 7316809677319633963, guid: 3d62036b2de420f47b652a33ef4990f0,
     type: 3}
-  burntPot: {fileID: 8948618562969618705, guid: b91cb9ddce83775409465f55f86b5273,
-    type: 3}
   showPatty: {fileID: 185191016245968799}
   beginTimer: 0
   onstove: 0
@@ -468,7 +446,8 @@ MonoBehaviour:
   photonView: {fileID: 1514938512457466202}
   timerCanvas: {fileID: 8355849678966718482}
   buttonCook: {fileID: 2621932748209976734}
-  burner: {fileID: 3674772447977971451}
+  burner: {fileID: 82234813789327364}
+  character: {fileID: 0}
 --- !u!114 &114138401645655040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,7 +484,7 @@ MonoBehaviour:
   mat: []
   shownMat: []
   matcolor: {r: 0, g: 0, b: 0, a: 0}
---- !u!82 &3674772447977971451
+--- !u!82 &82234813789327364
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

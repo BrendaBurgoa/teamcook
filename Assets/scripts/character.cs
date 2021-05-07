@@ -5,24 +5,17 @@ using UnityEngine.UI;
 
 public class character : Photon.MonoBehaviour
 {
-   // public bool isGrabbing;
+    //los scripts de movimiento son propios del prefab del personaje y vinieron del store, Simple Sample Charact (editados para que solo si la vista del personaje es mia se pueda mover)
     public PhotonView photonView;
-    public float speed;
-    public float rotationSpeed;
     public GameObject avatar;
-    public Animator animation;
     public Text PlayerName;
     public GameObject playerCanvas;
-    private float moveSpeed = 2f;
     public int playerId;
     public string currentSide;
-    void Start()
-    {
-            animation = avatar.GetComponent<Animator>();
 
-    }
     private void Awake()
     {
+        //se muestra el nombre del personaje y si es propio es de otro color
         if (photonView.isMine){
             PlayerName.text = PhotonNetwork.playerName;
         }
@@ -33,11 +26,13 @@ public class character : Photon.MonoBehaviour
     }
 
     void Update()
-    {   if(transform.GetChild(0).childCount >= 2){
+    {   
+        //en el caso de error que el empty que contiene lo agarrado tenga mas de un elemento, el segundo elemento se elimina
+        if(transform.GetChild(0).childCount >= 2){
             Destroy(transform.GetChild(0).transform.GetChild(0).gameObject);
         }
         if (photonView.isMine){
-            
+            //si se excede el limite según el lado en el que se encuentre, se lo retrocede
             Vector3 pos = transform.position;
 
             if(pos.x < -3.5f)

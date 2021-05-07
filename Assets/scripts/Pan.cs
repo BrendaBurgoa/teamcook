@@ -6,11 +6,8 @@ using UnityEngine.UI;
 public class Pan : MonoBehaviour
 {
     public GameObject cooked_patty;
-    public GameObject burntPot;
     public GameObject showPatty;
     [SerializeField]public bool beginTimer = false;
-    private bool isBurnt = false;
-    private bool halfBurnt = false;
     private bool cookingPatty = false;
     private bool isCooking = false;
     private bool collided = false;
@@ -24,6 +21,7 @@ public class Pan : MonoBehaviour
     public AudioSource burner;
     public GameObject character;
     private bool isPlaying = false;
+
       void Start(){
             timerCanvas.SetActive(false);
             buttonCook.SetActive(false);
@@ -31,11 +29,12 @@ public class Pan : MonoBehaviour
    }
     void Update(){
         if (beginTimer == true && onstove==true){
-     //       buttonCook.SetActive(false);
+            //si ya se puede comenzar el tiempo y está sobre el honro se activa el timer y se incrementa el tiempo
             timerCanvas.SetActive(true);
             cookingTime += Time.deltaTime;
             if (cookingTime > 10)
             {
+                //si el tiempo de coccion supera el tiempo predeterminado se apaga el timer y se instancia la versión cocinada
                 beginTimer=false;
                 CookedVersion();
                 photonView.RPC("PutSound", PhotonTargets.All, false);
@@ -47,6 +46,7 @@ public class Pan : MonoBehaviour
     
     public void CookBtn()
     {
+        //si ya se colocó un patty y está sobre el horno se activa el timer
         if (onstove==true && cookingPatty == true){
             if(collided && character.GetComponent<PhotonView>().isMine){
                 beginTimer = true;
@@ -61,6 +61,7 @@ public class Pan : MonoBehaviour
     }
     private void CookedVersion()
     {   
+        //si se colocó un patty se instancia un patty cocido y se destruye el crudo
         if(cookingPatty){
                 instantiateFood("patty");
                 this.photonView.TransferOwnership(PhotonNetwork.player);
@@ -80,14 +81,18 @@ private void PutSound(bool playstop){
 } 
     void OnCollisionEnter(Collision other)
     {
+        //se chequea que esté sobre el horno
         if(other.gameObject.tag == "stove"){
             onstove=true;
             gameObject.transform.rotation = Quaternion.Euler(0.0f, -90.0f, 0.0f); 
+            timerCanvas.SetActive(false);
         }
+        //se chequea quien es el personaje
         if(other.gameObject.tag=="character"){
                 collided=true;
                 character = other.gameObject;
         }
+        //se muestra el patty en la sarten y se borra el patty como ingrediente en sí
         if(other.gameObject.tag == "patty" && isCooking == false){
             photonView.RPC("ShowPatty", PhotonTargets.All, other.gameObject.name);
         }
@@ -96,13 +101,13 @@ private void PutSound(bool playstop){
     {
         if(other.gameObject.tag == "stove"){
            onstove = true;
+            gameObject.transform.rotation = Quaternion.Euler(0.0f, -90.0f, 0.0f); 
         }
     }
     void OnCollisionExit(Collision other)
     {
         if(other.gameObject.tag == "stove"){
             onstove=false;
-        //    timerCanvas.SetActive(false);
         }
         if(other.gameObject.tag== "character"){
             collided=false;
@@ -118,6 +123,7 @@ private void PutSound(bool playstop){
 
     private void CookIngredient()
     {    
+        //se muestra el patty y se activa el boton para comenzar a cocinar
                 timerCanvas.SetActive(true);
                 buttonCook.SetActive(true);
                 cookingPatty = true;
@@ -138,14 +144,11 @@ private void PutSound(bool playstop){
             photonView.RPC("UniquePan", PhotonTargets.All, newPan.GetComponent<PhotonView>().viewID);
 
         }
-        else if (which == "burnt"){
-            PhotonNetwork.Instantiate(burntPot.name, transform.position, Quaternion.identity,0);
-
-        }
     }
 
     [PunRPC]
     private void UniquePan(int id){
+        //se da un nombre unico al patty cocido instanciado
         var createdPot = PhotonView.Find(id);
         createdPot.name = createdPot.name + PhotonView.Find(id); 
     }
