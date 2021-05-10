@@ -17,7 +17,8 @@ public class gameManager : Photon.MonoBehaviour
         {
             manager.SetActive(true);
         }else if (Data.Instance.Rol == 1)
-        { 
+        {
+            manager.SetActive(false);
             ConnectingCanvas.SetActive(true);
         }
     }
