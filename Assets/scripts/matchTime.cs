@@ -22,8 +22,10 @@ public class matchTime : MonoBehaviour
     private bool canStart;
 
     void Start(){
+        StartButton.SetActive(false);
+        StartButton.GetComponent<Button>().interactable = false;
         //cuando un usuario nuevo se conecta llama para todos (así le llega al manager) la funcion que indica su conexión 
-            photonView.RPC("ShowConnected", PhotonTargets.All);    
+        photonView.RPC("ShowConnected", PhotonTargets.All);    
             playstate = 1;    
             roomName.text=Data.Instance.roomName;
     }
@@ -124,6 +126,8 @@ public class matchTime : MonoBehaviour
         {
             canStart = true;
             connected.text = connected.text +" " + player.name + ",";
+
+            StartButton.GetComponent<Button>().interactable = true;
         }
     }
 

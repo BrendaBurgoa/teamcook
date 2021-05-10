@@ -19,7 +19,12 @@ public class menuController : MonoBehaviour
         PhotonNetwork.ConnectUsingSettings(VersionName);
     }
 
-    private void Start(){
+    private void Start()
+    {
+        Init();
+    }
+    public void Init()
+    {
         if (Data.Instance.isAdmin)
         {
             Create.SetActive(true);
@@ -31,7 +36,6 @@ public class menuController : MonoBehaviour
             Join.SetActive(true);
         }
     }
-    
     public void CreateGame(){
         PhotonNetwork.CreateRoom(CreateGameinput.text, new RoomOptions(){maxPlayers = 7}, null);
         PhotonNetwork.playerName="manager";

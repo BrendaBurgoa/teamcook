@@ -26,18 +26,7 @@ public class character : Photon.MonoBehaviour
             Destroy(transform.GetChild(0).transform.GetChild(0).gameObject);
         }
         if (photonView.isMine){
-            //si se excede el limite según el lado en el que se encuentre, se lo retrocede
             Vector3 pos = transform.position;
-
-            //if(pos.x < -3.5f)
-            //pos.x = -3.3f;
-            //else if (pos.x > 3.7f)
-            //pos.x = 3.6f;
-
-            //if(pos.z < 0.1f)
-            //pos.z = 0.2f;
-            //else if (pos.z > 4.1f)
-            //pos.z = 4;
 
             if(currentSide == "left"){
                 if (pos.x < -limits_x.x) pos.x = -limits_x.x;
@@ -52,7 +41,6 @@ public class character : Photon.MonoBehaviour
 
             pos.y = 0;
             transform.position = pos;
-          //  playerCanvas.transform.rotation = Quaternion.identity;
         }
     }
 

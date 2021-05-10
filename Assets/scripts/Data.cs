@@ -16,6 +16,7 @@ public class Data : MonoBehaviour
     public int LateOrders;
     public int TimelyOrders;
     public bool fireExists;
+    public menuController menuController;
 	
 	public static Data Instance
 	{
@@ -29,5 +30,17 @@ public class Data : MonoBehaviour
         if (!mInstance)
             mInstance = this;
         DontDestroyOnLoad(this.gameObject);
+
+        URLParameters.Instance.RegisterOnDone((url) => {
+            Debug.Log("search parameters: " + url.Search);
+            Debug.Log("hash parameters: " + url.Hash);
+
+            string _isAdmin = url.SearchParameters["admin"];
+            if (_isAdmin == "yes")
+                isAdmin = true;
+            else
+                isAdmin = false;
+            menuController.Init();
+        });
     }
 }
