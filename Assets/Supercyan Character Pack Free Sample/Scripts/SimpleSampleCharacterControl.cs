@@ -53,66 +53,66 @@ public class SimpleSampleCharacterControl : Photon.MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (photonView.isMine){
-        ContactPoint[] contactPoints = collision.contacts;
-        for (int i = 0; i < contactPoints.Length; i++)
-        {
-            if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
-            {
-                if (!m_collisions.Contains(collision.collider))
-                {
-                    m_collisions.Add(collision.collider);
-                }
-                m_isGrounded = true;
-            }
-        }
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (photonView.isMine){
+    //    ContactPoint[] contactPoints = collision.contacts;
+    //    for (int i = 0; i < contactPoints.Length; i++)
+    //    {
+    //        if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+    //        {
+    //            if (!m_collisions.Contains(collision.collider))
+    //            {
+    //                m_collisions.Add(collision.collider);
+    //            }
+    //            m_isGrounded = true;
+    //        }
+    //    }
+    //    }
+    //}
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (photonView.isMine){
-        ContactPoint[] contactPoints = collision.contacts;
-        bool validSurfaceNormal = false;
-        for (int i = 0; i < contactPoints.Length; i++)
-        {
-            if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
-            {
-                validSurfaceNormal = true; break;
-            }
-        }
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (photonView.isMine){
+    //    ContactPoint[] contactPoints = collision.contacts;
+    //    bool validSurfaceNormal = false;
+    //    for (int i = 0; i < contactPoints.Length; i++)
+    //    {
+    //        if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+    //        {
+    //            validSurfaceNormal = true; break;
+    //        }
+    //    }
 
-        if (validSurfaceNormal)
-        {
-            m_isGrounded = true;
-            if (!m_collisions.Contains(collision.collider))
-            {
-                m_collisions.Add(collision.collider);
-            }
-        }
-        else
-        {
-            if (m_collisions.Contains(collision.collider))
-            {
-                m_collisions.Remove(collision.collider);
-            }
-            if (m_collisions.Count == 0) { m_isGrounded = false; }
-        }
-        }
-    }
+    //    if (validSurfaceNormal)
+    //    {
+    //        m_isGrounded = true;
+    //        if (!m_collisions.Contains(collision.collider))
+    //        {
+    //            m_collisions.Add(collision.collider);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (m_collisions.Contains(collision.collider))
+    //        {
+    //            m_collisions.Remove(collision.collider);
+    //        }
+    //        if (m_collisions.Count == 0) { m_isGrounded = false; }
+    //    }
+    //    }
+    //}
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (photonView.isMine){
-        if (m_collisions.Contains(collision.collider))
-        {
-            m_collisions.Remove(collision.collider);
-        }
-        if (m_collisions.Count == 0) { m_isGrounded = false; }
-        }
-    }
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (photonView.isMine){
+    //    if (m_collisions.Contains(collision.collider))
+    //    {
+    //        m_collisions.Remove(collision.collider);
+    //    }
+    //    if (m_collisions.Count == 0) { m_isGrounded = false; }
+    //    }
+    //}
 
     private void Update()
     {
@@ -124,30 +124,30 @@ public class SimpleSampleCharacterControl : Photon.MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (photonView.isMine){
-        m_animator.SetBool("Grounded", m_isGrounded);
+    //private void FixedUpdate()
+    //{
+    //    if (photonView.isMine){
+    //    m_animator.SetBool("Grounded", m_isGrounded);
 
-        switch (m_controlMode)
-        {
-            case ControlMode.Direct:
-                DirectUpdate();
-                break;
+    //    switch (m_controlMode)
+    //    {
+    //        case ControlMode.Direct:
+    //            DirectUpdate();
+    //            break;
 
-            case ControlMode.Tank:
-                TankUpdate();
-                break;
+    //        case ControlMode.Tank:
+    //            TankUpdate();
+    //            break;
 
-            default:
-                Debug.LogError("Unsupported state");
-                break;
-        }
+    //        default:
+    //            Debug.LogError("Unsupported state");
+    //            break;
+    //    }
 
-        m_wasGrounded = m_isGrounded;
-        m_jumpInput = false;
-        }
-    }
+    //    m_wasGrounded = m_isGrounded;
+    //    m_jumpInput = false;
+    //    }
+    //}
 
     private void TankUpdate()
     {
