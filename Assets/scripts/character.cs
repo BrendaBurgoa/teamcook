@@ -8,23 +8,15 @@ public class character : Photon.MonoBehaviour
     //los scripts de movimiento son propios del prefab del personaje y vinieron del store, Simple Sample Charact (editados para que solo si la vista del personaje es mia se pueda mover)
     public PhotonView photonView;
     public GameObject avatar;
-    public Text PlayerName;
+    public string playerName;
     public GameObject playerCanvas;
     public int playerId;
     public string currentSide;
 
-    private void Awake()
+    private void Start()
     {
-        //se muestra el nombre del personaje y si es propio es de otro color
-        if (photonView.isMine){
-            PlayerName.text = PhotonNetwork.playerName;
-        }
-        else{
-            PlayerName.text = photonView.owner.name;
-            PlayerName.color = Color.blue;
-        }
+        Events.OnNewPlayer(this);
     }
-
     void Update()
     {   
         //en el caso de error que el empty que contiene lo agarrado tenga mas de un elemento, el segundo elemento se elimina
@@ -54,7 +46,6 @@ public class character : Photon.MonoBehaviour
                     pos.x = 0.6f;
                 }
             }
-
             transform.position = pos;
             playerCanvas.transform.rotation = Quaternion.identity;
         }

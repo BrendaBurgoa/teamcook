@@ -21,9 +21,17 @@ public class orders : MonoBehaviour
 
     void Start(){
         clap = GetComponent<AudioSource>();
+        Events.NewOrder += NewOrder;
     }
-
-    void Update(){
+    void OnDestroy()
+    {
+        Events.NewOrder -= NewOrder;
+    }
+    void NewOrder()
+    {
+        _Update();
+    }
+    void _Update(){
         //la cantidad de ordenes se define segun la cantidad de objetos con esa tag que haya
         simpleBurger = GameObject.FindGameObjectsWithTag("SBurgerOrder").Length;
         fullBurger= GameObject.FindGameObjectsWithTag("FBurgerOrder").Length;
@@ -33,7 +41,6 @@ public class orders : MonoBehaviour
         onionSoup= GameObject.FindGameObjectsWithTag("OSoupOrder").Length;
         simpleSalad= GameObject.FindGameObjectsWithTag("SSaladOrder").Length;
         fullSalad= GameObject.FindGameObjectsWithTag("FSaladOrder").Length;
-
     }
 
     void OnCollisionEnter(Collision other)
@@ -98,6 +105,7 @@ public class orders : MonoBehaviour
         clap.Play();
         Data.Instance.TimelyOrders=newPoints;
         Destroy(GameObject.Find(receivedplate));
+        Events.OnRefreshPoints();
     }
 
     [PunRPC]    

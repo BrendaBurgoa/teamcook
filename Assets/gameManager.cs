@@ -28,7 +28,7 @@ public class gameManager : Photon.MonoBehaviour
     //esta funcion esta en este script para que pueda ser ejecutada por todos los jugadores, pero es llamda por el manager en MatchTime
     public void SpawnPlayer(){
         //se deshabilita la pantalla de carga y dependiendo de si el Id del jugador es par o impar se le asigna un lado de la cocina, luego se spawnea
-        ConnectingCanvas.SetActive(false);        
+           
         if (PhotonNetwork.player.ID %2==0){
                 valX = Random.Range(-2f, -1f);
                 side = "left";

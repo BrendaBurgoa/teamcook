@@ -17,43 +17,48 @@ public class addOrders : Photon.MonoBehaviour
     public PhotonView photonView;
 
     public void InstantiateOrder(int which){
+        GameObject order = null;
         if (which == 1){
-            var order = PhotonNetwork.Instantiate(orderSimpleSalad.name, transform.position, Quaternion.identity,0);
+            order = PhotonNetwork.Instantiate(orderSimpleSalad.name, transform.position, Quaternion.identity,0);
             photonView.RPC("setParent", PhotonTargets.All, order.GetComponent<PhotonView>().viewID );
         } 
         else if (which == 2){
-            var order = PhotonNetwork.Instantiate(orderFullSalad.name, transform.position, Quaternion.identity,0);
+            order = PhotonNetwork.Instantiate(orderFullSalad.name, transform.position, Quaternion.identity,0);
             photonView.RPC("setParent", PhotonTargets.All, order.GetComponent<PhotonView>().viewID );
         }
         else if (which == 3){
-            var order = PhotonNetwork.Instantiate(orderSimpleBurger.name, transform.position, Quaternion.identity,0);
+            order = PhotonNetwork.Instantiate(orderSimpleBurger.name, transform.position, Quaternion.identity,0);
             photonView.RPC("setParent", PhotonTargets.All, order.GetComponent<PhotonView>().viewID );
         }
         else if (which == 4){
-            var order = PhotonNetwork.Instantiate(orderFullBurger.name, transform.position, Quaternion.identity,0);
+            order = PhotonNetwork.Instantiate(orderFullBurger.name, transform.position, Quaternion.identity,0);
             photonView.RPC("setParent", PhotonTargets.All, order.GetComponent<PhotonView>().viewID );
         }
         else if (which == 5){
-            var order = PhotonNetwork.Instantiate(orderOnionSoup.name, transform.position, Quaternion.identity,0);
+            order = PhotonNetwork.Instantiate(orderOnionSoup.name, transform.position, Quaternion.identity,0);
             photonView.RPC("setParent", PhotonTargets.All, order.GetComponent<PhotonView>().viewID );
         }
         else if (which == 6){
-            var order = PhotonNetwork.Instantiate(orderTomatoSoup.name, transform.position, Quaternion.identity,0);
+            order = PhotonNetwork.Instantiate(orderTomatoSoup.name, transform.position, Quaternion.identity,0);
             photonView.RPC("setParent", PhotonTargets.All, order.GetComponent<PhotonView>().viewID );
         }
         else if (which == 7){
-            var order = PhotonNetwork.Instantiate(orderFullBurgerFries.name, transform.position, Quaternion.identity,0);
+            order = PhotonNetwork.Instantiate(orderFullBurgerFries.name, transform.position, Quaternion.identity,0);
             photonView.RPC("setParent", PhotonTargets.All, order.GetComponent<PhotonView>().viewID );
         }
         else if (which == 8){
-            var order = PhotonNetwork.Instantiate(orderSimpleBurgerFries.name, transform.position, Quaternion.identity,0);
+            order = PhotonNetwork.Instantiate(orderSimpleBurgerFries.name, transform.position, Quaternion.identity,0);
             photonView.RPC("setParent", PhotonTargets.All, order.GetComponent<PhotonView>().viewID );
         }
+        if(order != null)
+            order.transform.localScale = Vector3.one;
+        Events.NewOrder();
     }
     [PunRPC]
     private void setParent(int id){
-      var order =  PhotonView.Find(id).gameObject; 
-      order.transform.SetParent(gameObject.transform);
+          GameObject order =  PhotonView.Find(id).gameObject; 
+          order.transform.SetParent(gameObject.transform);
+          order.transform.localScale = Vector3.one;
     }
 
 

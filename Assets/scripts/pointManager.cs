@@ -7,11 +7,18 @@ public class pointManager : Photon.MonoBehaviour
 {
     public Text Points;
     public PhotonView photonView;
-    void Update()
+    private void Start()
     {
-        if(Data.Instance.Rol ==0){
-        photonView.RPC("markPoints", PhotonTargets.All);}
-        //actualiza el texto UI de las ordenes en tiempo y vencidas
+        Events.OnRefreshPoints += OnRefreshPoints;
+    }
+    private void OnDestroy()
+    {
+        Events.OnRefreshPoints -= OnRefreshPoints;
+    }
+    void OnRefreshPoints()
+    {
+        if(Data.Instance.Rol == 0)
+            photonView.RPC("markPoints", PhotonTargets.All);
     }
     [PunRPC]
     public void markPoints ()

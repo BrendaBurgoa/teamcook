@@ -14,7 +14,8 @@ private GameObject character;
         //reconoce los materiales del objeto
         ren = gameObject.GetComponent<Renderer>();
         mat = ren.materials;
-        matcolor=mat[0].color;
+       
+        matcolor =mat[0].color;
     }
     void Update(){
         if (gameObject.GetComponent<pick_drop>() != null && transform.parent != null){

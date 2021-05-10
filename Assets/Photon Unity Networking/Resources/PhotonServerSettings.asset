@@ -32,71 +32,55 @@ MonoBehaviour:
   - changeName
   - ChangePoints
   - Chat
+  - ChopForAll
   - DeleteChange
   - deleteChildren
   - DeleteLatest
+  - DeleteThis
   - DestroyRpc
   - extinguishFire
+  - FillTimer
+  - GiveToChara
+  - goBack
+  - GoToEnd
   - initializeVars
   - instantiateFires
   - instantiateIngredient
   - InstantiateRpc
   - markPoints
+  - ObjectEnablingWhenPlaced
+  - PauseResume
   - pickDrop
   - PickOrder
   - PickupItemInit
+  - PlayChop
   - PunPickup
   - PunPickupSimple
   - PunRespawn
+  - PutSound
+  - ReActivate
+  - ReloadLogic
   - RequestForPickupItems
   - RequestForPickupTimes
-  - setDataValues
+  - SetColors
   - SetIngredient
-  - setIngretiends
-  - SetLates
+  - setIngredients
+  - setLates
+  - SetNewParent
   - setParent
   - SetTime
+  - ShowConnected
+  - ShowPatty
+  - showTimers
   - SpawnUsers
-  - startCooking
+  - SwitchChefToOtherSide
+  - SwitchIngredientToOtherSide
   - throwToBin
   - timerFunction
   - timerMatch
-  - SetElementParent
-  - SwitchThings
-  - SwitchToOtherSide
-  - SetNewParent
-  - SwitchChefToOtherSide
-  - SwitchIngredientToOtherSide
-  - ChangeColors
-  - SetColors
-  - ShowConnected
-  - LinkCanvas
-  - goBack
-  - PauseResume
-  - setLates
-  - whoGets
-  - comunicateItsDone
-  - cookIngredient
-  - showEpty
-  - showEmpty
-  - Reload
-  - ReloadLogic
-  - GiveToChara
-  - checkIngredients
-  - setIngredients
-  - ReActivate
-  - FillTimer
-  - GoToEnd
-  - showTimers
-  - ChopForAll
-  - PlayChop
-  - ShowPatty
-  - TimerMatch
-  - PutSound
-  - ObjectEnablingWhenPlaced
-  - DeleteThis
   - UniquePan
   - UniquePot
-  - WritePoints
   - WhoGets
+  - WritePoints
+  - NewUser
   DisableAutoOpenWizard: 1

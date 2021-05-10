@@ -20,8 +20,16 @@ public class menuController : MonoBehaviour
     }
 
     private void Start(){
+        if (Data.Instance.isAdmin)
+        {
             Create.SetActive(true);
             Join.SetActive(false);
+        }
+        else
+        {
+            Create.SetActive(false);
+            Join.SetActive(true);
+        }
     }
     
     public void CreateGame(){

@@ -1666,6 +1666,7 @@ internal class NetworkingPeer : LoadBalancingPeer, IPhotonPeerListener
             }
             else
             {
+                Events.Log("Operation failed: " + operationResponse.ToStringFull() + " Server: " + this.Server);
                 Debug.LogError("Operation failed: " + operationResponse.ToStringFull() + " Server: " + this.Server);
             }
         }
@@ -2632,7 +2633,7 @@ internal class NetworkingPeer : LoadBalancingPeer, IPhotonPeerListener
             case PunEvent.RPC:
                 //ts: each event now contains a single RPC. execute this
                 // Debug.Log("Ev RPC from: " + originatingPlayer);
-
+                Events.Log("actorNr: " + actorNr);
                 this.ExecuteRpc(photonEvent[ParameterCode.Data] as Hashtable, actorNr);
                 break;
 

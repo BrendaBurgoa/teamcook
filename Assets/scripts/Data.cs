@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Data : MonoBehaviour
 {
-
+    public bool isAdmin;
     //información que persiste en las escenas
 
     const string PREFAB_PATH = "Data";    
