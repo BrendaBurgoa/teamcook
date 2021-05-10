@@ -12,7 +12,7 @@ public class character : Photon.MonoBehaviour
    // public GameObject playerCanvas;
     public int playerId;
     public string currentSide;
-    Vector2 limits_x = new Vector2(3.3f,0.6f);
+    Vector2 limits_x = new Vector2(3.45f,0.6f);
     Vector2 limits_z = new Vector2(3.93f, 0.35f);
 
     private void Start()
