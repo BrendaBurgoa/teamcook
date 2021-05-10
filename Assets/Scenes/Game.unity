@@ -2618,7 +2618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPrefab: {fileID: 4363056585697710716, guid: 1a97ad8ee96e83948b8c47376b14cada,
     type: 3}
-  photonView: {fileID: 0}
+  photonView: {fileID: 222933509}
 --- !u!1 &243735497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2637,7 +2637,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &243735498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5073,7 +5073,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 222933510}
         m_MethodName: MakeFires
         m_Mode: 1
         m_Arguments:
