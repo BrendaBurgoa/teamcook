@@ -61,7 +61,7 @@ public class PlaceObj : Photon.MonoBehaviour
         if (objectPicked != null)
         {        
             var chara = GameObject.Find(name);
-            var objPhtn = objectPicked.GetComponent<PhotonView>();
+            PhotonView objPhtn = objectPicked.GetComponent<PhotonView>();
             if(pickLeave == false){
                 //deja en muebles, transfiere ownership e indica en la clase del objeto que fue dejado
                 objPhtn.TransferOwnership(0);
@@ -75,7 +75,9 @@ public class PlaceObj : Photon.MonoBehaviour
                     objPhtn.TransferOwnership(chara.GetComponent<PhotonView>().viewID);
                     var dest = chara.transform.GetChild(0);
                     objectPicked.transform.SetParent(dest.transform);
-                    objectPicked.transform.localPosition= new Vector3(0f,0f,0f);
+                    objectPicked.transform.localPosition = Vector3.zero;
+                    ShowCollision sc = objPhtn.GetComponent<ShowCollision>();
+                    if(sc != null) sc.ResetCollision();
                 }
             }    
            objectPicked.GetComponent<pick_drop>().enabled = false;

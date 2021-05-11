@@ -17,6 +17,10 @@ public class character : Photon.MonoBehaviour
     {
         Events.OnNewPlayer(this);
     }
+    public bool IsMe()
+    {
+        return photonView.isMine;
+    }
     void Update()
     {   
         if(transform.GetChild(0).childCount >= 2){

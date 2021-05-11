@@ -2186,7 +2186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c174eae85619db840904117995982b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAdmin: 1
+  isAdmin: 0
   Rol: 0
   Point: 0
   Time: 0
