@@ -32,9 +32,9 @@ public class Data : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         URLParameters.Instance.RegisterOnDone((url) => {
-            Debug.Log("search parameters: " + url.Search);
-            Debug.Log("hash parameters: " + url.Hash);
-
+           // Debug.Log("search parameters: " + url.Search);
+           // Debug.Log("hash parameters: " + url.Hash);
+            if (url.SearchParameters == null  || url.SearchParameters.Count == 0) return;
             string _isAdmin = url.SearchParameters["admin"];
             if (_isAdmin == "yes")
                 isAdmin = true;

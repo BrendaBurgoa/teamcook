@@ -15,6 +15,12 @@ public class DebugBox : MonoBehaviour
     }
     void Log(string text)
     {
-        field.text = text;
+        CancelInvoke();
+        field.text += text;
+        Invoke("Reset", 4);
+    }
+    void Reset()
+    {
+        field.text = "";
     }
 }

@@ -83,4 +83,6 @@ MonoBehaviour:
   - WhoGets
   - WritePoints
   - NewUser
+  - pickDropDone
+  - pickDropMaster
   DisableAutoOpenWizard: 1

@@ -76,16 +76,14 @@ public class pick_drop : Photon.PunBehaviour
             character = null;
         }
     }
-
     [PunRPC]
-    private void pickDrop(string name){
-            if(name != "leave"){
-                var chara = GameObject.Find(name);
-                var dest = chara.transform.GetChild(0);
-                gameObject.transform.SetParent(dest.transform);
-                transform.localPosition= new Vector3(0f,0f,0f);
-                Debug.Log("entra mediante pickdrop");
-            }
-        }
+    private void pickDrop(string name)
+    {
+        var chara = GameObject.Find(name);
+        var dest = chara.transform.GetChild(0);
+        gameObject.transform.SetParent(dest.transform);
+        transform.localPosition= new Vector3(0f,0f,0f);
+        Debug.Log("entra mediante pickdrop");
+    }
 
 }

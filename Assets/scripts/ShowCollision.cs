@@ -9,7 +9,7 @@ public Material[] mat;
 public Material[] shownMat;
 public Color matcolor;
 private bool grabbed;
-private GameObject character;
+private character character;
 
     void Start () {
         ren = gameObject.GetComponent<Renderer>();
@@ -26,7 +26,7 @@ private GameObject character;
     void OnCollisionEnter(Collision other){
          if (other.gameObject.tag == "character"){
             SetColor(Color.green);
-            character = other.gameObject;
+            character = other.gameObject.GetComponent<character>();
          }
      }
     void OnCollisionExit(Collision other){

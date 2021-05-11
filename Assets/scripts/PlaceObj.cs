@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlaceObj : Photon.MonoBehaviour
 {
-    public GameObject character;
+    GameObject character;
     public PhotonView photonView;
     private bool contact;
     private Vector3 initialPosition;
@@ -29,14 +29,14 @@ public class PlaceObj : Photon.MonoBehaviour
                     }
                     if(allowed == true)
                     {                       
-                        photonView.RPC("pickDrop", PhotonTargets.All, false, character.name, character.transform.GetChild(0).transform.GetChild(0).name);
+                        photonView.RPC("pickDropMaster", PhotonTargets.All, false, character.name, character.transform.GetChild(0).transform.GetChild(0).name);
                     }
                 }
             else if (Input.GetKeyDown("space") && contact == true && gameObject.transform.childCount >= 1 && character.transform.GetChild(0).transform.childCount <=1 && character.GetComponent<PhotonView>().isMine)
-                {
-                    photonView.RPC("pickDrop", PhotonTargets.All, true, character.name, gameObject.transform.GetChild(0).name);
-                    //si apreto la barra, un personaje con manos vacias esta en contacto y tengo algo, se lo doy 
-                }
+            {
+                photonView.RPC("pickDropMaster", PhotonTargets.All, true, character.name, gameObject.transform.GetChild(0).name);
+                //si apreto la barra, un personaje con manos vacias esta en contacto y tengo algo, se lo doy 
+            }
     }
     void OnCollisionEnter(Collision other)
     {
@@ -54,10 +54,9 @@ public class PlaceObj : Photon.MonoBehaviour
             allowed=false;
         }
     }
-
-
     [PunRPC]
-    private void pickDrop(bool pickLeave, string name, string objectToPick){
+    private void pickDropMaster(bool pickLeave, string name, string objectToPick)
+    {
         var objectPicked = GameObject.Find(objectToPick);
         if (objectPicked != null)
         {        

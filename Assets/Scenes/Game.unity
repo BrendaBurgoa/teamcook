@@ -361,6 +361,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.29999924
       objectReference: {fileID: 0}
+    - target: {fileID: 865374834710856566, guid: b896b976bd1888542bc6af0bd1111f9c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 1267883645261807210, guid: b896b976bd1888542bc6af0bd1111f9c,
         type: 3}
       propertyPath: m_IsActive
@@ -623,8 +628,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 18305182}
   includedTags:
   - chopped_bread
@@ -1124,8 +1127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 54711779}
   includedTags:
   - extinguisher
@@ -1721,8 +1722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 97249352}
   includedTags:
   - extinguisher
@@ -3750,8 +3749,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 409538548}
   includedTags: []
   allowed: 0
@@ -4058,8 +4055,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 482867842}
   includedTags:
   - pot
@@ -4866,8 +4861,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 589598589}
   includedTags:
   - chopped_bread
@@ -5244,8 +5237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 651828905}
   includedTags:
   - onion
@@ -5833,8 +5824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 814984541}
   includedTags:
   - chopped_bread
@@ -7414,8 +7403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 1113694196}
   includedTags:
   - chopped_bread
@@ -7540,8 +7527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 1116573496}
   includedTags:
   - pan
@@ -8095,7 +8080,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148951560}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.72795045, y: -0.1877963, z: 1.8599999}
+  m_LocalPosition: {x: 0.78, y: -0.1877963, z: 1.8599999}
   m_LocalScale: {x: 0.64, y: 1, z: 0.71}
   m_Children:
   - {fileID: 18305181}
@@ -8184,8 +8169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 1197721762}
   includedTags:
   - chopped_bread
@@ -9788,8 +9771,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 1496662885}
   includedTags:
   - pot
@@ -11444,8 +11425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 1646022662}
   includedTags:
   - chopped_bread
@@ -11719,8 +11698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 1662012919}
   includedTags:
   - chopped_bread
@@ -12345,8 +12322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 1781677739}
   includedTags:
   - onion
@@ -12984,8 +12959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 1812475876}
   includedTags:
   - chopped_bread
@@ -13710,8 +13683,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 1962938846}
   includedTags:
   - chopped_bread
@@ -14440,8 +14411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 2124434074}
   includedTags:
   - pan
@@ -14566,8 +14535,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 527422398323969842, guid: 9c1d2dd870625754590ea534052195aa,
-    type: 3}
   photonView: {fileID: 2127781430}
   includedTags:
   - chopped_bread
@@ -14815,7 +14782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
   photonView: {fileID: 0}
   includedTags: []
   allowed: 0

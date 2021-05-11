@@ -8,12 +8,10 @@ public class character : Photon.MonoBehaviour
     //los scripts de movimiento son propios del prefab del personaje y vinieron del store, Simple Sample Charact (editados para que solo si la vista del personaje es mia se pueda mover)
     public PhotonView photonView;
     public GameObject avatar;
-    public string playerName;
-   // public GameObject playerCanvas;
     public int playerId;
     public string currentSide;
-    Vector2 limits_x = new Vector2(3.45f,0.6f);
-    Vector2 limits_z = new Vector2(3.93f, 0.35f);
+    Vector2 limits_x = new Vector2(3.47f,0.55f);
+    Vector2 limits_z = new Vector2(4f, 0.32f);
 
     private void Start()
     {
@@ -21,7 +19,6 @@ public class character : Photon.MonoBehaviour
     }
     void Update()
     {   
-        //en el caso de error que el empty que contiene lo agarrado tenga mas de un elemento, el segundo elemento se elimina
         if(transform.GetChild(0).childCount >= 2){
             Destroy(transform.GetChild(0).transform.GetChild(0).gameObject);
         }
