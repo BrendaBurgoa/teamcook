@@ -9,7 +9,7 @@ public Material[] mat;
 public Material[] shownMat;
 public Color matcolor;
 private bool grabbed;
-private character character;
+character character;
 
     void Start () {
         ren = gameObject.GetComponent<Renderer>();
