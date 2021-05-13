@@ -623,12 +623,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18305175}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 18305182}
   includedTags:
   - chopped_bread
   - onion
@@ -655,7 +654,7 @@ MonoBehaviour:
   - tomatoSoup
   - chopped_lettuce
   - lettuce
-  allowed: 0
+  offset: {x: 0, y: 0.55, z: 0}
 --- !u!23 &18305179
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1127,10 +1126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 54711779}
   includedTags:
   - extinguisher
-  allowed: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &58481851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,10 +1720,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 97249352}
   includedTags:
   - extinguisher
-  allowed: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!65 &97249354
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3749,9 +3746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 409538548}
   includedTags: []
-  allowed: 0
+  offset: {x: 0, y: 0.55, z: 0}
 --- !u!65 &409538550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4055,10 +4051,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 482867842}
   includedTags:
   - pot
-  allowed: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!65 &482867844
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4856,12 +4851,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589598587}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 589598589}
   includedTags:
   - chopped_bread
   - onion
@@ -4888,7 +4882,7 @@ MonoBehaviour:
   - tomatoSoup
   - chopped_lettuce
   - lettuce
-  allowed: 0
+  offset: {x: 0, y: 0.55, z: 0}
 --- !u!65 &589598591
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5237,12 +5231,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 651828905}
   includedTags:
   - onion
   - tomato
   - lettuce
-  allowed: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &651828905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5750,145 +5743,6 @@ MonoBehaviour:
   mat: []
   shownMat: []
   matcolor: {r: 0, g: 0, b: 0, a: 0}
---- !u!1 &814984539
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 814984540}
-  - component: {fileID: 814984545}
-  - component: {fileID: 814984544}
-  - component: {fileID: 814984543}
-  - component: {fileID: 814984542}
-  - component: {fileID: 814984541}
-  m_Layer: 0
-  m_Name: potCounter (11)
-  m_TagString: counter
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &814984540
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814984539}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.72875, z: 3.3333335}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1463238731}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &814984541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814984539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 34
-  instantiationId: 34
-  currentMasterID: -1
-  isRuntimeInstantiated: 0
---- !u!114 &814984542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814984539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  photonView: {fileID: 814984541}
-  includedTags:
-  - chopped_bread
-  - onion
-  - chopped_onion
-  - tomato
-  - chopped_tomato
-  - patty
-  - cooked_patty
-  - fries
-  - fullSalad
-  - simpleSalad
-  - potOnionSoup
-  - potTomatoSoup
-  - pot
-  - pan
-  - burnt_pot
-  - burnt_pan
-  - simpleBurgerFries
-  - fullBurgerFries
-  - fullBurger
-  - simpleBurger
-  - trashplate
-  - onionSoup
-  - tomatoSoup
-  - chopped_lettuce
-  - lettuce
-  allowed: 0
---- !u!65 &814984543
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814984539}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.71, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &814984544
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814984539}
-  serializedVersion: 2
-  m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!33 &814984545
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814984539}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &848618870
 GameObject:
   m_ObjectHideFlags: 0
@@ -7329,145 +7183,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110264166}
   m_Mesh: {fileID: 4300002, guid: b2f829bc39c18fe468a74370f294116d, type: 3}
---- !u!1 &1113694194
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1113694195}
-  - component: {fileID: 1113694200}
-  - component: {fileID: 1113694199}
-  - component: {fileID: 1113694198}
-  - component: {fileID: 1113694197}
-  - component: {fileID: 1113694196}
-  m_Layer: 0
-  m_Name: potCounter (1)
-  m_TagString: counter
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1113694195
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113694194}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.72875, z: 5.566667}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1463238731}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1113694196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113694194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 42
-  instantiationId: 42
-  currentMasterID: -1
-  isRuntimeInstantiated: 0
---- !u!114 &1113694197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113694194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  photonView: {fileID: 1113694196}
-  includedTags:
-  - chopped_bread
-  - onion
-  - chopped_onion
-  - tomato
-  - chopped_tomato
-  - patty
-  - cooked_patty
-  - fries
-  - fullSalad
-  - simpleSalad
-  - potOnionSoup
-  - potTomatoSoup
-  - pot
-  - pan
-  - burnt_pot
-  - burnt_pan
-  - simpleBurgerFries
-  - fullBurgerFries
-  - fullBurger
-  - simpleBurger
-  - trashplate
-  - onionSoup
-  - tomatoSoup
-  - chopped_lettuce
-  - lettuce
-  allowed: 0
---- !u!65 &1113694198
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113694194}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.71, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1113694199
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113694194}
-  serializedVersion: 2
-  m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!33 &1113694200
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113694194}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1116573495
 GameObject:
   m_ObjectHideFlags: 0
@@ -7527,10 +7242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 1116573496}
   includedTags:
   - pan
-  allowed: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!65 &1116573499
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7784,7 +7498,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 1517492993}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8089,7 +7803,6 @@ Transform:
   - {fileID: 2127781429}
   - {fileID: 1646022661}
   - {fileID: 409538547}
-  - {fileID: 1463238731}
   m_Father: {fileID: 394043472}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8164,12 +7877,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1197721760}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 1197721762}
   includedTags:
   - chopped_bread
   - onion
@@ -8196,7 +7908,7 @@ MonoBehaviour:
   - tomatoSoup
   - chopped_lettuce
   - lettuce
-  allowed: 0
+  offset: {x: 0, y: 0.55, z: 0}
 --- !u!65 &1197721764
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9265,41 +8977,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462188854}
   m_Mesh: {fileID: 4300000, guid: 6a4e254c0b0d9214ea7b53f9c0c43b10, type: 3}
---- !u!1 &1463238730
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1463238731}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1463238731
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463238730}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.073000014, z: -5.0499997}
-  m_LocalScale: {x: 0.9, y: 0.8, z: 0.8999999}
-  m_Children:
-  - {fileID: 1113694195}
-  - {fileID: 1812475875}
-  - {fileID: 814984540}
-  - {fileID: 1662012918}
-  - {fileID: 1962938845}
-  m_Father: {fileID: 1148951561}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1472090169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9771,10 +9448,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 1496662885}
   includedTags:
   - pot
-  allowed: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &1496662885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11420,12 +11096,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646022660}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 1646022662}
   includedTags:
   - chopped_bread
   - onion
@@ -11452,7 +11127,7 @@ MonoBehaviour:
   - tomatoSoup
   - chopped_lettuce
   - lettuce
-  allowed: 0
+  offset: {x: 0, y: 0.55, z: 0}
 --- !u!65 &1646022664
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11624,145 +11299,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659174470}
   m_Mesh: {fileID: 4300002, guid: b2f829bc39c18fe468a74370f294116d, type: 3}
---- !u!1 &1662012917
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1662012918}
-  - component: {fileID: 1662012923}
-  - component: {fileID: 1662012922}
-  - component: {fileID: 1662012921}
-  - component: {fileID: 1662012920}
-  - component: {fileID: 1662012919}
-  m_Layer: 0
-  m_Name: potCounter (12)
-  m_TagString: counter
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1662012918
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662012917}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.72875, z: 2.2255561}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1463238731}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1662012919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662012917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 35
-  instantiationId: 35
-  currentMasterID: -1
-  isRuntimeInstantiated: 0
---- !u!114 &1662012920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662012917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  photonView: {fileID: 1662012919}
-  includedTags:
-  - chopped_bread
-  - onion
-  - chopped_onion
-  - tomato
-  - chopped_tomato
-  - patty
-  - cooked_patty
-  - fries
-  - fullSalad
-  - simpleSalad
-  - potOnionSoup
-  - potTomatoSoup
-  - pot
-  - pan
-  - burnt_pot
-  - burnt_pan
-  - simpleBurgerFries
-  - fullBurgerFries
-  - fullBurger
-  - simpleBurger
-  - trashplate
-  - onionSoup
-  - tomatoSoup
-  - chopped_lettuce
-  - lettuce
-  allowed: 0
---- !u!65 &1662012921
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662012917}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.61}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1662012922
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662012917}
-  serializedVersion: 2
-  m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!33 &1662012923
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662012917}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1662446834
 GameObject:
   m_ObjectHideFlags: 0
@@ -12322,12 +11858,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 1781677739}
   includedTags:
   - onion
   - tomato
   - lettuce
-  allowed: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &1781677739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12885,145 +12420,6 @@ Transform:
   m_Father: {fileID: 1662446835}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1812475874
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1812475875}
-  - component: {fileID: 1812475880}
-  - component: {fileID: 1812475879}
-  - component: {fileID: 1812475878}
-  - component: {fileID: 1812475877}
-  - component: {fileID: 1812475876}
-  m_Layer: 0
-  m_Name: potCounter (10)
-  m_TagString: counter
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1812475875
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812475874}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.72875, z: 4.4555564}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1463238731}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1812475876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812475874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 33
-  instantiationId: 33
-  currentMasterID: -1
-  isRuntimeInstantiated: 0
---- !u!114 &1812475877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812475874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  photonView: {fileID: 1812475876}
-  includedTags:
-  - chopped_bread
-  - onion
-  - chopped_onion
-  - tomato
-  - chopped_tomato
-  - patty
-  - cooked_patty
-  - fries
-  - fullSalad
-  - simpleSalad
-  - potOnionSoup
-  - potTomatoSoup
-  - pot
-  - pan
-  - burnt_pot
-  - burnt_pan
-  - simpleBurgerFries
-  - fullBurgerFries
-  - fullBurger
-  - simpleBurger
-  - trashplate
-  - onionSoup
-  - tomatoSoup
-  - chopped_lettuce
-  - lettuce
-  allowed: 0
---- !u!65 &1812475878
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812475874}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.61}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1812475879
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812475874}
-  serializedVersion: 2
-  m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!33 &1812475880
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812475874}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1830882401
 GameObject:
   m_ObjectHideFlags: 0
@@ -13609,145 +13005,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954179894}
   m_CullTransparentMesh: 0
---- !u!1 &1962938844
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1962938845}
-  - component: {fileID: 1962938850}
-  - component: {fileID: 1962938849}
-  - component: {fileID: 1962938848}
-  - component: {fileID: 1962938847}
-  - component: {fileID: 1962938846}
-  m_Layer: 0
-  m_Name: potCounter (13)
-  m_TagString: counter
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1962938845
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962938844}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.72875, z: 1.1111118}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1463238731}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1962938846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962938844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 36
-  instantiationId: 36
-  currentMasterID: -1
-  isRuntimeInstantiated: 0
---- !u!114 &1962938847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962938844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  photonView: {fileID: 1962938846}
-  includedTags:
-  - chopped_bread
-  - onion
-  - chopped_onion
-  - tomato
-  - chopped_tomato
-  - patty
-  - cooked_patty
-  - fries
-  - fullSalad
-  - simpleSalad
-  - potOnionSoup
-  - potTomatoSoup
-  - pot
-  - pan
-  - burnt_pot
-  - burnt_pan
-  - simpleBurgerFries
-  - fullBurgerFries
-  - fullBurger
-  - simpleBurger
-  - trashplate
-  - onionSoup
-  - tomatoSoup
-  - chopped_lettuce
-  - lettuce
-  allowed: 0
---- !u!65 &1962938848
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962938844}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.71, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1962938849
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962938844}
-  serializedVersion: 2
-  m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!33 &1962938850
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962938844}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &2015485012
 GameObject:
   m_ObjectHideFlags: 0
@@ -14411,10 +13668,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 2124434074}
   includedTags:
   - pan
-  allowed: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!65 &2124434077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14530,12 +13786,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127781428}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 2127781430}
   includedTags:
   - chopped_bread
   - onion
@@ -14562,7 +13817,7 @@ MonoBehaviour:
   - tomatoSoup
   - chopped_lettuce
   - lettuce
-  allowed: 0
+  offset: {x: 0, y: 0.55, z: 0}
 --- !u!65 &2127781432
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14782,9 +14037,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
   includedTags: []
-  allowed: 0
+  offset: {x: 0, y: 0, z: 0}
 --- !u!4 &256496272220748234
 Transform:
   m_ObjectHideFlags: 0

@@ -8,41 +8,33 @@ public class ShowCollision : MonoBehaviour
     public Material[] mat;
     public Material[] shownMat;
     public Color matcolor;
-    private bool grabbed;
-    character character;
     pick_drop pick_drop_go;
+    Collider colliders;
 
     void Start () {
         ren = gameObject.GetComponent<Renderer>();
         mat = ren.materials;       
         matcolor =mat[0].color;
         pick_drop_go = gameObject.GetComponent<pick_drop>();
+        colliders = GetComponent<Collider>();
     }
     public void ResetCollision()
     {
         ren = gameObject.GetComponent<Renderer>();
         SetColor(matcolor);
     }
-    //void Update(){
-    //    if (pick_drop_go == null) return;
-    //    if(transform.parent != null && transform.parent.tag == "destination")
-    //        SetColor(matcolor);
-    //}
-    void OnCollisionEnter(Collision other){
-        character _character = other.gameObject.GetComponent<character>();
-        if (_character != null && _character.IsMe())
-        {
+    public void SetCollision(bool isOn)
+    {
+        if(colliders == null)
+            colliders = GetComponent<Collider>();
+        colliders.enabled = isOn;
+    }
+    public void OnCharacterOver(bool isOver)
+    {
+        if(isOver)
             SetColor(Color.green);
-            character = _character;
-         }
-     }
-    void OnCollisionExit(Collision other){
-        character _character = other.gameObject.GetComponent<character>();
-        if (_character != null && _character.IsMe())
-        {
-            character = null;
+        else
             SetColor(matcolor);
-        }
     }
     void SetColor(Color matcolor)
     {

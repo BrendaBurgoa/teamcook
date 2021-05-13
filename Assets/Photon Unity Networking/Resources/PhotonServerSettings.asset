@@ -87,4 +87,5 @@ MonoBehaviour:
   - pickDropMaster
   - drop
   - pick
+  - deleteItem
   DisableAutoOpenWizard: 1

@@ -4,82 +4,38 @@ using UnityEngine;
 
 public class PlaceObj : Photon.MonoBehaviour
 {
-    character character;
     private Vector3 initialPosition;
     public string[] includedTags;
+    public Vector3 offset;
 
     void Start(){
         initialPosition = gameObject.transform.position;
     }
-
-    void Update()
+    [PunRPC]
+    private void deleteItem(int viewID)
     {
-        if (character == null)
-            return;
-        if (Input.GetKeyDown("space"))
-        {
-            PhotonView pv;
-            if (character.HasSomething())
-            {
-                pv = HasSomethingToDrop();
-                if (pv != null)
-                    photonView.RPC("drop", PhotonTargets.All, pv.viewID);
-            }
-            else
-            {
-                if (gameObject.transform.childCount >= 1)
-                {
-                    pv = gameObject.transform.GetChild(0).GetComponent<PhotonView>();
-                    if (pv != null)
-                        photonView.RPC("pick", PhotonTargets.All, pv.viewID, character.photonView.viewID);
-                }
-            }
-        }
+        var pv = PhotonView.Find(viewID);
+        if (pv == null) return;
+        if(Data.Instance.Rol == 0)
+            PhotonNetwork.Destroy(pv);
+        Destroy(pv.gameObject);
     }
-    PhotonView HasSomethingToDrop()
+    public void OnSelect(PhotonView pv)
     {
-        for (var i = 0; i < includedTags.Length; i++)
-        {
-            PhotonView pv = character.container.GetComponentInChildren<PhotonView>();
-            if (pv.tag == includedTags[i])
-                return pv;
-        }
-        return null;
-    }
-    void OnCollisionEnter(Collision other)
-    {
-        character _character = other.gameObject.GetComponent<character>();
-        if (_character != null && _character.IsMe())
-        {
-            character= _character;
-        }
-    }
-
-    void OnCollisionExit(Collision other){
-        character _character = other.gameObject.GetComponent<character>();
-        if (_character != null && _character.IsMe()) { 
-            character= null;
-        }
+        photonView.RPC("deleteItem", PhotonTargets.All, pv.viewID);
+        string _name = pv.gameObject.name;
+        string[] arr = pv.gameObject.name.Split("(Clone)"[0]);
+        if (arr.Length > 1)
+            _name = arr[0];
+        PhotonNetwork.Instantiate(_name, transform.position + offset, Quaternion.identity, 0);
     }
     [PunRPC]
     private void drop(int viewID)
     {
         var obj = PhotonView.Find(viewID);
         if (obj == null) return;
-        {
-            obj.transform.SetParent(gameObject.transform);
-            obj.transform.localPosition = Vector3.zero;
-        }
+        obj.transform.position = gameObject.transform.position;
+        obj.transform.SetParent(gameObject.transform);
     }
-    [PunRPC]
-    private void pick(int id, int characterID)
-    {
-        var ingredient = PhotonView.Find(id);   
-        if (Data.Instance.Rol == 0)
-            ingredient.GetComponent<PhotonView>().TransferOwnership(characterID);
-
-        var _character = PhotonView.Find(characterID);
-        character characterThatCatch = _character.GetComponent<character>();
-        characterThatCatch.GetObject(ingredient.GetComponent<PhotonView>());
-    }
+   
 }
