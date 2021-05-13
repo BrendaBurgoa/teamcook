@@ -85,4 +85,6 @@ MonoBehaviour:
   - NewUser
   - pickDropDone
   - pickDropMaster
+  - drop
+  - pick
   DisableAutoOpenWizard: 1

@@ -12,10 +12,22 @@ public class character : Photon.MonoBehaviour
     public string currentSide;
     Vector2 limits_x = new Vector2(3.47f,0.55f);
     Vector2 limits_z = new Vector2(4f, 0.32f);
+    public Transform container;
 
+    public bool HasSomething()
+    {
+        return container.childCount > 0;
+    }
     private void Start()
     {
         Events.OnNewPlayer(this);
+    }
+    public void GetObject(PhotonView objectPicked)
+    {
+        objectPicked.transform.SetParent(container);
+        objectPicked.transform.localPosition = Vector3.zero;
+        ShowCollision sc = objectPicked.GetComponent<ShowCollision>();
+        if (sc != null) sc.ResetCollision();
     }
     public bool IsMe()
     {

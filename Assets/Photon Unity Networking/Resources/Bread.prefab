@@ -60,6 +60,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -71,6 +72,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -114,8 +116,6 @@ MonoBehaviour:
   character: {fileID: 0}
   charaPhotonView: {fileID: 0}
   isGrabbed: 0
-  isLeft: 0
-  leftWhere: 
   photonView: {fileID: 6060767346416672195}
   who: 
 --- !u!65 &6152247502059946549
@@ -147,7 +147,7 @@ MonoBehaviour:
   group: 0
   OwnerShipWasTransfered: 0
   prefixBackup: -1
-  synchronization: 3
+  synchronization: 2
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 1
@@ -251,3 +251,4 @@ MonoBehaviour:
   ren: {fileID: 0}
   mat: []
   shownMat: []
+  matcolor: {r: 0, g: 0, b: 0, a: 0}

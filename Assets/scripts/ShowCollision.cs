@@ -20,6 +20,7 @@ public class ShowCollision : MonoBehaviour
     }
     public void ResetCollision()
     {
+        ren = gameObject.GetComponent<Renderer>();
         SetColor(matcolor);
     }
     //void Update(){

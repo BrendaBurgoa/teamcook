@@ -29,6 +29,9 @@ public class Data : MonoBehaviour
     {
         if (!mInstance)
             mInstance = this;
+        else
+            Destroy(this.gameObject);
+
         DontDestroyOnLoad(this.gameObject);
 
         URLParameters.Instance.RegisterOnDone((url) => {

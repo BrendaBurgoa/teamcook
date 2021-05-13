@@ -56,6 +56,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -67,6 +68,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -168,6 +170,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -179,6 +182,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -232,14 +236,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94286c70634b85541ac93bc7b45e0d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simpleBurger: 0
+  fullBurger: 0
+  simpleBurgerFries: 0
+  fullBurgerFries: 0
+  tomatoSoup: 0
+  onionSoup: 0
+  simpleSalad: 0
+  fullSalad: 0
   text_points: {fileID: 0}
   photonView: {fileID: 8514766578095191444}
-  LateOsoup: 0
-  LateTsoup: 0
-  LateSburger: 0
-  LateFburger: 0
-  LateSsalad: 0
-  LateFsalad: 0
+  clap: {fileID: 0}
 --- !u!114 &8514766578095191444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +263,7 @@ MonoBehaviour:
   group: 0
   OwnerShipWasTransfered: 0
   prefixBackup: -1
-  synchronization: 3
+  synchronization: 2
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
@@ -279,7 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8387b4b9e2b4a8448bc2b882e74298e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
-  isGrabbing: 0
-  photonView: {fileID: 0}
-  distance: 0
+  photonView: {fileID: 8514766578095191444}
+  includedTags: []
+  allowed: 0

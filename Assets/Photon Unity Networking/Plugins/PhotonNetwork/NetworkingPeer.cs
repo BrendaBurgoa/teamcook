@@ -2633,7 +2633,7 @@ internal class NetworkingPeer : LoadBalancingPeer, IPhotonPeerListener
             case PunEvent.RPC:
                 //ts: each event now contains a single RPC. execute this
                 // Debug.Log("Ev RPC from: " + originatingPlayer);
-                Events.Log("actorNr: " + actorNr);
+             //   Events.Log("actorNr: " + actorNr);
                 this.ExecuteRpc(photonEvent[ParameterCode.Data] as Hashtable, actorNr);
                 break;
 

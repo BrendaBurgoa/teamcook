@@ -420,9 +420,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonView: {fileID: 527422398323969844}
   avatar: {fileID: 527422398323969842}
-  playerName: 
   playerId: 0
   currentSide: 
+  container: {fileID: 1419609380313842891}
 --- !u!114 &527422398323969844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PositionModel:
     SynchronizeEnabled: 1
-    TeleportEnabled: 0
+    TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
     InterpolateOption: 4
     InterpolateMoveTowardsSpeed: 1

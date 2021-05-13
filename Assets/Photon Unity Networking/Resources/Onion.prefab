@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 65346811216409604}
   - component: {fileID: 114050002575207410}
   - component: {fileID: 114170555908626244}
-  - component: {fileID: 114362620596467886}
   - component: {fileID: 389151977896243691}
   - component: {fileID: 114986137583869870}
   m_Layer: 0
@@ -62,6 +61,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,6 +73,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -116,8 +117,6 @@ MonoBehaviour:
   character: {fileID: 0}
   charaPhotonView: {fileID: 0}
   isGrabbed: 0
-  isLeft: 0
-  leftWhere: 
   photonView: {fileID: 114050002575207410}
   who: 
 --- !u!65 &65346811216409604
@@ -238,21 +237,6 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!114 &114362620596467886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6076939625370480646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60a636c080b0e864aa3cde06d8c22845, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myPrefab: {fileID: 4991559483658318487, guid: 20a0eb78b2d4e02459b3adccf6f65a2d,
-    type: 3}
-  photonView: {fileID: 114050002575207410}
 --- !u!95 &389151977896243691
 Animator:
   serializedVersion: 3
