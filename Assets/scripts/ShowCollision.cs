@@ -38,6 +38,7 @@ public class ShowCollision : MonoBehaviour
     }
     void SetColor(Color matcolor)
     {
+        if (ren == null) Start();
         shownMat = ren.materials;
         shownMat[0].color = matcolor;
         ren.materials = shownMat;

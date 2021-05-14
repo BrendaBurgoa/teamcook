@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class PlaceObj : Photon.MonoBehaviour
 {
-    private Vector3 initialPosition;
     public string[] includedTags;
     public Vector3 offset;
+    public Vector3 rotationToPlace;
 
-    void Start(){
-        initialPosition = gameObject.transform.position;
-    }
     [PunRPC]
     private void deleteItem(int viewID)
     {
@@ -27,7 +24,14 @@ public class PlaceObj : Photon.MonoBehaviour
         string[] arr = pv.gameObject.name.Split("(Clone)"[0]);
         if (arr.Length > 1)
             _name = arr[0];
-        PhotonNetwork.Instantiate(_name, transform.position + offset, Quaternion.identity, 0);
+        GameObject go = PhotonNetwork.Instantiate(_name, transform.position + offset, Quaternion.Euler(rotationToPlace), 0);
+        IfCoockerAdd(go);
+    }
+    void IfCoockerAdd(GameObject go)
+    {
+        Coocker coocker = GetComponent<Coocker>();
+        if (coocker != null)
+            coocker.Added(go);
     }
     [PunRPC]
     private void drop(int viewID)

@@ -34,7 +34,7 @@ public class matchTime : MonoBehaviour
     [PunRPC]
     private void SetColors(string name, int which){
         //busca al personaje del jugador indicado, busca el sombrero y le cambia de color
-         GameObject.Find(name).transform.GetChild(1).transform.GetChild(0).GetComponent<Renderer>().material.color =colors[which];
+        // GameObject.Find(name).transform.GetChild(1).transform.GetChild(0).GetComponent<Renderer>().material.color =colors[which];
     }
     float initialTime = 0;
 

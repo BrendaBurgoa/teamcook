@@ -18,10 +18,12 @@ public class orders : MonoBehaviour
 
     public PhotonView photonView;
     public AudioSource clap;
-
+    void Awake()
+    {
+        Events.NewOrder += NewOrder;
+    }
     void Start(){
         clap = GetComponent<AudioSource>();
-        Events.NewOrder += NewOrder;
     }
     void OnDestroy()
     {
@@ -43,68 +45,67 @@ public class orders : MonoBehaviour
         fullSalad= GameObject.FindGameObjectsWithTag("FSaladOrder").Length;
     }
 
-    void OnCollisionEnter(Collision other)
+    public void OnSelect(character character)
     {
-        //se deja entregar si no existe fuego y existe una orden para ese plato
-        if(Data.Instance.fireExists == false && other.gameObject.tag == "character"){
-            if(other.gameObject.GetComponent<PhotonView>().owner == PhotonNetwork.player && other.gameObject.transform.GetChild(0).transform.GetChild(0).gameObject != null){
-                var plate = other.gameObject.transform.GetChild(0).transform.GetChild(0).gameObject;
-                RecognizeOrder(plate.tag, plate);
-            }
+        if(Data.Instance.fireExists == false){
+            PhotonView pv = character.HasSomethingToDrop();
+            if (pv != null)
+                RecognizeOrder(pv.tag, pv);
         }
     }
     
-    private void RecognizeOrder(string collisionTag, GameObject plate){
+    private void RecognizeOrder(string collisionTag, PhotonView plate){
         //se corrobora que exista el pedido y se elimina una de las ordenes para entregar
-            if(collisionTag == "simpleBurger" && simpleBurger>0)
-            {
-                    photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
-                    photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerOrder");
-            }
-            else if(collisionTag == "fullBurger" && fullBurger>0)
-            {
-                    photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
-                    photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerOrder");
-            }
-            else if(collisionTag == "fullBurgerFries" && fullBurgerFries>0)
-            {
-                photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
-                    photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerFriesOrder"); 
-            }
-            else if(collisionTag == "simpleBurgerFries" && simpleBurgerFries>0)
-            {
-                    photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
-                    photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerFriesOrder");
-            }
+        if(collisionTag == "simpleBurger" && simpleBurger>0)
+        {
+                photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+                photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerOrder");
+        }
+        else if(collisionTag == "fullBurger" && fullBurger>0)
+        {
+                photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+                photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerOrder");
+        }
+        else if(collisionTag == "fullBurgerFries" && fullBurgerFries>0)
+        {
+            photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+                photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerFriesOrder"); 
+        }
+        else if(collisionTag == "simpleBurgerFries" && simpleBurgerFries>0)
+        {
+                photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+                photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerFriesOrder");
+        }
 
-            else if(collisionTag == "simpleSalad" && simpleSalad>0)
-            { 
-                        photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
-                        photonView.RPC("DeleteLatest", PhotonTargets.All, "SSaladOrder");
-            }
-            else if(collisionTag == "fullSalad" && fullSalad>0)
-            {
-                    photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
-                    photonView.RPC("DeleteLatest", PhotonTargets.All, "FSaladOrder");
-            }
-            else if(collisionTag == "onionSoup" && onionSoup>0)
-            {
-                    photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);
-                    photonView.RPC("DeleteLatest", PhotonTargets.All, "OSoupOrder");
-            }
-            else if(collisionTag == "tomatoSoup" && tomatoSoup>0)
-            {         
-                    photonView.RPC("ChangePoints", PhotonTargets.All, Data.Instance.TimelyOrders+1, plate.name);   
-                    photonView.RPC("DeleteLatest", PhotonTargets.All, "TSoupOrder");
-            }
+        else if(collisionTag == "simpleSalad" && simpleSalad>0)
+        { 
+                    photonView.RPC("ChangePoints", PhotonTargets.All,  plate.name);
+                    photonView.RPC("DeleteLatest", PhotonTargets.All, "SSaladOrder");
+        }
+        else if(collisionTag == "fullSalad" && fullSalad>0)
+        {
+                photonView.RPC("ChangePoints", PhotonTargets.All,   plate.name);
+                photonView.RPC("DeleteLatest", PhotonTargets.All, "FSaladOrder");
+        }
+        else if(collisionTag == "onionSoup" && onionSoup>0)
+        {
+                photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+                photonView.RPC("DeleteLatest", PhotonTargets.All, "OSoupOrder");
+        }
+        else if(collisionTag == "tomatoSoup" && tomatoSoup>0)
+        {         
+                photonView.RPC("ChangePoints", PhotonTargets.All,   plate.name);   
+                photonView.RPC("DeleteLatest", PhotonTargets.All, "TSoupOrder");
+        }
     }
 
     [PunRPC]
     private void ChangePoints(int newPoints, string receivedplate){
     //cuando se entrega se modifica el numero de entregas, se reproduce un audio y se destuye el plato entregado
-        clap.Play();
-        Data.Instance.TimelyOrders=newPoints;
+        clap.Play();        
         Destroy(GameObject.Find(receivedplate));
+
+        Data.Instance.TimelyOrders++;
         Events.OnRefreshPoints();
     }
 

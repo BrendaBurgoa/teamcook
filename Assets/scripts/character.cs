@@ -63,6 +63,10 @@ public class character : Photon.MonoBehaviour
        
         if (photonViewActive != null && Input.GetKeyDown("space"))
         {
+            Coocker coocker = photonViewActive.GetComponent<Coocker>();
+            if (coocker != null && !coocker.CanBeGrabbed())
+                return;
+
             pick_drop pd = photonViewActive.GetComponent<pick_drop>();
             if (pd != null && !HasSomething())
             {
@@ -77,10 +81,12 @@ public class character : Photon.MonoBehaviour
                     PhotonView pv = HasSomethingToDrop(po);
                     if (pv != null) po.OnSelect(pv);
                 }
+                orders o = photonViewActive.GetComponent<orders>();
+                if (o != null) o.OnSelect(this);
             } else
             {
                 instantiateObjects io = photonViewActive.GetComponent<instantiateObjects>();
-                if (io != null) InstantiateObject(io);
+                if (io != null) InstantiateObject(io);                
             }
         }
     }
@@ -94,6 +100,10 @@ public class character : Photon.MonoBehaviour
                 return pv;
         }
         return null;
+    }
+    public PhotonView HasSomethingToDrop()
+    {
+        return container.GetComponentInChildren<PhotonView>();
     }
 
     void OnCollisionEnter(Collision other)
