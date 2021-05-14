@@ -40,10 +40,6 @@ public class character : Photon.MonoBehaviour
     }
     void Update()
     {
-        //if (transform.GetChild(0).childCount >= 2)
-        //{
-        //    Destroy(transform.GetChild(0).transform.GetChild(0).gameObject);
-        //}
         if (!photonView.isMine) return;
 
         Vector3 pos = transform.position;
@@ -68,7 +64,7 @@ public class character : Photon.MonoBehaviour
         if (photonViewActive != null && Input.GetKeyDown("space"))
         {
             pick_drop pd = photonViewActive.GetComponent<pick_drop>();
-            if (pd != null)
+            if (pd != null && !HasSomething())
             {
                 photonView.RPC("pick", PhotonTargets.All, pd.photonView.viewID, photonView.viewID);
                 photonViewActive = null;
