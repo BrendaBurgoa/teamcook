@@ -81,6 +81,10 @@ public class character : Photon.MonoBehaviour
                     PhotonView pv = HasSomethingToDrop(po);
                     if (pv != null) po.OnSelect(pv);
                 }
+            } else
+            {
+                instantiateObjects io = photonViewActive.GetComponent<instantiateObjects>();
+                if (io != null) InstantiateObject(io);
             }
         }
     }
@@ -135,5 +139,32 @@ public class character : Photon.MonoBehaviour
         var _character = PhotonView.Find(characterID);
         character characterThatCatch = _character.GetComponent<character>();
         characterThatCatch.GetObject(ingredient.GetComponent<PhotonView>());
+    }
+    public void InstantiateObject(instantiateObjects io)
+    {
+        var ingredient = PhotonNetwork.Instantiate(io.myPrefab.name, new Vector3(1000,0,0), Quaternion.identity, 0);
+        photonView.RPC("instantiateIngredient", PhotonTargets.All, ingredient.GetComponent<PhotonView>().viewID, photonView.viewID);
+    }
+    [PunRPC]
+    void instantiateIngredient(int id, int characterID)
+    {
+        var ingredient = PhotonView.Find(id);
+
+        if (ingredient == null) return;
+        ingredient.name = ingredient.name + PhotonView.Find(ingredient.GetComponent<PhotonView>().viewID);
+
+        var _character = PhotonView.Find(characterID);
+        if (_character == null)
+        {
+            Destroy(ingredient.gameObject);
+        }
+        else
+        {
+            if (Data.Instance.Rol == 0)
+                ingredient.GetComponent<PhotonView>().TransferOwnership(characterID);
+
+            character characterThatCatch = _character.GetComponent<character>();
+            characterThatCatch.GetObject(ingredient.GetComponent<PhotonView>());
+        }
     }
 }
