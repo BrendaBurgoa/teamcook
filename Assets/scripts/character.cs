@@ -40,31 +40,31 @@ public class character : Photon.MonoBehaviour
     }
     void Update()
     {
-        if (transform.GetChild(0).childCount >= 2)
+        //if (transform.GetChild(0).childCount >= 2)
+        //{
+        //    Destroy(transform.GetChild(0).transform.GetChild(0).gameObject);
+        //}
+        if (!photonView.isMine) return;
+
+        Vector3 pos = transform.position;
+
+        if (currentSide == "left")
         {
-            Destroy(transform.GetChild(0).transform.GetChild(0).gameObject);
+            if (pos.x < -limits_x.x) pos.x = -limits_x.x;
+            if (pos.x > -limits_x.y) pos.x = -limits_x.y;
         }
-        if (photonView.isMine)
+        else if (currentSide == "right")
         {
-            Vector3 pos = transform.position;
-
-            if (currentSide == "left")
-            {
-                if (pos.x < -limits_x.x) pos.x = -limits_x.x;
-                if (pos.x > -limits_x.y) pos.x = -limits_x.y;
-            }
-            else if (currentSide == "right")
-            {
-                if (pos.x > limits_x.x) pos.x = limits_x.x;
-                if (pos.x < limits_x.y) pos.x = limits_x.y;
-            }
-
-            if (pos.z > limits_z.x) pos.z = limits_z.x - (0.01f);
-            if (pos.z < limits_z.y) pos.z = limits_z.y + (0.01f);
-
-            pos.y = 0;
-            transform.position = pos;
+            if (pos.x > limits_x.x) pos.x = limits_x.x;
+            if (pos.x < limits_x.y) pos.x = limits_x.y;
         }
+
+        if (pos.z > limits_z.x) pos.z = limits_z.x - (0.01f);
+        if (pos.z < limits_z.y) pos.z = limits_z.y + (0.01f);
+
+        pos.y = 0;
+        transform.position = pos;
+       
         if (photonViewActive != null && Input.GetKeyDown("space"))
         {
             pick_drop pd = photonViewActive.GetComponent<pick_drop>();
@@ -98,6 +98,7 @@ public class character : Photon.MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        if (!photonView.isMine) return;
         if (photonViewActive == null || photonViewActive.GetComponent<pick_drop>() == null)
         {
             PhotonView pv = other.gameObject.GetComponent<PhotonView>();
@@ -111,6 +112,7 @@ public class character : Photon.MonoBehaviour
     }
     void OnCollisionExit(Collision other)
     {
+        if (!photonView.isMine) return;
         PhotonView pv = other.gameObject.GetComponent<PhotonView>();
         if (pv != null)
         {
