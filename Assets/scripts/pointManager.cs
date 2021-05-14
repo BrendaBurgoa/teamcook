@@ -18,11 +18,11 @@ public class pointManager : Photon.MonoBehaviour
     void OnRefreshPoints()
     {
         if(Data.Instance.Rol == 0)
-            photonView.RPC("markPoints", PhotonTargets.All);
+            photonView.RPC("markPoints", PhotonTargets.All, Data.Instance.TimelyOrders, Data.Instance.LateOrders);
     }
     [PunRPC]
-    public void markPoints ()
+    public void markPoints (int TimelyOrders, int LateOrders)
     {
-        Points.text= "entregadas: "+Data.Instance.TimelyOrders +", vencidas: " + Data.Instance.LateOrders; 
+        Points.text= "entregadas: "+TimelyOrders +", vencidas: " + LateOrders; 
     }
 }

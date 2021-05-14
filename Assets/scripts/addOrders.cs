@@ -14,12 +14,13 @@ public class addOrders : Photon.MonoBehaviour
     public GameObject orderFullBurgerFries;
     public GameObject orderOnionSoup;
     public GameObject orderTomatoSoup;
-    public PhotonView photonView;
 
     public void InstantiateOrder(int which){
+        object[] data = new object[2];
+        data[0] = "OrdersContent";
         GameObject order = null;
         if (which == 1){
-            order = PhotonNetwork.Instantiate(orderSimpleSalad.name, transform.position, Quaternion.identity,0);
+            order = PhotonNetwork.Instantiate(orderSimpleSalad.name, transform.position, Quaternion.identity,0, data);
             photonView.RPC("setParent", PhotonTargets.All, order.GetComponent<PhotonView>().viewID );
         } 
         else if (which == 2){

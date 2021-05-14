@@ -1413,9 +1413,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPrefab: {fileID: 8782279033752639774, guid: 2c2b21d89e8922f4f9d90d168e6f0979,
     type: 3}
-  photonView: {fileID: 83716501}
-  val1: -0.5
-  val2: -1
 --- !u!65 &83716497
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1790,9 +1787,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPrefab: {fileID: 6076939625370480646, guid: 03c231e05d6085640b6f7f78b612bba4,
     type: 3}
-  photonView: {fileID: 100372396}
-  val1: 0.5
-  val2: 1
 --- !u!65 &100372392
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2061,9 +2055,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPrefab: {fileID: 394340420983770338, guid: 57bdff6a1426dee4a91a46f0364fe0e0, type: 3}
-  photonView: {fileID: 113239669}
-  val1: -0.5
-  val2: -1
 --- !u!65 &113239666
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6035,9 +6026,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPrefab: {fileID: 549104603256075585, guid: d23e91b66a97b2c42bd426e1a20e6d1a, type: 3}
-  photonView: {fileID: 873034076}
-  val1: 0.5
-  val2: 1
 --- !u!65 &873034072
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10005,9 +9993,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPrefab: {fileID: 8128616915051131824, guid: eec89cc38c5bf4d458758658209887a9,
     type: 3}
-  photonView: {fileID: 1514456266}
-  val1: 0.5
-  val2: 1
 --- !u!65 &1514456263
 BoxCollider:
   m_ObjectHideFlags: 0
