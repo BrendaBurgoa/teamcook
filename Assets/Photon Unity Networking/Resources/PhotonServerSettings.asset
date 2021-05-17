@@ -89,4 +89,8 @@ MonoBehaviour:
   - pick
   - deleteItem
   - Ready
+  - StartCookingForAll
+  - DestroyForAll
+  - AddIngredient
+  - PlaceNewGO
   DisableAutoOpenWizard: 1

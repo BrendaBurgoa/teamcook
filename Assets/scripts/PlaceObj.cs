@@ -24,14 +24,16 @@ public class PlaceObj : Photon.MonoBehaviour
         string[] arr = pv.gameObject.name.Split("(Clone)"[0]);
         if (arr.Length > 1)
             _name = arr[0];
-        GameObject go = PhotonNetwork.Instantiate(_name, transform.position + offset, Quaternion.Euler(rotationToPlace), 0);
-        IfCoockerAdd(go);
+        photonView.RPC("PlaceNewGO", PhotonTargets.MasterClient, _name);
     }
-    void IfCoockerAdd(GameObject go)
+    [PunRPC]
+    private void PlaceNewGO(string _name)
     {
+        GameObject go = PhotonNetwork.Instantiate(_name, transform.position + offset, Quaternion.Euler(rotationToPlace), 0);
+
         Coocker coocker = GetComponent<Coocker>();
         if (coocker != null)
-            coocker.Added(go);
+            coocker.Added(go.GetComponent<PhotonView>());
     }
     [PunRPC]
     private void drop(int viewID)

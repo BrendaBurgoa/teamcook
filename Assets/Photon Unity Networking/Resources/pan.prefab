@@ -197,7 +197,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1789292075831752522}
+      - m_Target: {fileID: 0}
         m_MethodName: CookBtn
         m_Mode: 1
         m_Arguments:
@@ -222,7 +222,6 @@ GameObject:
   - component: {fileID: 1514938512457466206}
   - component: {fileID: 1514938512457466202}
   - component: {fileID: 1514938512457466203}
-  - component: {fileID: 1789292075831752522}
   - component: {fileID: 114138401645655040}
   - component: {fileID: 114947210969860530}
   - component: {fileID: 82234813789327364}
@@ -417,31 +416,6 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!114 &1789292075831752522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514938512457466180}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0939c32542c0414cba2aca84f3c2382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooked_patty: {fileID: 7316809677319633963, guid: 3d62036b2de420f47b652a33ef4990f0,
-    type: 3}
-  showPatty: {fileID: 185191016245968799}
-  beginTimer: 0
-  onstove: 0
-  timer: {fileID: 8195883611189968184}
-  waitTime: 13
-  cookingTime: 0
-  photonView: {fileID: 1514938512457466202}
-  timerCanvas: {fileID: 8355849678966718482}
-  buttonCook: {fileID: 2621932748209976734}
-  burner: {fileID: 82234813789327364}
-  character: {fileID: 0}
 --- !u!114 &114138401645655040
 MonoBehaviour:
   m_ObjectHideFlags: 0

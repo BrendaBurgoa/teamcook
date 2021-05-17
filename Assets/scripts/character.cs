@@ -78,11 +78,15 @@ public class character : Photon.MonoBehaviour
                 PlaceObj po = photonViewActive.GetComponent<PlaceObj>();
                 if(po != null)
                 {
-                    PhotonView pv = HasSomethingToDrop(po);
-                    if (pv != null) po.OnSelect(pv);
+                    PhotonView pov = HasSomethingToDropInside(po);
+                    if (pov != null) po.OnSelect(pov);
                 }
                 orders o = photonViewActive.GetComponent<orders>();
                 if (o != null) o.OnSelect(this);
+
+                plate p = photonViewActive.GetComponent<plate>();
+                PhotonView pv = HasSomethingToDrop();
+                if (p != null && pv != null) p.OnSelect(pv, this);
             } else
             {
                 instantiateObjects io = photonViewActive.GetComponent<instantiateObjects>();
@@ -91,7 +95,7 @@ public class character : Photon.MonoBehaviour
         }
     }
 
-    PhotonView HasSomethingToDrop(PlaceObj po)
+    PhotonView HasSomethingToDropInside(PlaceObj po)
     {
         for (var i = 0; i < po.includedTags.Length; i++)
         {

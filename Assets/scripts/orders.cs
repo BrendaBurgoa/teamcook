@@ -31,9 +31,9 @@ public class orders : MonoBehaviour
     }
     void NewOrder()
     {
-        _Update();
+        GetOrdersQty();
     }
-    void _Update(){
+    void GetOrdersQty(){
         //la cantidad de ordenes se define segun la cantidad de objetos con esa tag que haya
         simpleBurger = GameObject.FindGameObjectsWithTag("SBurgerOrder").Length;
         fullBurger= GameObject.FindGameObjectsWithTag("FBurgerOrder").Length;
@@ -47,16 +47,20 @@ public class orders : MonoBehaviour
 
     public void OnSelect(character character)
     {
-        if(Data.Instance.fireExists == false){
+        print("OnSelect orders " + Data.Instance.fireExists);
+        if (Data.Instance.fireExists == true) return;
+
             PhotonView pv = character.HasSomethingToDrop();
             if (pv != null)
                 RecognizeOrder(pv.tag, pv);
-        }
     }
     
     private void RecognizeOrder(string collisionTag, PhotonView plate){
-        //se corrobora que exista el pedido y se elimina una de las ordenes para entregar
-        if(collisionTag == "simpleBurger" && simpleBurger>0)
+
+        GetOrdersQty();
+        print("RecognizeOrder " + collisionTag);
+
+        if (collisionTag == "simpleBurger" && simpleBurger>0)
         {
                 photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
                 photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerOrder");
@@ -100,11 +104,9 @@ public class orders : MonoBehaviour
     }
 
     [PunRPC]
-    private void ChangePoints(int newPoints, string receivedplate){
-    //cuando se entrega se modifica el numero de entregas, se reproduce un audio y se destuye el plato entregado
+    private void ChangePoints(string receivedplate){
         clap.Play();        
         Destroy(GameObject.Find(receivedplate));
-
         Data.Instance.TimelyOrders++;
         Events.OnRefreshPoints();
     }

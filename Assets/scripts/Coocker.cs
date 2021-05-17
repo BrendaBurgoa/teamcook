@@ -15,7 +15,7 @@ public class Coocker : MonoBehaviour
         public GameObject target;
     }
     public float duration = 13.0f;
-    bool beginTimer;
+    bool isCooking;
     public Image fillImage;
     float timer;
     public GameObject bar;
@@ -35,44 +35,69 @@ public class Coocker : MonoBehaviour
     }
     public bool CanBeGrabbed()
     {
-        if (beginTimer)
-            return false;
+        if (isCooking) return false;
         return true;
     }
-    public void Added(GameObject go)
+    public void Added(PhotonView pv)
     {
-        int totalIngredients = 0;
-        foreach (IngredientData d in ingredients)
-        {
-            if (d.ingredientTag == go.tag)
-                d.target = go;
-            if (d.target != null)
-                totalIngredients++;
-        }
-        if (totalIngredients >= ingredients.Length)
-            StartCooking();
-    }
-    void StartCooking()
-    {
-        bar.SetActive(true);
-        beginTimer = true;
+        photonView.RPC("AddIngredient", PhotonTargets.All, pv.viewID);
     }
     private void Update()
     {
-        if (!beginTimer) return;
+        if (!isCooking) return;
         timer += Time.deltaTime;
         if (timer >= duration)
-            photonView.RPC("Ready", PhotonTargets.All);
+            photonView.RPC("Ready", PhotonTargets.MasterClient);
         else
             fillImage.fillAmount = timer/ duration;
     }
     [PunRPC]
+    private void StartCookingForAll()
+    {
+        bar.SetActive(true);
+        isCooking = true;
+        GetComponent<AudioSource>().Play();
+    }
+    [PunRPC]
+    private void AddIngredient(int viewID)
+    {
+        PhotonView pv = PhotonView.Find(viewID);
+        int totalIngredients = 0;
+        foreach (IngredientData d in ingredients)
+        {
+            if (d.ingredientTag == pv.gameObject.tag)
+                d.target = pv.gameObject;
+            if (d.target != null)
+                totalIngredients++;
+        }
+        if (totalIngredients >= ingredients.Length)
+            photonView.RPC("StartCookingForAll", PhotonTargets.All);
+    }
+    [PunRPC]
     private void Ready()
     {
-        if(Data.Instance.Rol == 0)
-            PhotonNetwork.Instantiate(finalState.name, transform.position, transform.rotation, 0);
-        foreach(IngredientData id in ingredients)
-            Destroy(id.target.gameObject);
+        print("Cook Ready " + Data.Instance.Rol);
+        PhotonNetwork.Instantiate(finalState.name, transform.position, transform.rotation, 0);
+        isCooking = false;            
+        photonView.RPC("DestroyForAll", PhotonTargets.All);
+    }
+    [PunRPC]
+    private void DestroyForAll()
+    {
+        GetComponent<AudioSource>().Stop();
+        isCooking = false;
+
+        print("ingredients: " + ingredients.Length);
+
+        foreach (IngredientData id in ingredients)
+        {
+            print("id: " + id.target);
+            if(id.target != null)
+                Destroy(id.target.gameObject);
+            id.target = null;
+        }
+
+        print("Destroy Parent" + ingredients.Length);
         Destroy(this.gameObject);
     }
 }
