@@ -11,16 +11,13 @@ GameObject:
   - component: {fileID: 376549204855577578}
   - component: {fileID: 376549204856347594}
   - component: {fileID: 376549204857346314}
-  - component: {fileID: 8493819382716977208}
   - component: {fileID: 1979363890278799047}
   - component: {fileID: 5873904965175018440}
   - component: {fileID: 5834776406584433726}
   - component: {fileID: 5834967891301441672}
-  - component: {fileID: 5835022271686053730}
-  - component: {fileID: 6055914662062343719}
   - component: {fileID: 114473088713314498}
   m_Layer: 0
-  m_Name: exitinguisher
+  m_Name: extinguisher
   m_TagString: extinguisher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 376549204855146442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.67, y: 0.89, z: 0.04}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: -1.5789477, y: 1.1111108, z: 1.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -62,10 +59,11 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5afcf95cbe2cf4943a3e6ea314d496a4, type: 3}
+  - {fileID: 2100000, guid: e762475b247a6d242b31d1b90d1adac6, type: 2}
   - {fileID: 2100002, guid: 5afcf95cbe2cf4943a3e6ea314d496a4, type: 3}
   - {fileID: 2100004, guid: 5afcf95cbe2cf4943a3e6ea314d496a4, type: 3}
   - {fileID: 2100006, guid: 5afcf95cbe2cf4943a3e6ea314d496a4, type: 3}
@@ -77,6 +75,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -89,22 +88,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &8493819382716977208
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376549204855146442}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 10
-  m_AngularDrag: 10
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!114 &1979363890278799047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,13 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b10a3657f88cad4fbfba0eb584beb9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
-  charaPhotonView: {fileID: 0}
-  isGrabbed: 0
-  isLeft: 0
-  leftWhere: 
-  photonView: {fileID: 5834776406584433726}
-  who: 
 --- !u!65 &5873904965175018440
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -132,7 +108,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376549204855146442}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1.52, z: 1.37}
@@ -177,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PositionModel:
-    SynchronizeEnabled: 1
+    SynchronizeEnabled: 0
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
     InterpolateOption: 2
@@ -242,40 +218,6 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!114 &5835022271686053730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376549204855146442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60a636c080b0e864aa3cde06d8c22845, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myPrefab: {fileID: 4991559483658318487, guid: 20a0eb78b2d4e02459b3adccf6f65a2d,
-    type: 3}
-  photonView: {fileID: 5834776406584433726}
---- !u!95 &6055914662062343719
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376549204855146442}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114473088713314498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,3 +233,4 @@ MonoBehaviour:
   ren: {fileID: 0}
   mat: []
   shownMat: []
+  matcolor: {r: 0, g: 0, b: 0, a: 0}

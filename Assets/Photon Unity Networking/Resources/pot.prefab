@@ -658,7 +658,6 @@ GameObject:
   - component: {fileID: 7134787962498353534}
   - component: {fileID: 7134787962498353535}
   - component: {fileID: 7134787962498353532}
-  - component: {fileID: 7134787962498353533}
   - component: {fileID: 114083413135946950}
   - component: {fileID: 7134787962498353528}
   - component: {fileID: 7134787962498353529}
@@ -748,27 +747,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7134787962498353510}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.4898539, y: 0.26, z: 0.19}
   m_Center: {x: 0.15, y: -0.01, z: 0}
---- !u!54 &7134787962498353533
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7134787962498353510}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 10
-  m_AngularDrag: 10
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!114 &114083413135946950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,7 +804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PositionModel:
-    SynchronizeEnabled: 1
+    SynchronizeEnabled: 0
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
     InterpolateOption: 2

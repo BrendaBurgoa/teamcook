@@ -32,6 +32,6 @@ public class extinguisher : MonoBehaviour
     public void extinguishFire()
     {
         Data.Instance.fireExists = false;
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 }

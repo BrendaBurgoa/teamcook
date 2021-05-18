@@ -117,11 +117,11 @@ public class Coocker : MonoBehaviour
         {
             foreach (IngredientData id in food.ingredients)
             {
-                if (id.target != null) Destroy(id.target.gameObject);
+                if (id.target != null) gameManager.Instance.DeleteItem(id.target.gameObject.GetComponent<PhotonView>().viewID);
                 id.target = null;
             }
         }
-        if(replaceGO) Destroy(this.gameObject);
+        if(replaceGO) gameManager.Instance.DeleteItem(photonView.viewID);
         Reset();
     }
 }

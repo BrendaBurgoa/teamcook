@@ -34,7 +34,7 @@ public class orders : MonoBehaviour
         GetOrdersQty();
     }
     void GetOrdersQty(){
-        //la cantidad de ordenes se define segun la cantidad de objetos con esa tag que haya
+
         simpleBurger = GameObject.FindGameObjectsWithTag("SBurgerOrder").Length;
         fullBurger= GameObject.FindGameObjectsWithTag("FBurgerOrder").Length;
         simpleBurgerFries= GameObject.FindGameObjectsWithTag("SBurgerFriesOrder").Length;
@@ -50,9 +50,9 @@ public class orders : MonoBehaviour
         print("OnSelect orders " + Data.Instance.fireExists);
         if (Data.Instance.fireExists == true) return;
 
-            PhotonView pv = character.HasSomethingToDrop();
-            if (pv != null)
-                RecognizeOrder(pv.tag, pv);
+        PhotonView pv = character.HasSomethingToDrop();
+        if (pv != null)
+            RecognizeOrder(pv.tag, pv);
     }
     
     private void RecognizeOrder(string collisionTag, PhotonView plate){
@@ -62,44 +62,44 @@ public class orders : MonoBehaviour
 
         if (collisionTag == "simpleBurger" && simpleBurger>0)
         {
-                photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
-                photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerOrder");
+            photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+            photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerOrder");
         }
         else if(collisionTag == "fullBurger" && fullBurger>0)
         {
-                photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
-                photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerOrder");
+            photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+            photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerOrder");
         }
         else if(collisionTag == "fullBurgerFries" && fullBurgerFries>0)
         {
             photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
-                photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerFriesOrder"); 
+            photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerFriesOrder"); 
         }
         else if(collisionTag == "simpleBurgerFries" && simpleBurgerFries>0)
         {
-                photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
-                photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerFriesOrder");
+            photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+            photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerFriesOrder");
         }
 
         else if(collisionTag == "simpleSalad" && simpleSalad>0)
         { 
-                    photonView.RPC("ChangePoints", PhotonTargets.All,  plate.name);
-                    photonView.RPC("DeleteLatest", PhotonTargets.All, "SSaladOrder");
+            photonView.RPC("ChangePoints", PhotonTargets.All,  plate.name);
+            photonView.RPC("DeleteLatest", PhotonTargets.All, "SSaladOrder");
         }
         else if(collisionTag == "fullSalad" && fullSalad>0)
         {
-                photonView.RPC("ChangePoints", PhotonTargets.All,   plate.name);
-                photonView.RPC("DeleteLatest", PhotonTargets.All, "FSaladOrder");
+            photonView.RPC("ChangePoints", PhotonTargets.All,   plate.name);
+            photonView.RPC("DeleteLatest", PhotonTargets.All, "FSaladOrder");
         }
         else if(collisionTag == "onionSoup" && onionSoup>0)
         {
-                photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
-                photonView.RPC("DeleteLatest", PhotonTargets.All, "OSoupOrder");
+            photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+            photonView.RPC("DeleteLatest", PhotonTargets.All, "OSoupOrder");
         }
         else if(collisionTag == "tomatoSoup" && tomatoSoup>0)
         {         
-                photonView.RPC("ChangePoints", PhotonTargets.All,   plate.name);   
-                photonView.RPC("DeleteLatest", PhotonTargets.All, "TSoupOrder");
+            photonView.RPC("ChangePoints", PhotonTargets.All,   plate.name);   
+            photonView.RPC("DeleteLatest", PhotonTargets.All, "TSoupOrder");
         }
     }
 

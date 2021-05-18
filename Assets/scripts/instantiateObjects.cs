@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class instantiateObjects : Photon.MonoBehaviour
+public class instantiateObjects : MonoBehaviour
 {
     public GameObject myPrefab;
     

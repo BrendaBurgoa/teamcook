@@ -93,11 +93,11 @@ public class Coockers : MonoBehaviour
         {
             print("id: " + id.target);
             if(id.target != null)
-                Destroy(id.target.gameObject);
+                PhotonNetwork.Destroy(id.target.gameObject);
             id.target = null;
         }
 
         print("Destroy Parent" + ingredients.Length);
-        Destroy(this.gameObject);
+        PhotonNetwork.Destroy(this.gameObject);
     }
 }

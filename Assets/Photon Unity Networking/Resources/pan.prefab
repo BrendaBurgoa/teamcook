@@ -306,7 +306,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1514938512457466180}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.4898539, y: 1.3, z: 0.13}
@@ -555,7 +555,7 @@ MonoBehaviour:
   includedTags:
   - patty
   offset: {x: 0, y: 0.1, z: 0}
-  rotationToPlace: {x: 0, y: -90, z: 0}
+  rotationToPlace: {x: 0, y: 0, z: 0}
 --- !u!114 &2176067100086295798
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -93,4 +93,5 @@ MonoBehaviour:
   - DestroyForAll
   - AddIngredient
   - PlaceNewGO
+  - DeleteItemByMaster
   DisableAutoOpenWizard: 1

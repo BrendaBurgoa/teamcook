@@ -87,6 +87,9 @@ public class character : Photon.MonoBehaviour
                 plate p = photonViewActive.GetComponent<plate>();
                 PhotonView pv = HasSomethingToDrop();
                 if (p != null && pv != null) p.OnSelect(pv, this);
+
+                trash t = photonViewActive.GetComponent<trash>();
+                if (t != null && pv != null) t.OnSelect(pv, this);
             } else
             {
                 instantiateObjects io = photonViewActive.GetComponent<instantiateObjects>();
@@ -109,8 +112,7 @@ public class character : Photon.MonoBehaviour
     {
         return container.GetComponentInChildren<PhotonView>();
     }
-
-    void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!photonView.isMine) return;
         if (photonViewActive == null || photonViewActive.GetComponent<pick_drop>() == null)
@@ -124,7 +126,7 @@ public class character : Photon.MonoBehaviour
             }
         }
     }
-    void OnCollisionExit(Collision other)
+    private void OnTriggerExit(Collider other)
     {
         if (!photonView.isMine) return;
         PhotonView pv = other.gameObject.GetComponent<PhotonView>();
@@ -156,18 +158,15 @@ public class character : Photon.MonoBehaviour
         photonView.RPC("instantiateIngredient", PhotonTargets.All, ingredient.GetComponent<PhotonView>().viewID, photonView.viewID);
     }
     [PunRPC]
-    void instantiateIngredient(int id, int characterID)
+    void instantiateIngredient(int viewID, int characterID)
     {
-        var ingredient = PhotonView.Find(id);
+        var ingredient = PhotonView.Find(viewID);
 
         if (ingredient == null) return;
-        ingredient.name = ingredient.name + PhotonView.Find(ingredient.GetComponent<PhotonView>().viewID);
 
         var _character = PhotonView.Find(characterID);
         if (_character == null)
-        {
-            Destroy(ingredient.gameObject);
-        }
+            gameManager.Instance.DeleteItem(viewID);
         else
         {
             if (Data.Instance.Rol == 0)

@@ -40,7 +40,7 @@ void Start(){
             photonView.RPC("ChopForAll", PhotonTargets.All);
             ChopChange();  
             ingredientToChop.GetComponent<PhotonView>().TransferOwnership(0);
-            PhotonNetwork.Destroy(GetComponent<Transform>().GetChild(0).gameObject);
+           // gameManager.Instance.DeleteItem(GetComponent<Transform>().GetChild(0).gameObject);
             photonView.RPC("PlayChop", PhotonTargets.All, false);
 
         }

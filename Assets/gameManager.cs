@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class gameManager : Photon.MonoBehaviour
 {
+    static gameManager mInstance = null;
     public GameObject manager;
-    public PhotonView photonView;
+    PhotonView photonView;
     public GameObject ConnectingCanvas;
     private float valX;
     private float valZ;
     private string side;
 
+    public static gameManager Instance
+    {
+        get
+        {
+            return mInstance;
+        }
+    }
+    void Awake()
+    {
+        if (!mInstance)
+            mInstance = this;
+    }
     void Start()
-    {             
+    {
+        photonView = GetComponent<PhotonView>();
         if (Data.Instance.Rol == 0)
         {
             manager.SetActive(true);
@@ -23,12 +37,9 @@ public class gameManager : Photon.MonoBehaviour
         }
     }
 
-
     public GameObject PlayerPrefab;
 
-    //esta funcion esta en este script para que pueda ser ejecutada por todos los jugadores, pero es llamda por el manager en MatchTime
     public void SpawnPlayer(){
-        //se deshabilita la pantalla de carga y dependiendo de si el Id del jugador es par o impar se le asigna un lado de la cocina, luego se spawnea
            
         if (PhotonNetwork.player.ID %2==0){
                 valX = Random.Range(-2f, -1f);
@@ -45,11 +56,19 @@ public class gameManager : Photon.MonoBehaviour
 
     [PunRPC]
     public void changeName(int id, string rightOrLeft)
-    { 
-        //para luego poder buscar a cada jugador, se le asigna un nombre unico segun su ID       
+    {    
         var ownAvatar = PhotonView.Find(id);
         ownAvatar.GetComponent<character>().playerId=PhotonNetwork.player.ID;
         ownAvatar.name = ownAvatar.name + PhotonView.Find(id); 
         ownAvatar.GetComponent<character>().currentSide=rightOrLeft;
+    }
+    public void DeleteItem(int viewID)
+    {
+        photonView.RPC("DeleteItemByMaster", PhotonTargets.MasterClient, viewID);
+    }
+    [PunRPC]
+    void DeleteItemByMaster(int viewID)
+    {
+        PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
     }
 }
