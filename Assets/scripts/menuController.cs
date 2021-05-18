@@ -13,10 +13,13 @@ public class menuController : MonoBehaviour
     [SerializeField] private GameObject Create;
     [SerializeField] private GameObject Join;
     [SerializeField] private Text alert;
+    [SerializeField] private GameObject masker;
+
     private string username = "";
 
     private void Awake(){
         PhotonNetwork.ConnectUsingSettings(VersionName);
+        masker.SetActive(true);
     }
 
     private void Start()
@@ -60,6 +63,7 @@ public class menuController : MonoBehaviour
     private void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);
+        masker.SetActive(false);
         alert.text="Conectado al servidor";
     }
     private void OnCreateRoomFailed()

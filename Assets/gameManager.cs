@@ -64,6 +64,8 @@ public class gameManager : Photon.MonoBehaviour
     }
     public void DeleteItem(int viewID)
     {
+        GameObject go = PhotonView.Find(viewID).gameObject;
+        foreach (MeshRenderer sr in go.GetComponents<MeshRenderer>())  sr.enabled = false; //lo apaga para que se oculte rápido (estético)
         photonView.RPC("DeleteItemByMaster", PhotonTargets.MasterClient, viewID);
     }
     [PunRPC]
