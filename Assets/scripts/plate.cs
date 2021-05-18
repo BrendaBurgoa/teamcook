@@ -53,15 +53,15 @@ public class plate : Photon.MonoBehaviour
             {
                 tsoup++;
                 photonView.RPC("setIngredients", PhotonTargets.All, 7, pv.viewID, tsoup);
-                var createdPot = PhotonNetwork.Instantiate(newPot.name, new Vector3((transform.position.x-2f),transform.position.y, (transform.position.z-2f) ), Quaternion.identity,0);                
-                photonView.RPC("GiveToChara", PhotonTargets.All, character.GetComponent<PhotonView>().viewID, createdPot.GetComponent<PhotonView>().viewID);                
+               // var createdPot = PhotonNetwork.Instantiate(newPot.name, new Vector3((transform.position.x-2f),transform.position.y, (transform.position.z-2f) ), Quaternion.identity,0);                
+                photonView.RPC("GiveToChara", PhotonTargets.MasterClient, character.GetComponent<PhotonView>().viewID, newPot.name);                
             }
             else if (tag == "potOnionSoup")
             {
                 osoup++;
                 photonView.RPC("setIngredients", PhotonTargets.All, 6, pv.viewID, osoup);
-                var createdPot = PhotonNetwork.Instantiate(newPot.name, new Vector3((transform.position.x-0.5f),transform.position.y, (transform.position.z-0.5f) ), Quaternion.identity,0);
-                photonView.RPC("GiveToChara", PhotonTargets.All, character.GetComponent<PhotonView>().viewID, createdPot.GetComponent<PhotonView>().viewID);
+               // var createdPot = PhotonNetwork.Instantiate(newPot.name, new Vector3((transform.position.x-0.5f),transform.position.y, (transform.position.z-0.5f) ), Quaternion.identity,0);
+                photonView.RPC("GiveToChara", PhotonTargets.MasterClient, character.GetComponent<PhotonView>().viewID, newPot.name);
             }
             makeDish();
             photonView.RPC("initializeVars", PhotonTargets.All);
@@ -73,43 +73,44 @@ public class plate : Photon.MonoBehaviour
     public void makeDish(){
         if (patty == 0 && bread == 0 && tomato == 0 && lettuce == 0 && fries == 0 && tsoup == 0 && osoup == 0)
             return;
+        Vector3 dest = new Vector3(2.9f, transform.position.y, 4.4f);
 
         Debug.Log("tomato: " + tomato + ", bread: " + bread + ", lettuce" + lettuce + ", patty: " + patty + ", fries" + fries + ", tsoup" + tsoup + ", osoup" + osoup);
         if (patty==1 && bread == 1 && tomato == 0 && lettuce == 0 && fries == 0 && tsoup ==0 && osoup ==0 ){
-            PhotonNetwork.Instantiate(simpleBurger.name, new Vector3(3.6f,transform.position.y, 4.6f ), Quaternion.identity,0);
+            PhotonNetwork.Instantiate(simpleBurger.name, dest, Quaternion.identity,0);
             photonView.RPC("initializeVars", PhotonTargets.All);
               ding.Play();
         }
         else if(patty==1 && bread == 1 && tomato == 1 && lettuce == 1 && fries == 0 && tsoup ==0 && osoup ==0){
-            PhotonNetwork.Instantiate(fullBurger.name, new Vector3(3.6f,transform.position.y, 4.6f ), Quaternion.identity,0);
+            PhotonNetwork.Instantiate(fullBurger.name, dest, Quaternion.identity,0);
             photonView.RPC("initializeVars", PhotonTargets.All);
               ding.Play();
         } else if(patty==1 && bread == 1 && tomato == 0 && lettuce == 0 && fries == 1 && tsoup ==0 && osoup ==0){
-            PhotonNetwork.Instantiate(simpleBurgerFries.name, new Vector3(3.6f,transform.position.y, 4.6f ), Quaternion.identity,0);
+            PhotonNetwork.Instantiate(simpleBurgerFries.name, dest, Quaternion.identity,0);
             photonView.RPC("initializeVars", PhotonTargets.All);
               ding.Play();
         }
         else if(tsoup ==1 && osoup ==0 && patty==0 && bread == 0 && tomato == 0 && lettuce == 0 && fries == 0)
         {
-            PhotonNetwork.Instantiate(tomatoSoup.name, new Vector3(3.6f,transform.position.y, 4.6f ), Quaternion.Euler(-90.0f, 0f, 0.0f),0);
+            PhotonNetwork.Instantiate(tomatoSoup.name, dest, Quaternion.Euler(-90.0f, 0f, 0.0f),0);
               ding.Play();
         }
         else if(osoup ==1 && tsoup ==0 && patty==0 && bread == 0 && tomato == 0 && lettuce == 0 && fries == 0){
-            PhotonNetwork.Instantiate(onionSoup.name, new Vector3(3.6f,transform.position.y, 4.6f ), Quaternion.Euler(-90.0f, 0f, 0.0f),0);
+            PhotonNetwork.Instantiate(onionSoup.name, dest, Quaternion.Euler(-90.0f, 0f, 0.0f),0);
               ding.Play();
         }
         else if(patty==1 && bread == 1 && tomato == 1 && lettuce == 1 && fries == 1 && tsoup ==0 && osoup ==0){
-            PhotonNetwork.Instantiate(fullBurgerFries.name,new Vector3(3.6f,transform.position.y, 4.6f ), Quaternion.identity,0);
+            PhotonNetwork.Instantiate(fullBurgerFries.name, dest, Quaternion.identity,0);
               ding.Play();
             photonView.RPC("initializeVars", PhotonTargets.All);
         }
         else if(patty==0 && bread == 0 && tomato == 0 && lettuce == 3 && fries == 0 && tsoup ==0 && osoup ==0){
-            PhotonNetwork.Instantiate(simpleSalad.name, new Vector3(3.6f,transform.position.y, 4.6f ), Quaternion.identity,0);
+            PhotonNetwork.Instantiate(simpleSalad.name, dest, Quaternion.identity,0);
               ding.Play();
             photonView.RPC("initializeVars", PhotonTargets.All);
         }
         else if(patty==0 && bread == 0 && tomato == 1 && lettuce == 2 && fries == 0 && tsoup ==0 && osoup ==0){
-            PhotonNetwork.Instantiate(fullSalad.name, new Vector3(3.6f,transform.position.y, 4.6f ), Quaternion.identity,0);
+            PhotonNetwork.Instantiate(fullSalad.name, dest, Quaternion.identity,0);
               ding.Play();
             photonView.RPC("initializeVars", PhotonTargets.All);
         }
@@ -171,8 +172,7 @@ public class plate : Photon.MonoBehaviour
             photonView.RPC("setIngredients", PhotonTargets.All, 3, pv.viewID, patty);
             var currentUI = PhotonNetwork.Instantiate(pattyUI.name, transform.position, Quaternion.Euler(7.0f, 0f, -5f),0);
             photonView.RPC("SetNewParent", PhotonTargets.All, currentUI.GetComponent<PhotonView>().viewID );
-            var createdPot = PhotonNetwork.Instantiate(newPan.name, new Vector3((transform.position.x-2f),transform.position.y, (transform.position.z-2f) ), Quaternion.identity,0);
-            photonView.RPC("GiveToChara", PhotonTargets.All, character.GetComponent<PhotonView>().viewID, createdPot.GetComponent<PhotonView>().viewID);                
+           photonView.RPC("GiveToChara", PhotonTargets.MasterClient, character.GetComponent<PhotonView>().viewID, "pan");                
         }
         else if (tag == "chopped_bread")
         {
@@ -184,11 +184,20 @@ public class plate : Photon.MonoBehaviour
     }
 
     [PunRPC]
-    private void GiveToChara(int charaid, int id){
-        //se dan las ollas/sartenes vacias al personaje
-        PhotonView obj = PhotonView.Find(id);
-        if (obj == null) return;
-        obj.name = obj.name + id; 
+    private void GiveToChara(int charaid, string name){
+        var createdPot = PhotonNetwork.Instantiate(name,  new Vector3((transform.position.x - 2f), transform.position.y, (transform.position.z - 2f)), Quaternion.identity, 0);
+      
+        PhotonView obj = PhotonView.Find(createdPot.GetComponent<PhotonView>().viewID);
+
+        photonView.RPC("CharacterGet", PhotonTargets.All, charaid, obj.viewID);
+
+        character chara = PhotonView.Find(charaid).GetComponent<character>();
+        obj.TransferOwnership(charaid);
+    }
+    [PunRPC]
+    private void CharacterGet(int charaid, int viewID)
+    {
+        PhotonView obj = PhotonView.Find(viewID);
         character chara = PhotonView.Find(charaid).GetComponent<character>();
         chara.GetObject(obj);
     }

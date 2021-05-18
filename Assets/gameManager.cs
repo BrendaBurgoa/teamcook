@@ -42,13 +42,13 @@ public class gameManager : Photon.MonoBehaviour
     public void SpawnPlayer(){
            
         if (PhotonNetwork.player.ID %2==0){
-                valX = Random.Range(-2f, -1f);
-                side = "left";
-            }        
+            valX = Random.Range(-2f, -1f);
+            side = "left";
+        }        
         else if (PhotonNetwork.player.ID %2==1){
-                valX = Random.Range(1f, 3f);
-                side = "right";
-            }
+            valX = Random.Range(1f, 3f);
+            side = "right";
+        }
         valZ = Random.Range(1f, 3f);
         var newPlayer = PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(valX, 0, valZ), Quaternion.identity, 0);
         photonView.RPC("changeName", PhotonTargets.All, newPlayer.GetComponent<PhotonView>().viewID, side);

@@ -94,4 +94,5 @@ MonoBehaviour:
   - AddIngredient
   - PlaceNewGO
   - DeleteItemByMaster
+  - CharacterGet
   DisableAutoOpenWizard: 1
