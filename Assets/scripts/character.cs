@@ -14,6 +14,8 @@ public class character : Photon.MonoBehaviour
     Vector2 limits_z = new Vector2(4f, 0.32f);
     public Transform container;
     public PhotonView photonViewActive;
+    SimpleSampleCharacterControl control;
+    public List<ShowCollision> colliders;
 
     public bool HasSomething()
     {
@@ -21,6 +23,7 @@ public class character : Photon.MonoBehaviour
     }
     private void Start()
     {
+        control = GetComponent<SimpleSampleCharacterControl>();
         Events.OnNewPlayer(this);
     }
     public void GetObject(PhotonView objectPicked)
@@ -28,11 +31,17 @@ public class character : Photon.MonoBehaviour
         ShowCollision sc = objectPicked.GetComponent<ShowCollision>();
         if (sc != null)
         {
+            PickUp();
             sc.ResetCollision();
             sc.SetCollision(false);
         }
         objectPicked.transform.SetParent(container);
         objectPicked.transform.localPosition = Vector3.zero;
+        ResetColliders();
+    }
+    public void PickUp()
+    {
+        control.PickUp();
     }
     public bool IsMe()
     {
@@ -80,20 +89,38 @@ public class character : Photon.MonoBehaviour
                 {
                     PhotonView pov = HasSomethingToDropInside(po);
                     if (pov != null) po.OnSelect(pov);
+                    PickUp();
                 }
                 orders o = photonViewActive.GetComponent<orders>();
-                if (o != null) o.OnSelect(this);
-
+                if (o != null)
+                {
+                    PickUp();
+                    o.OnSelect(this);
+                }
                 plate p = photonViewActive.GetComponent<plate>();
                 PhotonView pv = HasSomethingToDrop();
-                if (p != null && pv != null) p.OnSelect(pv, this);
-
+                if (p != null && pv != null)
+                {
+                    PickUp();
+                    p.OnSelect(pv, this);
+                }
                 trash t = photonViewActive.GetComponent<trash>();
-                if (t != null && pv != null) t.OnSelect(pv, this);
+                if (t != null && pv != null)
+                {
+                    PickUp();
+                    t.OnSelect(pv, this);
+                }
+                extinguisher e = photonViewActive.GetComponent<extinguisher>();
+                if (e != null && pv != null)
+                {
+                    PickUp();
+                    e.OnSelect();
+                }
             } else
             {
                 instantiateObjects io = photonViewActive.GetComponent<instantiateObjects>();
-                if (io != null) InstantiateObject(io);                
+                if (io != null) InstantiateObject(io);
+                PickUp();   
             }
         }
     }
@@ -112,31 +139,90 @@ public class character : Photon.MonoBehaviour
     {
         return container.GetComponentInChildren<PhotonView>();
     }
+    void ResetColliders()
+    {
+        if (photonViewActive != null)
+            photonViewActive.GetComponent<ShowCollision>().OnCharacterOver(false);
+        colliders.Clear();
+        photonViewActive = null;
+    }
+    void AddCollider(ShowCollision showCollision, bool add)
+    {
+        if(add)
+            colliders.Add(showCollision);
+        else
+        {
+            showCollision.OnCharacterOver(false);
+            colliders.Remove(showCollision);
+        }
+        SetColliderActive();
+    }
+    void SetColliderActive()
+    {
+        if (colliders.Count <= 0)
+        {
+            photonViewActive = null;
+            return;
+        }
+        photonViewActive = colliders[0].photonView;
+        if (photonViewActive == null)
+        {
+            ResetColliders();
+            return;
+        }
+        foreach (ShowCollision sc in colliders)
+        {
+            if(sc != null && sc.GetComponent<pick_drop>())
+                photonViewActive = sc.photonView;
+
+        }
+        foreach (ShowCollision sc in colliders)
+        {
+            if(photonViewActive.viewID == sc.photonView.viewID)
+                sc.OnCharacterOver(true);
+            else
+                sc.OnCharacterOver(false);
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (!photonView.isMine) return;
-        if (photonViewActive == null || photonViewActive.GetComponent<pick_drop>() == null)
-        {
-            PhotonView pv = other.gameObject.GetComponent<PhotonView>();
-            if (pv != null)
-            {
-                photonViewActive = pv;
-                ShowCollision sc = photonViewActive.GetComponent<ShowCollision>();
-                if (sc != null) sc.OnCharacterOver(true);
-            }
-        }
+
+        PhotonView pv = other.gameObject.GetComponent<PhotonView>();
+        if (pv == null) return;
+        ShowCollision sc = pv.GetComponent<ShowCollision>();
+        if (sc != null) AddCollider(sc, true);
+
+        //if (photonViewActive == null || photonViewActive.GetComponent<pick_drop>() == null)
+        //{
+        //    PhotonView pv = other.gameObject.GetComponent<PhotonView>();
+        //    if (pv != null)
+        //    {
+        //        photonViewActive = pv;
+        //        ShowCollision sc = photonViewActive.GetComponent<ShowCollision>();
+        //        if (sc != null) sc.OnCharacterOver(true);
+        //    }
+        //}
     }
     private void OnTriggerExit(Collider other)
     {
         if (!photonView.isMine) return;
+
         PhotonView pv = other.gameObject.GetComponent<PhotonView>();
-        if (pv != null)
-        {
-            ShowCollision sc = pv.GetComponent<ShowCollision>();
-            if (sc != null) sc.OnCharacterOver(false);
-            if(photonViewActive != null && photonViewActive == pv)
-                photonViewActive = null;
-        }
+        if (pv == null) return;
+        ShowCollision sc = pv.GetComponent<ShowCollision>();
+        if (sc != null) AddCollider(sc, false);
+
+
+        //if (!photonView.isMine) return;
+        //PhotonView pv = other.gameObject.GetComponent<PhotonView>();
+        //if (pv != null)
+        //{
+        //    ShowCollision sc = pv.GetComponent<ShowCollision>();
+        //    if (sc != null) sc.OnCharacterOver(false);
+        //    if(photonViewActive != null && photonViewActive == pv)
+        //        photonViewActive = null;
+        //}
     }
 
     [PunRPC]
@@ -154,7 +240,7 @@ public class character : Photon.MonoBehaviour
     }
     public void InstantiateObject(instantiateObjects io)
     {
-        var ingredient = PhotonNetwork.Instantiate(io.myPrefab.name, new Vector3(1000,0,0), Quaternion.identity, 0);
+        var ingredient = PhotonNetwork.Instantiate(io.myPrefab.name, new Vector3(1000,0,0), io.myPrefab.transform.rotation, 0);
         photonView.RPC("instantiateIngredient", PhotonTargets.All, ingredient.GetComponent<PhotonView>().viewID, photonView.viewID);
     }
     [PunRPC]

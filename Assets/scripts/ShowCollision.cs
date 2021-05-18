@@ -10,8 +10,10 @@ public class ShowCollision : MonoBehaviour
     public Color matcolor;
     pick_drop pick_drop_go;
     Collider colliders;
+    public PhotonView photonView;
 
     void Start () {
+        photonView = GetComponent<PhotonView>();
         ren = gameObject.GetComponent<Renderer>();
         mat = ren.materials;       
         matcolor =mat[0].color;

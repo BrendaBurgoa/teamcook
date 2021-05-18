@@ -95,4 +95,5 @@ MonoBehaviour:
   - PlaceNewGO
   - DeleteItemByMaster
   - CharacterGet
+  - FireOff
   DisableAutoOpenWizard: 1

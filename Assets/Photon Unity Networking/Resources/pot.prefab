@@ -750,8 +750,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4898539, y: 0.26, z: 0.19}
-  m_Center: {x: 0.15, y: -0.01, z: 0}
+  m_Size: {x: 0.79, y: 0.26, z: 0.31}
+  m_Center: {x: 0, y: -0.01, z: 0}
 --- !u!114 &114083413135946950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,6 +904,7 @@ MonoBehaviour:
   mat: []
   shownMat: []
   matcolor: {r: 0, g: 0, b: 0, a: 0}
+  photonView: {fileID: 0}
 --- !u!82 &1801564133412135050
 AudioSource:
   m_ObjectHideFlags: 0
