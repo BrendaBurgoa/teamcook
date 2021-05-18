@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 114947210969860530}
   - component: {fileID: 82234813789327364}
   - component: {fileID: 739774827}
-  - component: {fileID: 739774832}
+  - component: {fileID: 2176067100086295798}
   m_Layer: 0
   m_Name: pan
   m_TagString: pan
@@ -555,8 +555,8 @@ MonoBehaviour:
   includedTags:
   - patty
   offset: {x: 0, y: 0.1, z: 0}
-  rotationToPlace: {x: 0, y: 0, z: 0}
---- !u!114 &739774832
+  rotationToPlace: {x: 0, y: -90, z: 0}
+--- !u!114 &2176067100086295798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -565,17 +565,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1514938512457466180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eefda7a99fbc91469995931effd588b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0192050b7ade93146beb9c642819730b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredients:
-  - ingredientTag: patty
-    target: {fileID: 0}
+  foods:
+  - ingredients:
+    - ingredientTag: patty
+      target: {fileID: 0}
+    finalState: {fileID: 7316809677319633963, guid: 3d62036b2de420f47b652a33ef4990f0,
+      type: 3}
   duration: 13
   fillImage: {fileID: 8195883611189968184}
   bar: {fileID: 8355849678966718482}
-  finalState: {fileID: 7316809677319633963, guid: 3d62036b2de420f47b652a33ef4990f0,
-    type: 3}
+  replaceGO: 1
+  anim: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &2621932748209976734
 GameObject:
   m_ObjectHideFlags: 0

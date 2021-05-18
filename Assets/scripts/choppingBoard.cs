@@ -24,7 +24,7 @@ void Start(){
     chopping = GetComponent<AudioSource>();
 
 }
-void Update(){
+    void Update(){
     if(startChop ==true && Data.Instance.Rol == 0){
         //solo el manager activa el audio de todos, y lleva cuenta de que se está cortando 
             if (gameObject.transform.childCount >= 1){

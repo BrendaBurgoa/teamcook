@@ -6,8 +6,14 @@ using System;
 
 public class Coocker : MonoBehaviour
 {
-    public IngredientData[] ingredients;
-
+    public Food[] foods;
+    
+    [Serializable]
+    public class Food
+    {
+        public IngredientData[] ingredients;
+        public GameObject finalState;
+    }
     [Serializable]
     public class IngredientData
     {
@@ -19,8 +25,11 @@ public class Coocker : MonoBehaviour
     public Image fillImage;
     float timer;
     public GameObject bar;
-    public GameObject finalState;
     PhotonView photonView;
+    string finalStateName;
+    public bool replaceGO = true;
+    public Animator anim;
+    public Vector3 offset;
 
     void Start()
     {
@@ -47,13 +56,22 @@ public class Coocker : MonoBehaviour
         if (!isCooking) return;
         timer += Time.deltaTime;
         if (timer >= duration)
-            photonView.RPC("Ready", PhotonTargets.MasterClient);
+        {
+            if(Data.Instance.Rol == 0)
+            {
+                PhotonNetwork.Instantiate(finalStateName, transform.position + offset, transform.rotation, 0);
+                photonView.RPC("DestroyForAll", PhotonTargets.All);
+            }
+            isCooking = false;
+        }
         else
-            fillImage.fillAmount = timer/ duration;
+            fillImage.fillAmount = timer / duration;
     }
     [PunRPC]
     private void StartCookingForAll()
     {
+        if (anim != null)
+            anim.enabled = true;
         bar.SetActive(true);
         isCooking = true;
         GetComponent<AudioSource>().Play();
@@ -62,42 +80,48 @@ public class Coocker : MonoBehaviour
     private void AddIngredient(int viewID)
     {
         PhotonView pv = PhotonView.Find(viewID);
-        int totalIngredients = 0;
-        foreach (IngredientData d in ingredients)
+       
+        foreach (Food food in foods)
         {
-            if (d.ingredientTag == pv.gameObject.tag)
-                d.target = pv.gameObject;
-            if (d.target != null)
-                totalIngredients++;
+            bool foodAdded = false;
+            int totalIngredients = 0;
+            foreach (IngredientData d in food.ingredients)
+            {
+                if (d.ingredientTag == pv.gameObject.tag && d.target == null && !foodAdded)
+                {
+                    foodAdded = true;
+                    d.target = pv.gameObject;                   
+                    finalStateName = food.finalState.name;
+                }
+                if (d.target != null)
+                    totalIngredients++;
+            }
+            if (totalIngredients >= food.ingredients.Length)
+            {
+                photonView.RPC("StartCookingForAll", PhotonTargets.All);
+                return;
+            }
         }
-        if (totalIngredients >= ingredients.Length)
-            photonView.RPC("StartCookingForAll", PhotonTargets.All);
-    }
-    [PunRPC]
-    private void Ready()
-    {
-        print("Cook Ready " + Data.Instance.Rol);
-        PhotonNetwork.Instantiate(finalState.name, transform.position, transform.rotation, 0);
-        isCooking = false;            
-        photonView.RPC("DestroyForAll", PhotonTargets.All);
     }
     [PunRPC]
     private void DestroyForAll()
     {
+
+        if (anim != null)
+            anim.enabled = false;
+
         GetComponent<AudioSource>().Stop();
         isCooking = false;
 
-        print("ingredients: " + ingredients.Length);
-
-        foreach (IngredientData id in ingredients)
+        foreach (Food food in foods)
         {
-            print("id: " + id.target);
-            if(id.target != null)
-                Destroy(id.target.gameObject);
-            id.target = null;
+            foreach (IngredientData id in food.ingredients)
+            {
+                if (id.target != null) Destroy(id.target.gameObject);
+                id.target = null;
+            }
         }
-
-        print("Destroy Parent" + ingredients.Length);
-        Destroy(this.gameObject);
+        if(replaceGO) Destroy(this.gameObject);
+        Reset();
     }
 }

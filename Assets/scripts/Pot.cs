@@ -27,6 +27,7 @@ public class Pot : MonoBehaviour
     public GameObject buttonCook;
     public AudioSource burner;
     private bool isPlaying = false;
+
    void Start(){
        //se desactivan los elementos UI
             timerCanvas.SetActive(false);
