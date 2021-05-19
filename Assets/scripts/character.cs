@@ -72,13 +72,15 @@ public class character : Photon.MonoBehaviour
        
         if (photonViewActive != null && Input.GetKeyDown("space"))
         {
-            Coocker coocker = photonViewActive.GetComponent<Coocker>();
-            if (coocker != null && !coocker.CanBeGrabbed())
-                return;
+          
 
             pick_drop pd = photonViewActive.GetComponent<pick_drop>();
             if (pd != null && !HasSomething())
             {
+                Coocker coocker = photonViewActive.GetComponent<Coocker>();
+                if (coocker != null && !coocker.CanBeGrabbed())
+                    return;
+
                 photonView.RPC("pick", PhotonTargets.All, pd.photonView.viewID, photonView.viewID);
                 photonViewActive = null;
             }
@@ -91,6 +93,10 @@ public class character : Photon.MonoBehaviour
                     if (pov != null) po.OnSelect(pov);
                     PickUp();
                 }
+                Coocker coocker = photonViewActive.GetComponent<Coocker>();
+                if (coocker != null && !coocker.CanBeGrabbed())
+                    return;
+
                 orders o = photonViewActive.GetComponent<orders>();
                 if (o != null)
                 {
@@ -164,17 +170,12 @@ public class character : Photon.MonoBehaviour
             photonViewActive = null;
             return;
         }
-        photonViewActive = colliders[0].photonView;
+
+        photonViewActive = GetPhotonviewActive();
         if (photonViewActive == null)
         {
             ResetColliders();
             return;
-        }
-        foreach (ShowCollision sc in colliders)
-        {
-            if(sc != null && sc.GetComponent<pick_drop>())
-                photonViewActive = sc.photonView;
-
         }
         foreach (ShowCollision sc in colliders)
         {
@@ -183,6 +184,25 @@ public class character : Photon.MonoBehaviour
             else
                 sc.OnCharacterOver(false);
         }
+    }
+    PhotonView GetPhotonviewActive()  // jerarquiza los objetos en over y devuelve segun orden de importancia:
+    {
+        ShowCollision _sc = null;
+        foreach (ShowCollision sc in colliders)
+        {
+            if (sc != null)
+            {
+                if (sc.GetComponent<Coocker>())
+                    return sc.photonView;
+                else if ( sc.GetComponent<pick_drop>())
+                    _sc = sc;
+                else if (_sc == null || _sc.GetComponent<pick_drop>() == null)
+                    _sc = sc;
+            }
+        }
+        if (_sc == null)
+            return null;
+        return _sc.photonView;
     }
     private void OnTriggerEnter(Collider other)
     {

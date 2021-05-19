@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b10a3657f88cad4fbfba0eb584beb9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: -90, y: 0, z: 0}
 --- !u!65 &5079553167137665175
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -214,7 +215,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.49, y: 0.44, z: 0.46}
+  m_Size: {x: 0.97, y: 0.44, z: 0.46}
   m_Center: {x: 0, y: 0, z: 0.09}
 --- !u!114 &114339827118256646
 MonoBehaviour:
@@ -310,3 +311,4 @@ MonoBehaviour:
   mat: []
   shownMat: []
   matcolor: {r: 0, g: 0, b: 0, a: 0}
+  photonView: {fileID: 0}

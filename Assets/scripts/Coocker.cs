@@ -44,6 +44,11 @@ public class Coocker : MonoBehaviour
     }
     public bool CanBeGrabbed()
     {
+        foreach (Food f in foods)
+            foreach (IngredientData d in f.ingredients)
+                if (d.target != null)
+                    return false;
+
         if (isCooking) return false;
         return true;
     }
@@ -106,7 +111,6 @@ public class Coocker : MonoBehaviour
     [PunRPC]
     private void DestroyForAll()
     {
-
         if (anim != null)
             anim.enabled = false;
 

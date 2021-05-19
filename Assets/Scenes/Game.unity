@@ -4104,7 +4104,7 @@ MonoBehaviour:
   bar: {fileID: 1900769284}
   replaceGO: 0
   anim: {fileID: 1482202947}
-  offset: {x: 1.3, y: 0.1, z: 0}
+  offset: {x: 1, y: 0.1, z: 0.2}
 --- !u!114 &519801167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4256,8 +4256,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.33, y: 1, z: 2.47}
-  m_Center: {x: 0, y: 0, z: -0.03}
+  m_Size: {x: 1.03, y: 3.96, z: 2.89}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &519801172
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10890,8 +10890,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 2.47}
-  m_Center: {x: 0, y: 0, z: 0.49}
+  m_Size: {x: 1.03, y: 3.96, z: 2.89}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1781677736
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11135,7 +11135,7 @@ MonoBehaviour:
   bar: {fileID: 2097312373}
   replaceGO: 0
   anim: {fileID: 1851382157}
-  offset: {x: 1.3, y: 0.1, z: 0}
+  offset: {x: 1, y: 0.1, z: 0}
 --- !u!1 &1781718222
 GameObject:
   m_ObjectHideFlags: 0

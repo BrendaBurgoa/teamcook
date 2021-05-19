@@ -174,7 +174,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 58.85, z: 1.38}
+  m_Size: {x: 1.42, y: 58.85, z: 1.38}
   m_Center: {x: -0.06, y: 0, z: 0}
 --- !u!114 &6003765848454430427
 MonoBehaviour:
@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b10a3657f88cad4fbfba0eb584beb9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0}
 --- !u!114 &114868195544880230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,3 +232,4 @@ MonoBehaviour:
   mat: []
   shownMat: []
   matcolor: {r: 0, g: 0, b: 0, a: 0}
+  photonView: {fileID: 0}
