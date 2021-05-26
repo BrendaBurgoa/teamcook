@@ -115,6 +115,7 @@ public class character : Photon.MonoBehaviour
                 {
                     PickUp();
                     t.OnSelect(pv, this);
+                    return;
                 }
                 extinguisher e = photonViewActive.GetComponent<extinguisher>();
                 if (e != null && pv != null)
