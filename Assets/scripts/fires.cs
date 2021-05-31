@@ -19,7 +19,10 @@ public class fires : Photon.MonoBehaviour
     [PunRPC]
     private void instantiateFires()
     {
-        Vector3 position = new Vector3(Random.Range(-3f, 3.0f), 0, Random.Range(0f, 4.0f));
+        float _x = Random.Range(0.8f, 3.0f);
+        if (Random.Range(0, 10) < 5)
+            _x *= -1;
+        Vector3 position = new Vector3(_x, 0, Random.Range(0.9f, 3.5f));
         PhotonNetwork.Instantiate(myPrefab.name, position, Quaternion.identity, 0);
     }
 }

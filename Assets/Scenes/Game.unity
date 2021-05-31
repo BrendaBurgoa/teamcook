@@ -336,6 +336,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1662446835}
     m_Modifications:
+    - target: {fileID: 1825516356, guid: b896b976bd1888542bc6af0bd1111f9c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 19.90804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825516356, guid: b896b976bd1888542bc6af0bd1111f9c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 73.89998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825516356, guid: b896b976bd1888542bc6af0bd1111f9c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825516356, guid: b896b976bd1888542bc6af0bd1111f9c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3472587654282239120, guid: b896b976bd1888542bc6af0bd1111f9c,
         type: 3}
       propertyPath: m_RootOrder
@@ -3572,8 +3588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c4adb8fd2fbe74c83d3ba35a4de67f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pan: {fileID: 1514938512457466180, guid: 8ccc5539cb9c5c4459cf0779dd4a2094, type: 3}
-  pot: {fileID: 7134787962498353510, guid: cb3e06ae331cc2149b0828dfba4be475, type: 3}
 --- !u!65 &489153254
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6794,7 +6808,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 1517492993}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

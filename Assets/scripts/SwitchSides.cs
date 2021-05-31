@@ -56,11 +56,11 @@ public class SwitchSides : MonoBehaviour
     [PunRPC]
      public void SwitchIngredientToOtherSide(int side){
         if(side%2==1){
-            OnionPattyButtons.transform.localPosition = new Vector3(2.07f,0.5f,-5.5f);
-            TomatoLettuceBreadButtons.transform.localPosition = new Vector3(-18.85f,0.5f,-4f);
+            OnionPattyButtons.transform.localPosition = new Vector3(1.81f,0.5f,-6.8f);
+            TomatoLettuceBreadButtons.transform.localPosition = new Vector3(-18.85f, 0.5f,-3f);
         }else{
-            OnionPattyButtons.transform.localPosition = new Vector3(-18.85f,0.5f,-4.41f);
-            TomatoLettuceBreadButtons.transform.localPosition = new Vector3(2.07f,0.5f,-5.5f);
+            OnionPattyButtons.transform.localPosition = new Vector3(-18.7f, 0.5f,-4.41f);
+            TomatoLettuceBreadButtons.transform.localPosition = new Vector3(1.72f, 0.5f,-5.5f);
         }
         }
 }

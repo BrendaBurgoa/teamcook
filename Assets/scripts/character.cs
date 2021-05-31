@@ -39,6 +39,15 @@ public class character : Photon.MonoBehaviour
         objectPicked.transform.localPosition = Vector3.zero;
         ResetColliders();
     }
+    void DropAll()
+    {
+        PhotonView pv = container.GetComponentInChildren<PhotonView>();
+        if(pv != null)
+        {
+            pv.transform.SetParent(gameManager.Instance.transform);
+            pv.transform.transform.localPosition = new Vector3(1000, 0, 0);
+        }
+    }
     public void PickUp()
     {
         control.PickUp();
@@ -90,7 +99,11 @@ public class character : Photon.MonoBehaviour
                 if(po != null)
                 {
                     PhotonView pov = HasSomethingToDropInside(po);
-                    if (pov != null) po.OnSelect(pov);
+                    if (pov != null)
+                    {
+                        po.OnSelect(pov);
+                        DropAll();
+                    }
                     PickUp();
                 }
                 Coocker coocker = photonViewActive.GetComponent<Coocker>();
