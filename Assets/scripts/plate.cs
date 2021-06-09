@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class plate : Photon.MonoBehaviour
 {
+    public GameObject button;
     public Transform uiContainer;
     public int lettuce;
     public int tomato;
@@ -26,7 +27,6 @@ public class plate : Photon.MonoBehaviour
     public GameObject fullBurger;
     public GameObject simpleBurgerFries;
     public GameObject fullBurgerFries;
-    public PhotonView photonView;
     public GameObject pattyUI;
     public GameObject tomatoUI;
     public GameObject friesUI;
@@ -36,32 +36,35 @@ public class plate : Photon.MonoBehaviour
     public GameObject lettuceUI;
     public AudioSource ding;
     public AudioSource dong;
-    private void Awake()
-    {
-        photonView = GetComponent<PhotonView>();
-        
-    }
+
     void Start(){
+        button.SetActive(false);
         initializeVars();
     }
-
-    public void OnSelect(PhotonView pv, character character)
+    public void OnCharacterNear(bool isNear)
     {
+        button.SetActive(isNear);
+    }
+    public void OnSelect(PhotonView pv, character character)
+    {       
         string tag = pv.tag;
+        print(pv.name);
         if (tag == "potOnionSoup" || tag == "potTomatoSoup"){
             if (tag == "potTomatoSoup")
             {
                 tsoup++;
-                photonView.RPC("setIngredients", PhotonTargets.All, 7, pv.viewID, tsoup);
+                photonView.RPC("setIngredients", PhotonTargets.All, 7, tsoup);
                // var createdPot = PhotonNetwork.Instantiate(newPot.name, new Vector3((transform.position.x-2f),transform.position.y, (transform.position.z-2f) ), Quaternion.identity,0);                
-                photonView.RPC("GiveToChara", PhotonTargets.MasterClient, character.GetComponent<PhotonView>().viewID, newPot.name);                
+                photonView.RPC("GiveToChara", PhotonTargets.MasterClient, character.GetComponent<PhotonView>().viewID, newPot.name);
+                gameManager.Instance.DeleteItem(pv.viewID);
             }
             else if (tag == "potOnionSoup")
             {
                 osoup++;
-                photonView.RPC("setIngredients", PhotonTargets.All, 6, pv.viewID, osoup);
+                photonView.RPC("setIngredients", PhotonTargets.All, 6, osoup);
                // var createdPot = PhotonNetwork.Instantiate(newPot.name, new Vector3((transform.position.x-0.5f),transform.position.y, (transform.position.z-0.5f) ), Quaternion.identity,0);
                 photonView.RPC("GiveToChara", PhotonTargets.MasterClient, character.GetComponent<PhotonView>().viewID, newPot.name);
+                gameManager.Instance.DeleteItem(pv.viewID);
             }
             makeDish();
             photonView.RPC("initializeVars", PhotonTargets.All);
@@ -120,10 +123,9 @@ public class plate : Photon.MonoBehaviour
             photonView.RPC("initializeVars", PhotonTargets.All);
         }        
     }
-
     [PunRPC]
-    public void setIngredients(int which, int viewID, int count){
-        gameManager.Instance.DeleteItem(viewID);
+    public void setIngredients(int which, int count){
+        //gameManager.Instance.DeleteItem(viewID);
             switch (which){
             case 1: tomato= count;
                 break;
@@ -147,39 +149,44 @@ public class plate : Photon.MonoBehaviour
         if (tag == "chopped_tomato")
         {
             tomato = tomato +1;
-            photonView.RPC("setIngredients", PhotonTargets.All, 1, pv.viewID, tomato);
+            photonView.RPC("setIngredients", PhotonTargets.All, 1, tomato);
             var currentUI = PhotonNetwork.Instantiate(tomatoUI.name, transform.position, Quaternion.Euler(7.0f, 0f, -5f),0);
             Debug.Log(currentUI + "currentUI");
             photonView.RPC("SetNewParent", PhotonTargets.All, currentUI.GetComponent<PhotonView>().viewID );
+            gameManager.Instance.DeleteItem(pv.viewID);
         }
         else if (tag == "fries")
         {
             fries = fries + 1;
-            photonView.RPC("setIngredients", PhotonTargets.All, 5, pv.viewID, fries);
+            photonView.RPC("setIngredients", PhotonTargets.All, 5, fries);
             var currentUI = PhotonNetwork.Instantiate(friesUI.name, transform.position, Quaternion.Euler(7.0f, 0f, -5f),0);
             photonView.RPC("SetNewParent", PhotonTargets.All, currentUI.GetComponent<PhotonView>().viewID );
+            gameManager.Instance.DeleteItem(pv.viewID);
         }
         else if (tag == "chopped_lettuce")
         {
             lettuce = lettuce + 1;
-            photonView.RPC("setIngredients", PhotonTargets.All, 2, pv.viewID, lettuce);
+            photonView.RPC("setIngredients", PhotonTargets.All, 2, lettuce);
             var currentUI = PhotonNetwork.Instantiate(lettuceUI.name, transform.position, Quaternion.Euler(7.0f, 0f, -5f),0);
             photonView.RPC("SetNewParent", PhotonTargets.All, currentUI.GetComponent<PhotonView>().viewID );
+            gameManager.Instance.DeleteItem(pv.viewID);
         }
         else if (tag == "cooked_patty")
         {
             patty++;
-            photonView.RPC("setIngredients", PhotonTargets.All, 3, pv.viewID, patty);
+            photonView.RPC("setIngredients", PhotonTargets.All, 3, patty);
             var currentUI = PhotonNetwork.Instantiate(pattyUI.name, transform.position, Quaternion.Euler(7.0f, 0f, -5f),0);
             photonView.RPC("SetNewParent", PhotonTargets.All, currentUI.GetComponent<PhotonView>().viewID );
-           photonView.RPC("GiveToChara", PhotonTargets.MasterClient, character.GetComponent<PhotonView>().viewID, "pan");                
+           photonView.RPC("GiveToChara", PhotonTargets.MasterClient, character.GetComponent<PhotonView>().viewID, "pan");
+            gameManager.Instance.DeleteItem(pv.viewID);
         }
         else if (tag == "chopped_bread")
         {
             bread++;
-            photonView.RPC("setIngredients", PhotonTargets.All, 4, pv.viewID, bread);
+            photonView.RPC("setIngredients", PhotonTargets.All, 4, bread);
             var currentUI = PhotonNetwork.Instantiate(breadUI.name, transform.position, Quaternion.Euler(7.0f, 0f, -5f),0);
             photonView.RPC("SetNewParent", PhotonTargets.All, currentUI.GetComponent<PhotonView>().viewID );
+            gameManager.Instance.DeleteItem(pv.viewID);
         }
     }
 

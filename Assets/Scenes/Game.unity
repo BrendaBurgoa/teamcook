@@ -336,22 +336,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1662446835}
     m_Modifications:
-    - target: {fileID: 1825516356, guid: b896b976bd1888542bc6af0bd1111f9c, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 19.90804
-      objectReference: {fileID: 0}
-    - target: {fileID: 1825516356, guid: b896b976bd1888542bc6af0bd1111f9c, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 73.89998
-      objectReference: {fileID: 0}
-    - target: {fileID: 1825516356, guid: b896b976bd1888542bc6af0bd1111f9c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 1825516356, guid: b896b976bd1888542bc6af0bd1111f9c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3472587654282239120, guid: b896b976bd1888542bc6af0bd1111f9c,
         type: 3}
       propertyPath: m_RootOrder
@@ -412,17 +396,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: plate
       objectReference: {fileID: 0}
-    - target: {fileID: 3472587654282239123, guid: b896b976bd1888542bc6af0bd1111f9c,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3472587654282239134, guid: b896b976bd1888542bc6af0bd1111f9c,
+    - target: {fileID: 5845671502497814192, guid: b896b976bd1888542bc6af0bd1111f9c,
         type: 3}
       propertyPath: viewIdField
       value: 24
       objectReference: {fileID: 0}
-    - target: {fileID: 3472587654282239134, guid: b896b976bd1888542bc6af0bd1111f9c,
+    - target: {fileID: 5845671502497814192, guid: b896b976bd1888542bc6af0bd1111f9c,
         type: 3}
       propertyPath: instantiationId
       value: 24
@@ -4113,6 +4092,7 @@ MonoBehaviour:
       target: {fileID: 0}
     finalState: {fileID: 8064698903818449196, guid: 46c92a4473e088f4283815c5a4312bab,
       type: 3}
+  qty_field: {fileID: 0}
   duration: 3
   fillImage: {fileID: 975449918}
   bar: {fileID: 1900769284}
@@ -11144,6 +11124,7 @@ MonoBehaviour:
       target: {fileID: 0}
     finalState: {fileID: 8064698903818449196, guid: 46c92a4473e088f4283815c5a4312bab,
       type: 3}
+  qty_field: {fileID: 0}
   duration: 3
   fillImage: {fileID: 853976094}
   bar: {fileID: 2097312373}
@@ -12545,6 +12526,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1662446835}
     m_Modifications:
+    - target: {fileID: 664225019643066097, guid: cb3e06ae331cc2149b0828dfba4be475,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5724762587806927634, guid: cb3e06ae331cc2149b0828dfba4be475,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087543049279019941, guid: cb3e06ae331cc2149b0828dfba4be475,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7134787962498353510, guid: cb3e06ae331cc2149b0828dfba4be475,
         type: 3}
       propertyPath: m_Name
@@ -12618,6 +12614,16 @@ PrefabInstance:
     - target: {fileID: 7134787962498353529, guid: cb3e06ae331cc2149b0828dfba4be475,
         type: 3}
       propertyPath: m_PositionModel.SynchronizeEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620788655538068704, guid: cb3e06ae331cc2149b0828dfba4be475,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9169918743036507793, guid: cb3e06ae331cc2149b0828dfba4be475,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

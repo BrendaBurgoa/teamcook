@@ -16,10 +16,15 @@ public class character : Photon.MonoBehaviour
     public PhotonView photonViewActive;
     SimpleSampleCharacterControl control;
     public List<ShowCollision> colliders;
+    public MeshRenderer hatRender;
 
     public bool HasSomething()
     {
         return container.childCount > 0;
+    }
+    public void SetColor(Color color)
+    {
+        hatRender.material.color = color;
     }
     private void Start()
     {
@@ -193,7 +198,9 @@ public class character : Photon.MonoBehaviour
         }
         foreach (ShowCollision sc in colliders)
         {
-            if(photonViewActive.viewID == sc.photonView.viewID)
+            if (sc == null)
+                return;
+            else if (photonViewActive.viewID == sc.photonView.viewID)
                 sc.OnCharacterOver(true);
             else
                 sc.OnCharacterOver(false);
@@ -224,6 +231,12 @@ public class character : Photon.MonoBehaviour
 
         PhotonView pv = other.gameObject.GetComponent<PhotonView>();
         if (pv == null) return;
+
+
+        plate plate = pv.GetComponent<plate>();
+        if (plate != null)  plate.OnCharacterNear(true);
+
+
         ShowCollision sc = pv.GetComponent<ShowCollision>();
         if (sc != null) AddCollider(sc, true);
 
@@ -244,6 +257,10 @@ public class character : Photon.MonoBehaviour
 
         PhotonView pv = other.gameObject.GetComponent<PhotonView>();
         if (pv == null) return;
+
+        plate plate = pv.GetComponent<plate>();
+        if (plate != null) plate.OnCharacterNear(false);
+
         ShowCollision sc = pv.GetComponent<ShowCollision>();
         if (sc != null) AddCollider(sc, false);
 

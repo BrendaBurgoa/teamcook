@@ -26,8 +26,7 @@ public class SelfDestruct : MonoBehaviour
         timerFunction(1.0f / waitTime * Time.deltaTime);
         if (Data.Instance.Rol == 0 && cookingTime > waitTime)
         {
-            isReady = true;
-            Data.Instance.LateOrders++;
+            isReady = true;           
             photonView.RPC("setLates", PhotonTargets.All);
         }          
     }
@@ -40,5 +39,7 @@ public class SelfDestruct : MonoBehaviour
     [PunRPC]
     private void setLates(){
         Destroy(gameObject);
+        Data.Instance.LateOrders++;
+        Events.OnRefreshPoints();
     }
 }

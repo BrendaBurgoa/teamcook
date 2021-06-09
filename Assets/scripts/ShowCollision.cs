@@ -33,13 +33,15 @@ public class ShowCollision : MonoBehaviour
     }
     public void OnCharacterOver(bool isOver)
     {
-        if(isOver)
+        if (gameObject == null) return;
+        if (isOver)
             SetColor(Color.green);
         else
             SetColor(matcolor);
     }
     void SetColor(Color matcolor)
     {
+        
         if (ren == null) Start();
         shownMat = ren.materials;
         shownMat[0].color = matcolor;

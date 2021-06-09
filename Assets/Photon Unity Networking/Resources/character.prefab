@@ -398,11 +398,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba158ff05cf30224f94bfdddec8e7635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   photonView: {fileID: 527422398323969844}
   m_moveSpeed: 3
   m_turnSpeed: 2
   m_animator: {fileID: 433579227425324770}
-  m_controlMode: 1
+  rb: {fileID: 0}
+  offsetSpeed: 0.005
 --- !u!114 &527422398323969843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,6 +423,8 @@ MonoBehaviour:
   currentSide: 
   container: {fileID: 1419609380313842891}
   photonViewActive: {fileID: 0}
+  colliders: []
+  hatRender: {fileID: 8607678015631388684}
 --- !u!114 &527422398323969844
 MonoBehaviour:
   m_ObjectHideFlags: 0

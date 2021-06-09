@@ -7,6 +7,7 @@ using System;
 public class Coocker : MonoBehaviour
 {
     public Food[] foods;
+    public Text qty_field;
     
     [Serializable]
     public class Food
@@ -38,6 +39,7 @@ public class Coocker : MonoBehaviour
     }
     public void Reset()
     {
+        if(qty_field != null) qty_field.text = "";
         timer = 0;
         fillImage.fillAmount = 0;
         bar.SetActive(false);
@@ -101,8 +103,13 @@ public class Coocker : MonoBehaviour
                 if (d.target != null)
                     totalIngredients++;
             }
+            if (totalIngredients > 0)
+            {
+                if (qty_field != null) qty_field.text = "x" + totalIngredients;
+            }
             if (totalIngredients >= food.ingredients.Length)
             {
+                if (qty_field != null) qty_field.text = "";
                 photonView.RPC("StartCookingForAll", PhotonTargets.All);
                 return;
             }

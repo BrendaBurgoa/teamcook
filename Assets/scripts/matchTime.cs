@@ -18,7 +18,7 @@ public class matchTime : MonoBehaviour
     public Text timeleft;
     private int playstate;
     private float fill;
-     Color[] colors = { new Color(0,1,0,1), new Color(1,0,0,1), new Color(1,1,1,1), new Color(0,0,1,1),  new Color(1,1,0,1), new Color(0, 0, 0, 1)};
+    Color[] colors = { new Color(1,1,1,1), new Color(1,0,0,1), new Color(0,1,0,1), new Color(0,0,1,1),  new Color(1,1,0,1), new Color(0, 0, 0, 1)};
     private bool canStart;
 
     void Start(){
@@ -32,9 +32,11 @@ public class matchTime : MonoBehaviour
     
 
     [PunRPC]
-    private void SetColors(string name, int which){
+    private void SetColors(int viewID, int which){
         //busca al personaje del jugador indicado, busca el sombrero y le cambia de color
-        // GameObject.Find(name).transform.GetChild(1).transform.GetChild(0).GetComponent<Renderer>().material.color =colors[which];
+        PhotonView pv = PhotonView.Find(viewID);
+        if(pv != null)
+            pv.GetComponent<character>().SetColor(colors[which]);
     }
     float initialTime = 0;
 
@@ -82,41 +84,23 @@ public class matchTime : MonoBehaviour
                 else
                     timer = Mathf.Floor(diff / 60) + ":0" + Mathf.Floor(diff % 60);
 
+                CheckColors();
                 photonView.RPC("FillTimer", PhotonTargets.All, timer);
-            }
-            CheckColors();
+            }            
         }
-        //photonView.RPC("timerMatch", PhotonTargets.All);
         Invoke("OnTick", 0.1f);
     }
     int lastTotalCharacters;
+    [PunRPC]
     void CheckColors()
     {
         GameObject[] AllPlayers = GameObject.FindGameObjectsWithTag("character");
-        if(AllPlayers.Length>0 && lastTotalCharacters != AllPlayers.Length)
-        {
-            lastTotalCharacters = AllPlayers.Length;
-            for (int i = 0; i < AllPlayers.Length; i++)
-                photonView.RPC("SetColors", PhotonTargets.All, AllPlayers[i].name, i);
-        }
-    }
-    void Update____()
-    {
-
-        //  if(beginTimer==true){
-        //si la partida comienza se corre el tiempo
-        photonView.RPC("timerMatch", PhotonTargets.All);
-        //if (changeColors == true && Data.Instance.Rol == 0)
+        //if(AllPlayers.Length>0 && lastTotalCharacters != AllPlayers.Length)
         //{
-        //    //se spawnean la primera vez con todos sombreros de color blanco, si se es manager y todavía no se cambió de color, se recorre cada jugador y mediante RPC se le cambia de color a un color asignado distinto
-        //    AllPlayers = GameObject.FindGameObjectsWithTag("character");
-        //    for (int i = 0; i < AllPlayers.Length; i++)
-        //    {
-        //        photonView.RPC("SetColors", PhotonTargets.All, AllPlayers[i].name, i);
-        //    }
-        //}
-
-        //   }
+        //    lastTotalCharacters = AllPlayers.Length;
+            for (int i = 0; i < AllPlayers.Length; i++)
+                photonView.RPC("SetColors", PhotonTargets.All, AllPlayers[i].GetComponent<PhotonView>().viewID, i);
+      //  }
     }
     [PunRPC]
     private void ShowConnected(){
@@ -125,12 +109,16 @@ public class matchTime : MonoBehaviour
         foreach (var player in PhotonNetwork.otherPlayers)
         {
             canStart = true;
-            connected.text = connected.text +" " + player.name + ",";
-
+            connected.text = connected.text +" " + player.name + ",";            
             StartButton.GetComponent<Button>().interactable = true;
         }
+        Invoke("CheckColorsDelay", 1); // delay esperando que cargue el utlimo:
     }
-
+    void CheckColorsDelay()
+    {
+        photonView.RPC("CheckColors", PhotonTargets.MasterClient);
+        Events.OnRefreshPoints();
+    }
     private void OnPhotonPlayerDisconnected(PhotonPlayer player){
         //si el manager pierde conexión o se desconecta, el juego temrina y se redirecciona al menu 
         //se utiliza en nombre en vez de Data.Rol porque el evento de pun no lo puede acceder

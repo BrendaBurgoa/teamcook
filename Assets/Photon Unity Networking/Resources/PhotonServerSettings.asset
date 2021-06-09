@@ -96,4 +96,5 @@ MonoBehaviour:
   - DeleteItemByMaster
   - CharacterGet
   - FireOff
+  - CheckColors
   DisableAutoOpenWizard: 1

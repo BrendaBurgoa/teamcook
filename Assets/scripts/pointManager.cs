@@ -10,6 +10,7 @@ public class pointManager : Photon.MonoBehaviour
     private void Start()
     {
         Events.OnRefreshPoints += OnRefreshPoints;
+        markPoints(0, 0);
     }
     private void OnDestroy()
     {
