@@ -97,4 +97,5 @@ MonoBehaviour:
   - CharacterGet
   - FireOff
   - CheckColors
+  - DeleteRefreshAll
   DisableAutoOpenWizard: 1

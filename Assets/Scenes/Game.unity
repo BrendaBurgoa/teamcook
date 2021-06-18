@@ -4094,6 +4094,7 @@ MonoBehaviour:
       type: 3}
   qty_field: {fileID: 0}
   duration: 3
+  isCooking: 0
   fillImage: {fileID: 975449918}
   bar: {fileID: 1900769284}
   replaceGO: 0
@@ -11126,6 +11127,7 @@ MonoBehaviour:
       type: 3}
   qty_field: {fileID: 0}
   duration: 3
+  isCooking: 0
   fillImage: {fileID: 853976094}
   bar: {fileID: 2097312373}
   replaceGO: 0

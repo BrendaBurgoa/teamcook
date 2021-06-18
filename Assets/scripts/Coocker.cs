@@ -22,7 +22,7 @@ public class Coocker : MonoBehaviour
         public GameObject target;
     }
     public float duration = 13.0f;
-    bool isCooking;
+    public bool isCooking;
     public Image fillImage;
     float timer;
     public GameObject bar;

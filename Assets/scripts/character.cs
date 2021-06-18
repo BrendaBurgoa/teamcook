@@ -86,12 +86,12 @@ public class character : Photon.MonoBehaviour
        
         if (photonViewActive != null && Input.GetKeyDown("space"))
         {
-          
+            Coocker coocker = photonViewActive.GetComponent<Coocker>();
+            if (coocker != null && coocker.isCooking) return;
 
             pick_drop pd = photonViewActive.GetComponent<pick_drop>();
             if (pd != null && !HasSomething())
             {
-                Coocker coocker = photonViewActive.GetComponent<Coocker>();
                 if (coocker != null && !coocker.CanBeGrabbed())
                     return;
 
@@ -111,7 +111,6 @@ public class character : Photon.MonoBehaviour
                     }
                     PickUp();
                 }
-                Coocker coocker = photonViewActive.GetComponent<Coocker>();
                 if (coocker != null && !coocker.CanBeGrabbed())
                     return;
 

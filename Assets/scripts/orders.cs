@@ -62,55 +62,60 @@ public class orders : MonoBehaviour
 
         if (collisionTag == "simpleBurger" && simpleBurger>0)
         {
-            photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+            ChangePoints(plate.viewID);
             photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerOrder");
         }
         else if(collisionTag == "fullBurger" && fullBurger>0)
         {
-            photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+            ChangePoints(plate.viewID);
             photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerOrder");
         }
         else if(collisionTag == "fullBurgerFries" && fullBurgerFries>0)
         {
-            photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+            ChangePoints(plate.viewID);
             photonView.RPC("DeleteLatest", PhotonTargets.All, "FBurgerFriesOrder"); 
         }
         else if(collisionTag == "simpleBurgerFries" && simpleBurgerFries>0)
         {
-            photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+            ChangePoints(plate.viewID);
             photonView.RPC("DeleteLatest", PhotonTargets.All, "SBurgerFriesOrder");
         }
 
         else if(collisionTag == "simpleSalad" && simpleSalad>0)
-        { 
-            photonView.RPC("ChangePoints", PhotonTargets.All,  plate.name);
+        {
+            ChangePoints(plate.viewID);
             photonView.RPC("DeleteLatest", PhotonTargets.All, "SSaladOrder");
         }
         else if(collisionTag == "fullSalad" && fullSalad>0)
         {
-            photonView.RPC("ChangePoints", PhotonTargets.All,   plate.name);
+            ChangePoints(plate.viewID);
             photonView.RPC("DeleteLatest", PhotonTargets.All, "FSaladOrder");
         }
         else if(collisionTag == "onionSoup" && onionSoup>0)
         {
-            photonView.RPC("ChangePoints", PhotonTargets.All, plate.name);
+            ChangePoints(plate.viewID);
             photonView.RPC("DeleteLatest", PhotonTargets.All, "OSoupOrder");
         }
         else if(collisionTag == "tomatoSoup" && tomatoSoup>0)
-        {         
-            photonView.RPC("ChangePoints", PhotonTargets.All,   plate.name);   
+        {
+            ChangePoints(plate.viewID);   
             photonView.RPC("DeleteLatest", PhotonTargets.All, "TSoupOrder");
         }
     }
 
     [PunRPC]
-    private void ChangePoints(string receivedplate){
-        clap.Play();        
-        Destroy(GameObject.Find(receivedplate));
+    private void ChangePoints(int viewID)
+    {       
+        gameManager.Instance.DeleteItem(viewID);
+        photonView.RPC("DeleteRefreshAll", PhotonTargets.All);
+    }
+    [PunRPC]
+    private void DeleteRefreshAll()
+    {
+        clap.Play();
         Data.Instance.TimelyOrders++;
         Events.OnRefreshPoints();
     }
-
     [PunRPC]    
     private void DeleteLatest(string tag){
         var listButton = GameObject.FindGameObjectsWithTag(tag);

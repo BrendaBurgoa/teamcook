@@ -1109,10 +1109,13 @@ public static class PhotonNetwork
         }
         #endif
 
-		if (PhotonServerSettings != null)
-		{
-			Application.runInBackground = PhotonServerSettings.RunInBackground;
-		}
+        //commented by Pontura
+		//if (PhotonServerSettings != null)
+		//{
+		//	Application.runInBackground = PhotonServerSettings.RunInBackground;
+		//}
+        // force allways run in background:
+        Application.runInBackground = true;
 
         // Set up a MonoBehaviour to run Photon, and hide it
         GameObject photonGO = new GameObject();
