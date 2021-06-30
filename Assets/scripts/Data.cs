@@ -46,4 +46,11 @@ public class Data : MonoBehaviour
             menuController.Init();
         });
     }
+    public void Reset()
+    {
+        LateOrders = 0;
+        TimelyOrders = 0;
+        fireExists = false;
+        Point = 0;
+    }
 }

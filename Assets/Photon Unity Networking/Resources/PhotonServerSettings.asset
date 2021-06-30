@@ -98,4 +98,10 @@ MonoBehaviour:
   - FireOff
   - CheckColors
   - DeleteRefreshAll
+  - AddPlate
+  - SetNewIngredient
+  - pickAll
+  - PickObjectForAll
+  - PickObjectMasterFilter
+  - PickObjectForOthers
   DisableAutoOpenWizard: 1

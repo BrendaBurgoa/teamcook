@@ -94,8 +94,8 @@ public class character : Photon.MonoBehaviour
             {
                 if (coocker != null && !coocker.CanBeGrabbed())
                     return;
-
-                photonView.RPC("pick", PhotonTargets.All, pd.photonView.viewID, photonView.viewID);
+                PickUp();
+                gameManager.Instance.PickObject(pd.photonView.viewID, photonView.viewID);
                 photonViewActive = null;
             }
             else if (HasSomething())
@@ -107,7 +107,7 @@ public class character : Photon.MonoBehaviour
                     if (pov != null)
                     {
                         po.OnSelect(pov);
-                        DropAll();
+                       // DropAll();
                     }
                     PickUp();
                 }
@@ -144,7 +144,7 @@ public class character : Photon.MonoBehaviour
             {
                 instantiateObjects io = photonViewActive.GetComponent<instantiateObjects>();
                 if (io != null) InstantiateObject(io);
-                PickUp();   
+                PickUp();
             }
         }
     }
@@ -235,20 +235,9 @@ public class character : Photon.MonoBehaviour
         plate plate = pv.GetComponent<plate>();
         if (plate != null)  plate.OnCharacterNear(true);
 
-
         ShowCollision sc = pv.GetComponent<ShowCollision>();
         if (sc != null) AddCollider(sc, true);
 
-        //if (photonViewActive == null || photonViewActive.GetComponent<pick_drop>() == null)
-        //{
-        //    PhotonView pv = other.gameObject.GetComponent<PhotonView>();
-        //    if (pv != null)
-        //    {
-        //        photonViewActive = pv;
-        //        ShowCollision sc = photonViewActive.GetComponent<ShowCollision>();
-        //        if (sc != null) sc.OnCharacterOver(true);
-        //    }
-        //}
     }
     private void OnTriggerExit(Collider other)
     {
@@ -262,35 +251,12 @@ public class character : Photon.MonoBehaviour
 
         ShowCollision sc = pv.GetComponent<ShowCollision>();
         if (sc != null) AddCollider(sc, false);
-
-
-        //if (!photonView.isMine) return;
-        //PhotonView pv = other.gameObject.GetComponent<PhotonView>();
-        //if (pv != null)
-        //{
-        //    ShowCollision sc = pv.GetComponent<ShowCollision>();
-        //    if (sc != null) sc.OnCharacterOver(false);
-        //    if(photonViewActive != null && photonViewActive == pv)
-        //        photonViewActive = null;
-        //}
     }
-
-    [PunRPC]
-    private void pick(int id, int characterID)
-    {
-        PhotonView ingredient = PhotonView.Find(id);
-        if (Data.Instance.Rol == 0)
-            ingredient.GetComponent<PhotonView>().TransferOwnership(characterID);
-
-        ingredient.GetComponent<ShowCollision>().SetCollision(false);
-
-        var _character = PhotonView.Find(characterID);
-        character characterThatCatch = _character.GetComponent<character>();
-        characterThatCatch.GetObject(ingredient.GetComponent<PhotonView>());
-    }
+    
     public void InstantiateObject(instantiateObjects io)
     {
         var ingredient = PhotonNetwork.Instantiate(io.myPrefab.name, new Vector3(1000,0,0), io.myPrefab.transform.rotation, 0);
+        print("_______New Object: " + io.myPrefab.name);
         photonView.RPC("instantiateIngredient", PhotonTargets.All, ingredient.GetComponent<PhotonView>().viewID, photonView.viewID);
     }
     [PunRPC]

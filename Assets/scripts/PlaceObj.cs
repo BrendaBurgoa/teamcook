@@ -7,21 +7,29 @@ public class PlaceObj : Photon.MonoBehaviour
     public string[] includedTags;
     public Vector3 offset;
     public Vector3 rotationToPlace;
-
+    float lastTimeItemPlaced;
 
     public void OnSelect(PhotonView pv)
-    {
-        gameManager.Instance.DeleteItem(pv.viewID);
+    {        
         string _name = pv.gameObject.name;
         string[] arr = pv.gameObject.name.Split("(Clone)"[0]);
         if (arr.Length > 1)
             _name = arr[0];
-        photonView.RPC("PlaceNewGO", PhotonTargets.MasterClient, _name);
+        photonView.RPC("PlaceNewGO", PhotonTargets.MasterClient, _name, pv.viewID);
     }
     [PunRPC]
-    private void PlaceNewGO(string _name)
+    private void PlaceNewGO(string _name, int viewID)
     {
+        if (lastTimeItemPlaced != 0 && lastTimeItemPlaced + 1.5f > Time.time)
+            return;
+
+        lastTimeItemPlaced = Time.time;
+
+        gameManager.Instance.DeleteItem(viewID);
+        
         GameObject go = PhotonNetwork.Instantiate(_name, transform.position + offset, Quaternion.Euler(rotationToPlace), 0);
+
+        print("MasterClient Place New GO: " + _name);
 
         Coocker coocker = GetComponent<Coocker>();
         if (coocker != null)

@@ -28,6 +28,7 @@ public class menuController : MonoBehaviour
     }
     public void Init()
     {
+        Data.Instance.Reset();
         if (Data.Instance.isAdmin)
         {
             Create.SetActive(true);

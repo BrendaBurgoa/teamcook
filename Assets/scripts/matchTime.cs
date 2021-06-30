@@ -9,7 +9,6 @@ public class matchTime : MonoBehaviour
     bool gameStarted;
     public GameObject StartCanvas;
     public GameObject stopCanvas;
-    public Image timer;
     public PhotonView photonView;
     public GameObject StartButton;
     public gameManager gameManager;
@@ -153,10 +152,10 @@ public class matchTime : MonoBehaviour
     [PunRPC]
     private void GoToEnd(){
         CancelInvoke();
-               // beginTimer=false;
-                GameObject go = GameObject.Find("OrdersContent");
-                Data.Instance.LateOrders = Data.Instance.LateOrders + go.transform.childCount;
-                UnityEngine.SceneManagement.SceneManager.LoadScene("End");            
+        // beginTimer=false;
+        GameObject go = GameObject.Find("OrdersContent");
+        //Data.Instance.LateOrders = Data.Instance.LateOrders + go.transform.childCount;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("End");            
     }
 
 
@@ -169,10 +168,7 @@ public class matchTime : MonoBehaviour
     [PunRPC]
     public void ReloadLogic(){
         //si se reinicia el juego se va a ir a otra escena y volver a la actual para asegurar que los elementos no perduren en la partida nueva
-        Data.Instance.LateOrders=0;
-        Data.Instance.TimelyOrders=0;
-        Data.Instance.fireExists=false;
-        Data.Instance.Point=0;
+        Data.Instance.Reset();
         UnityEngine.SceneManagement.SceneManager.LoadScene("restart");            
     }
     

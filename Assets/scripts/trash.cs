@@ -39,18 +39,24 @@ public class trash : Photon.MonoBehaviour
     [PunRPC]
     private void GiveToChara(int charaid, string name)
     {
+        Debug.Log("TRASH ____Give " + name);
         var newObj = PhotonNetwork.Instantiate(name, new Vector3(1000,0,0), Quaternion.identity, 0);
         PhotonView obj = PhotonView.Find(newObj.GetComponent<PhotonView>().viewID);
+        Debug.Log("TRASH NEW obj.viewID; " + obj.viewID);
         photonView.RPC("CharacterGet", PhotonTargets.All, charaid, obj.viewID);
-        character chara = PhotonView.Find(charaid).GetComponent<character>();
-        obj.TransferOwnership(charaid);
+
+       // character character = PhotonView.Find(charaid).GetComponent<character>();
+        //obj.TransferOwnership(charaid);
+       // if (character == null) return;
+       // character.GetObject(photonView);
     }
     [PunRPC]
     private void CharacterGet(int charaid, int viewID)
     {
         PhotonView obj = PhotonView.Find(viewID);
-        character chara = PhotonView.Find(charaid).GetComponent<character>();
-        chara.GetObject(obj);
+        character character = PhotonView.Find(charaid).GetComponent<character>();
+        if (character == null) return;
+        character.GetObject(obj);
     }
 
     //[PunRPC]

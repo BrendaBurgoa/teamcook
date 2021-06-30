@@ -31,6 +31,7 @@ public class Coocker : MonoBehaviour
     public bool replaceGO = true;
     public Animator anim;
     public Vector3 offset;
+    public float offset_random_x;
 
     void Start()
     {
@@ -66,7 +67,9 @@ public class Coocker : MonoBehaviour
         {
             if(Data.Instance.Rol == 0)
             {
-                PhotonNetwork.Instantiate(finalStateName, transform.position + offset, transform.rotation, 0);
+                Vector3 newOffset = offset;
+                newOffset.x += (float)UnityEngine.Random.Range(0, offset_random_x);
+                PhotonNetwork.Instantiate(finalStateName, transform.position + newOffset, transform.rotation, 0);
                 photonView.RPC("DestroyForAll", PhotonTargets.All);
             }
             isCooking = false;

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ShowPoints : Photon.MonoBehaviour
 {
     public Text points;
+    public Text resultsField;
     public GameObject reStartBtn;
     public PhotonView photonView;
     private int results;
@@ -16,6 +17,7 @@ public class ShowPoints : Photon.MonoBehaviour
 
     void Start()
     {
+        resultsField.text = "";
         signal.SetActive(false);
         points.text = "";
         //en la pantalla final toma el porcentaje de ordenes completadas y las que no se llegaron a hacer y reemplaza el texto por el porcentaje
@@ -36,9 +38,11 @@ public class ShowPoints : Photon.MonoBehaviour
     [PunRPC]
     private void WritePoints(int onTime, int late){
 
+        //resultsField.text = "Entregadas: " + onTime + " Perdidas: " + late;
         signal.SetActive(true);
-        results = ((onTime)*100)/(late + onTime);
-        points.text=results+"%";
+        int total = (late + onTime);
+        results = (int)(((float)onTime / (float)total)*100);
+        points.text= results+"%";
 
         if(results < 33.3f)
             red.GetComponent<Image>().color = Color.white;

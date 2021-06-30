@@ -77,4 +77,37 @@ public class gameManager : Photon.MonoBehaviour
         if(pv != null)
             PhotonNetwork.Destroy(pv.gameObject);
     }
+
+    public void PickObject(int id, int characterID)
+    {
+        photonView.RPC("PickObjectMasterFilter", PhotonTargets.MasterClient, id, characterID);
+    }
+    [PunRPC]
+    public void PickObjectMasterFilter(int id, int characterID)
+    {
+        PhotonView ingredient = PhotonView.Find(id);
+        character characterThaHasItem = ingredient.GetComponentInParent<character>();
+        if (characterThaHasItem == null)
+        {
+            // se fija que el objeto no este ya agarrado:
+            Picked(id, characterID);
+            photonView.RPC("PickObjectForOthers", PhotonTargets.Others, id, characterID);
+        }
+    }
+    [PunRPC]
+    public void PickObjectForOthers(int id, int characterID)
+    {
+        Picked(id, characterID);
+    }
+    public void Picked(int id, int characterID)
+    {
+        PhotonView ingredient = PhotonView.Find(id);
+        if (ingredient == null) return;
+        ingredient.GetComponent<ShowCollision>().SetCollision(false);
+
+        var _character = PhotonView.Find(characterID);
+        character characterThatCatch = _character.GetComponent<character>();
+        characterThatCatch.GetObject(ingredient.GetComponent<PhotonView>());
+    }
+
 }
