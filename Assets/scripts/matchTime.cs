@@ -59,8 +59,14 @@ public class matchTime : MonoBehaviour
         gameStarted = true;
 
         if (Data.Instance.Rol == 1)
-            photonView.RPC("NewUser", PhotonTargets.All);
+        {
+            Invoke("AddMe", 1);
+        }
         StartCanvas.SetActive(false);
+    }
+    void AddMe()
+    {
+        photonView.RPC("NewUser", PhotonTargets.All);
     }
     int lastPlayTime = 0;
 

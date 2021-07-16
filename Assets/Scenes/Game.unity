@@ -726,21 +726,6 @@ PrefabInstance:
       propertyPath: instantiationId
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 5873904965175018440, guid: 278140ed04a849c408be792e0271cb26,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 2.63
-      objectReference: {fileID: 0}
-    - target: {fileID: 5873904965175018440, guid: 278140ed04a849c408be792e0271cb26,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 5873904965175018440, guid: 278140ed04a849c408be792e0271cb26,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 1.07
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 278140ed04a849c408be792e0271cb26, type: 3}
 --- !u!1 &20426353
@@ -3783,7 +3768,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519801163}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -2.689, y: -0.021000087, z: -4.586}
+  m_LocalPosition: {x: -2.715, y: -0.021000087, z: -4.586}
   m_LocalScale: {x: -0.90720004, y: 0.1176, z: 0.4}
   m_Children:
   - {fileID: 1900769285}
@@ -3843,14 +3828,15 @@ MonoBehaviour:
     finalState: {fileID: 8064698903818449196, guid: 46c92a4473e088f4283815c5a4312bab,
       type: 3}
   qty_field: {fileID: 0}
+  canbcelCookBtn: {fileID: 0}
   duration: 3
   isCooking: 0
   fillImage: {fileID: 975449918}
   bar: {fileID: 1900769284}
   replaceGO: 0
   anim: {fileID: 1482202947}
-  offset: {x: 0.8, y: 0.1, z: 0.1}
-  offset_random_x: 1
+  offset: {x: 0.7, y: 0.1, z: 0.1}
+  offset_random_x: 0.8
 --- !u!114 &519801167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8134,6 +8120,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1662446835}
     m_Modifications:
+    - target: {fileID: 1460754833, guid: cb3e06ae331cc2149b0828dfba4be475, type: 3}
+      propertyPath: canbcelCookBtn
+      value: 
+      objectReference: {fileID: 1472090171}
+    - target: {fileID: 5564147337403843850, guid: cb3e06ae331cc2149b0828dfba4be475,
+        type: 3}
+      propertyPath: m_Name
+      value: CancelButton
+      objectReference: {fileID: 0}
     - target: {fileID: 7134787962498353510, guid: cb3e06ae331cc2149b0828dfba4be475,
         type: 3}
       propertyPath: m_Name
@@ -8214,6 +8209,12 @@ PrefabInstance:
 --- !u!4 &1472090170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7134787962498353521, guid: cb3e06ae331cc2149b0828dfba4be475,
+    type: 3}
+  m_PrefabInstance: {fileID: 1472090169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1472090171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5564147337403843850, guid: cb3e06ae331cc2149b0828dfba4be475,
     type: 3}
   m_PrefabInstance: {fileID: 1472090169}
   m_PrefabAsset: {fileID: 0}
@@ -10878,6 +10879,7 @@ MonoBehaviour:
     finalState: {fileID: 8064698903818449196, guid: 46c92a4473e088f4283815c5a4312bab,
       type: 3}
   qty_field: {fileID: 0}
+  canbcelCookBtn: {fileID: 0}
   duration: 3
   isCooking: 0
   fillImage: {fileID: 853976094}
@@ -11786,8 +11788,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 81.59, y: 251.22}
-  m_SizeDelta: {x: -163.09119, y: -502.44}
+  m_AnchoredPosition: {x: 81.59, y: 251.6}
+  m_SizeDelta: {x: -163.09119, y: -520.0605}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1874130970
 MonoBehaviour:
@@ -12281,21 +12283,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1662446835}
     m_Modifications:
-    - target: {fileID: 664225019643066097, guid: cb3e06ae331cc2149b0828dfba4be475,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5724762587806927634, guid: cb3e06ae331cc2149b0828dfba4be475,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7087543049279019941, guid: cb3e06ae331cc2149b0828dfba4be475,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7134787962498353510, guid: cb3e06ae331cc2149b0828dfba4be475,
         type: 3}
       propertyPath: m_Name
@@ -12366,28 +12353,7 @@ PrefabInstance:
       propertyPath: instantiationId
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 7134787962498353529, guid: cb3e06ae331cc2149b0828dfba4be475,
-        type: 3}
-      propertyPath: m_PositionModel.SynchronizeEnabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7134787962498353532, guid: cb3e06ae331cc2149b0828dfba4be475,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.68
-      objectReference: {fileID: 0}
-    - target: {fileID: 8620788655538068704, guid: cb3e06ae331cc2149b0828dfba4be475,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9169918743036507793, guid: cb3e06ae331cc2149b0828dfba4be475,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7134787962498353533, guid: cb3e06ae331cc2149b0828dfba4be475, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb3e06ae331cc2149b0828dfba4be475, type: 3}
 --- !u!4 &2073723746 stripped
 Transform:

@@ -8,6 +8,8 @@ public class Coocker : MonoBehaviour
 {
     public Food[] foods;
     public Text qty_field;
+
+    public GameObject canbcelCookBtn;
     
     [Serializable]
     public class Food
@@ -37,6 +39,27 @@ public class Coocker : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         Reset();
+        SetCancelBtn(false);
+    }
+    public void OnCharacterNear(bool isNear)
+    {
+        SetCancelBtn(isNear);
+    }
+    void SetCancelBtn(bool isOn)
+    {
+        if (canbcelCookBtn == null) return;
+
+        bool foodAdded = false;
+        foreach (Food food in foods)
+        {
+            foreach (IngredientData d in food.ingredients)
+            {
+                if (d.target != null)
+                    foodAdded = true;
+            }
+        }
+        if (foodAdded || !isOn)
+            canbcelCookBtn.SetActive(isOn);
     }
     public void Reset()
     {
@@ -58,6 +81,29 @@ public class Coocker : MonoBehaviour
     public void Added(PhotonView pv)
     {
         photonView.RPC("AddIngredient", PhotonTargets.All, pv.viewID);
+    }
+    public void Empty()
+    {
+        photonView.RPC("EmptyAllIngredients", PhotonTargets.MasterClient);
+        SetCancelBtn(false);
+    }
+    [PunRPC]
+    void EmptyAllIngredients()
+    {
+        photonView.RPC("EmptyIngredients", PhotonTargets.All);       
+    }
+    [PunRPC]
+    void EmptyIngredients()
+    {       
+        foreach (Food food in foods)
+        {
+            foreach (IngredientData id in food.ingredients)
+            {
+                if (id.target != null) gameManager.Instance.DeleteItem(id.target.gameObject.GetComponent<PhotonView>().viewID);
+                id.target = null;
+            }
+        }
+        Reset();
     }
     private void Update()
     {
@@ -105,37 +151,36 @@ public class Coocker : MonoBehaviour
                 }
                 if (d.target != null)
                     totalIngredients++;
-            }
-            if (totalIngredients > 0)
-            {
-                if (qty_field != null) qty_field.text = "x" + totalIngredients;
-            }
+            }   
+
+            if(foodAdded)
+                SetCancelBtn(true);
+            else
+                SetCancelBtn(false);
+
             if (totalIngredients >= food.ingredients.Length)
             {
                 if (qty_field != null) qty_field.text = "";
                 photonView.RPC("StartCookingForAll", PhotonTargets.All);
                 return;
+            } else if (totalIngredients > 0)
+            {
+                if (qty_field != null) qty_field.text = "x" + totalIngredients;
             }
         }
     }
     [PunRPC]
     private void DestroyForAll()
     {
+        SetCancelBtn(false);
         if (anim != null)
             anim.enabled = false;
 
         GetComponent<AudioSource>().Stop();
         isCooking = false;
 
-        foreach (Food food in foods)
-        {
-            foreach (IngredientData id in food.ingredients)
-            {
-                if (id.target != null) gameManager.Instance.DeleteItem(id.target.gameObject.GetComponent<PhotonView>().viewID);
-                id.target = null;
-            }
-        }
-        if(replaceGO) gameManager.Instance.DeleteItem(photonView.viewID);
-        Reset();
+        EmptyIngredients();
+
+        if (replaceGO) gameManager.Instance.DeleteItem(photonView.viewID);
     }
 }

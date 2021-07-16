@@ -23,14 +23,19 @@ public class PlaceObj : Photon.MonoBehaviour
         if (lastTimeItemPlaced != 0 && lastTimeItemPlaced + 1.5f > Time.time)
             return;
 
-        lastTimeItemPlaced = Time.time;
-
-        gameManager.Instance.DeleteItem(viewID);
+        //Hack para no cocinar en cualquier lado:
+        if ( 
+            (includedTags[0] == "patty" && transform.localPosition.x < 1)
+            || 
+            (includedTags[0] == "chopped_tomato" && transform.localPosition.x > -1)
+           )
+            return;
         
+
+        lastTimeItemPlaced = Time.time;
+        gameManager.Instance.DeleteItem(viewID);        
         GameObject go = PhotonNetwork.Instantiate(_name, transform.position + offset, Quaternion.Euler(rotationToPlace), 0);
-
-        print("MasterClient Place New GO: " + _name);
-
+        
         Coocker coocker = GetComponent<Coocker>();
         if (coocker != null)
             coocker.Added(go.GetComponent<PhotonView>());

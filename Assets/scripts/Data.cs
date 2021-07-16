@@ -17,6 +17,7 @@ public class Data : MonoBehaviour
     public int TimelyOrders;
     public bool fireExists;
     public menuController menuController;
+    public bool loaded;
 	
 	public static Data Instance
 	{
@@ -33,18 +34,23 @@ public class Data : MonoBehaviour
             Destroy(this.gameObject);
 
         DontDestroyOnLoad(this.gameObject);
+        loaded = false;
 
+#if UNITY_WEBGL && !UNITY_EDITOR
         URLParameters.Instance.RegisterOnDone((url) => {
            // Debug.Log("search parameters: " + url.Search);
            // Debug.Log("hash parameters: " + url.Hash);
             if (url.SearchParameters == null  || url.SearchParameters.Count == 0) return;
             string _isAdmin = url.SearchParameters["admin"];
+            Debug.Log("_isAdmin: " + _isAdmin);
             if (_isAdmin == "yes")
                 isAdmin = true;
             else
                 isAdmin = false;
+            loaded = true;
             menuController.Init();
         });
+#endif
     }
     public void Reset()
     {

@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b10a3657f88cad4fbfba0eb584beb9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0}
 --- !u!65 &5873904965175018440
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111,7 +112,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.52, z: 1.37}
+  m_Size: {x: 2.63, y: 2.28, z: 1.07}
   m_Center: {x: 0, y: -0.23, z: 0}
 --- !u!114 &5834776406584433726
 MonoBehaviour:
@@ -129,7 +130,7 @@ MonoBehaviour:
   group: 0
   OwnerShipWasTransfered: 0
   prefixBackup: -1
-  synchronization: 3
+  synchronization: 1
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 1
@@ -234,3 +235,4 @@ MonoBehaviour:
   mat: []
   shownMat: []
   matcolor: {r: 0, g: 0, b: 0, a: 0}
+  photonView: {fileID: 0}

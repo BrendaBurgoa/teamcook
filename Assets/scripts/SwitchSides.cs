@@ -28,29 +28,45 @@ public class SwitchSides : MonoBehaviour
     public void SwitchChefToOtherSide(int side){
         //array con todos los jugadores se fija en su id y según sea par o impar, se fija de la clase character el lado actual y lo cambia. Y le asigna una posicion aleatoria nueva en el lado nuevo
         AllPlayers= GameObject.FindGameObjectsWithTag("character");
+
         for(int i=0; i<AllPlayers.Length; i++){
             var randomValuez = Random.Range(0.3f, 3.5f);
-            if(AllPlayers[i].GetComponent<character>().playerId%2==1){
-                if(side%2==1){
-                    var randomValuex = Random.Range(-3f, -0.5f);
-                    AllPlayers[i].transform.localPosition = new Vector3(randomValuex, 0 , randomValuez);
-                    AllPlayers[i].GetComponent<character>().currentSide="left";
-                }else{
-                    var randomValuex = Random.Range(0.3f, 3f);
-                    AllPlayers[i].transform.localPosition = new Vector3(randomValuex, 0 , randomValuez);
-                    AllPlayers[i].GetComponent<character>().currentSide="right";
-                }
-            }else{
-                if(side%2==1){
-                    var randomValuex = Random.Range(0.3f, 3f);
-                    AllPlayers[i].transform.localPosition = new Vector3(randomValuex, 0, randomValuez);
-                    AllPlayers[i].GetComponent<character>().currentSide="right";
-                }else{
-                    var randomValuex = Random.Range(-3f, -0.5f);
-                    AllPlayers[i].transform.localPosition = new Vector3(randomValuex, 0, randomValuez);
-                    AllPlayers[i].GetComponent<character>().currentSide="left";
-                }
+            var randomValuex = Random.Range(0.3f, 3f);
+
+            if (AllPlayers[i].GetComponent<character>().currentSide == "left")
+            {               
+                AllPlayers[i].transform.localPosition = new Vector3(randomValuex, 0, randomValuez);
+                AllPlayers[i].GetComponent<character>().currentSide = "right";
             }
+            else
+            {
+                AllPlayers[i].transform.localPosition = new Vector3(-randomValuex, 0, randomValuez);
+                AllPlayers[i].GetComponent<character>().currentSide = "left";
+            }
+
+
+
+            //if(AllPlayers[i].GetComponent<character>().playerId%2==1){
+            //    if(side%2==1){
+            //        var randomValuex = Random.Range(-3f, -0.5f);
+            //        AllPlayers[i].transform.localPosition = new Vector3(randomValuex, 0 , randomValuez);
+            //        AllPlayers[i].GetComponent<character>().currentSide="left";
+            //    }else{
+            //        var randomValuex = Random.Range(0.3f, 3f);
+            //        AllPlayers[i].transform.localPosition = new Vector3(randomValuex, 0 , randomValuez);
+            //        AllPlayers[i].GetComponent<character>().currentSide="right";
+            //    }
+            //}else{
+            //    if(side%2==1){
+            //        var randomValuex = Random.Range(0.3f, 3f);
+            //        AllPlayers[i].transform.localPosition = new Vector3(randomValuex, 0, randomValuez);
+            //        AllPlayers[i].GetComponent<character>().currentSide="right";
+            //    }else{
+            //        var randomValuex = Random.Range(-3f, -0.5f);
+            //        AllPlayers[i].transform.localPosition = new Vector3(randomValuex, 0, randomValuez);
+            //        AllPlayers[i].GetComponent<character>().currentSide="left";
+            //    }
+            //}
         }
     }
     [PunRPC]

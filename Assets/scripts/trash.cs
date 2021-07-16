@@ -9,7 +9,7 @@ public class trash : Photon.MonoBehaviour
     {
         string tag = pv.gameObject.tag;
         print("trash " + tag);
-        if (tag != "pot" && tag != "extinguisher" && tag != "counter" && tag != "stove")
+        if (tag != "pan" && tag != "pot" && tag != "extinguisher" && tag != "counter" && tag != "stove")
         {
             gameManager.Instance.DeleteItem(pv.viewID);
         }

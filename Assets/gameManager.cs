@@ -40,15 +40,45 @@ public class gameManager : Photon.MonoBehaviour
     public GameObject PlayerPrefab;
 
     public void SpawnPlayer(){
-           
-        if (PhotonNetwork.player.ID %2==0){
-            valX = Random.Range(-2f, -1f);
-            side = "left";
-        }        
-        else if (PhotonNetwork.player.ID %2==1){
-            valX = Random.Range(1f, 3f);
-            side = "right";
+
+        GameObject[] all = GameObject.FindGameObjectsWithTag("character");
+        if (all.Length == 0)
+        {
+            if (PhotonNetwork.player.ID %2==0){
+                valX = Random.Range(-2f, -1f);
+                side = "left";
+            }        
+            else if (PhotonNetwork.player.ID %2==1){
+                valX = Random.Range(1f, 3f);
+                side = "right";
+            }
         }
+        else
+        {
+            int total_in_left = 0;
+            int total_in_right = 0;
+            foreach (GameObject go in all)
+            {
+                if (go.transform.localPosition.x > 0)
+                    total_in_right++;
+                else total_in_left++;
+            }
+            bool inLeft = true;
+            if (total_in_left > total_in_right)
+                inLeft = false;
+
+            if (inLeft)
+            {
+                valX = Random.Range(-2f, -1f);
+                side = "left";
+            }
+            else
+            {
+                valX = Random.Range(1f, 3f);
+                side = "right";
+            }
+        }
+        print("Agrega user id: " + PhotonNetwork.player.ID + "  (ya hay " + all.Length + ")");
         valZ = Random.Range(1f, 3f);
         var newPlayer = PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(valX, 0, valZ), Quaternion.identity, 0);
         photonView.RPC("changeName", PhotonTargets.All, newPlayer.GetComponent<PhotonView>().viewID, side);
@@ -85,6 +115,7 @@ public class gameManager : Photon.MonoBehaviour
     [PunRPC]
     public void PickObjectMasterFilter(int id, int characterID)
     {
+        Debug.Log("Pick up item id: " + id + " characterID: " + characterID);
         PhotonView ingredient = PhotonView.Find(id);
         character characterThaHasItem = ingredient.GetComponentInParent<character>();
         if (characterThaHasItem == null)

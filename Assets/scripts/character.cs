@@ -235,6 +235,9 @@ public class character : Photon.MonoBehaviour
         plate plate = pv.GetComponent<plate>();
         if (plate != null)  plate.OnCharacterNear(true);
 
+        Coocker c = pv.GetComponent<Coocker>();
+        if (c != null) c.OnCharacterNear(true);
+
         ShowCollision sc = pv.GetComponent<ShowCollision>();
         if (sc != null) AddCollider(sc, true);
 
@@ -246,6 +249,9 @@ public class character : Photon.MonoBehaviour
         PhotonView pv = other.gameObject.GetComponent<PhotonView>();
         if (pv == null) return;
 
+        Coocker c = pv.GetComponent<Coocker>();
+        if (c != null) c.OnCharacterNear(false);
+
         plate plate = pv.GetComponent<plate>();
         if (plate != null) plate.OnCharacterNear(false);
 
@@ -256,7 +262,6 @@ public class character : Photon.MonoBehaviour
     public void InstantiateObject(instantiateObjects io)
     {
         var ingredient = PhotonNetwork.Instantiate(io.myPrefab.name, new Vector3(1000,0,0), io.myPrefab.transform.rotation, 0);
-        print("_______New Object: " + io.myPrefab.name);
         photonView.RPC("instantiateIngredient", PhotonTargets.All, ingredient.GetComponent<PhotonView>().viewID, photonView.viewID);
     }
     [PunRPC]
