@@ -42,7 +42,9 @@ public class ShowPoints : Photon.MonoBehaviour
         signal.SetActive(true);
         int total = (late + onTime);
         results = (int)(((float)onTime / (float)total)*100);
-        points.text= results+"%";
+
+        if (results < 0) results = 0;
+        points.text = results+"%";
 
         if(results < 33.3f)
             red.GetComponent<Image>().color = Color.white;

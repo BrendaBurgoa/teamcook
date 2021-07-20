@@ -50,14 +50,20 @@ public class Coocker : MonoBehaviour
         if (canbcelCookBtn == null) return;
 
         bool foodAdded = false;
+        int totalIngredients = 0;
         foreach (Food food in foods)
         {
             foreach (IngredientData d in food.ingredients)
             {
                 if (d.target != null)
+                {
                     foodAdded = true;
+                    totalIngredients++;
+                }
             }
-        }
+            if (totalIngredients >= food.ingredients.Length)
+                return;
+        }       
         if (foodAdded || !isOn)
             canbcelCookBtn.SetActive(isOn);
     }
@@ -151,22 +157,17 @@ public class Coocker : MonoBehaviour
                 }
                 if (d.target != null)
                     totalIngredients++;
-            }   
-
-            if(foodAdded)
-                SetCancelBtn(true);
-            else
-                SetCancelBtn(false);
-
+            }
+            if (totalIngredients > 0)
+            {
+                if (qty_field != null) qty_field.text = "x" + totalIngredients;
+            }
             if (totalIngredients >= food.ingredients.Length)
             {
                 if (qty_field != null) qty_field.text = "";
                 photonView.RPC("StartCookingForAll", PhotonTargets.All);
-                return;
-            } else if (totalIngredients > 0)
-            {
-                if (qty_field != null) qty_field.text = "x" + totalIngredients;
-            }
+                SetCancelBtn(false);
+            } 
         }
     }
     [PunRPC]
